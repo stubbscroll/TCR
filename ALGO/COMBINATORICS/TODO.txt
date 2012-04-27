@@ -1,0 +1,8 @@
+masse formler!
+
+derangement
+partial derangement http://mathworld.wolfram.com/PartialDerangement.html
+
+sjekk stirling number
+
+approksimasjon for partition number

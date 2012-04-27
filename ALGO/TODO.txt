@@ -1,0 +1,136 @@
+PQUEUE
+
+- balanced binary tree with insert, delete, get kth element
+- find bridge in graph
+
+ARITHMETIC
+
+issquare
+issquarefree
+
+fast way to calculate issquare(n)
+
+http://stackoverflow.com/questions/295579/fastest-way-to-determine-if-an-integers-square-root-is-an-integer
+http://hansliten.wordpress.com/2010/07/31/faster-square-test/
+http://gmplib.org/manual/Perfect-Square-Algorithm.html#Perfect-Square-Algorithm
+
+COMBINATORICS
+
+generate all permutations
+generate all subsets
+generate all n-tuples
+generate all multisets
+
+generate all subsets of submask
+generate all k-element subsets (snoob)
+
+return next/previous (combinatorial structure of some kind)
+- permutation, subset, n-tuple, partition, k-partition, k-subset, etc
+
+evaluate binomial
+evaluate multinomial
+
+lucas' theorem
+
+rank/unrank (combinatorial structure)
+- see next/previous
+
+COMPUTATIONAL-GEOMETRY
+
+ccw
+line-line intersection
+line-circle intersection
+polegon-polygon intersection
+convex hull (both with and without collinear points)
+point in polygon
+point in triangle (special case of above)
+distance from point to line, line segment, circle, polygon etc
+projection of point to line (2d), plane (3d)
+
+circle geometry http://en.wikipedia.org/wiki/Circle_segment
+
+DATA STRUCTURE
+
+binomial heap
+fibonacci heap
+red-black tree (looks rather complicated to implement)
+avl tree
+splay tree
+aa tree
+scapegoat tree
+treap
+b-tree?
+
+some kind of balanced tree with the following operations:
+- insert element
+- delete element
+- find K-th element
+^ this one is important!
+
+GRAPH
+
+bellman-ford
+maxflow with edge lists, memory usage O(E), edge lookup time O(E)
+mincost maxflow
+bipartite matching with capacity >1 between each pair
+in an undirected graph, find articulation points in connected component
+ (node such that if removed, the component is no longer connected)
+  check https://secure.wikimedia.org/wikipedia/en/wiki/Articulation_point
+in an undirected graph, find bridge in connected component (edge such
+  that if removed, the component is no longer connected)
+  check https://secure.wikimedia.org/wikipedia/en/wiki/Bridge_%28graph_theory%29
+tarjan's scc
+special maxflow code for the "tripartite matching in graph" problem: given
+  nodes X,Y,Z such that all edges are from X to Y or Y to Z, find a max
+  matching. not to be confused with the NP-complete problem.
+
+MATRIX
+
+matmul
+matmulmod
+matpowmod
+matadd
+determinant
+inverse
+gaussian elimination
+gaussian elimination mod
+for square matrix A, sum A^1+A^2+...+A^n
+
+NUMBER-THEORY
+
+chinese remainder theorem
+
+faster ullmulmod
+faster powmod, without init and ugly macros
+
+upper bound for primtall nummer n: a(n) < n*(log n + log log n - 1/2) for n>=20
+find continued fraction from arbitrary real number
+solve pell equation
+solve more general diophantine equations
+
+NUMERIC
+
+laguerre's (numerical) method of finding roots of a polynomial
+robinson's recursion for solving "toeplitz" matrices
+
+PROBABILITY
+
+given n numbers, choose k unique numbers uniformly:
+http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+uniform random
+random from gaussian distribution (box muller)
+
+SEARCH
+
+find kth number in array in linear time (order statistics)
+
+STRING
+
+knuth-morris-pratt
+aho-corasick
+given a string, calculate transition table[a][b]:
+  if we have matched to pos a and see char b, transition to position in table
+
+OTHER
+
+take old c routines and fix them

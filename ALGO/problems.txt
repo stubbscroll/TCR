@@ -1,0 +1,495 @@
+UVa quicklink: http://uva.onlinejudge.org/external/115/11528.html
+
+list of problems for testing different kinds of algorithms and methods. that
+problem p is listed under algorithm a does not necessarily mean that a is the
+best algorithm for solving it.
+
+1 graph theory
+1.1 network flow
+1.1.1 maxflow
+
+- UVa 563 (with node splitting, huge graph needing edge list) (good stress test for max flow)
+- UVa 753
+- UVa 820
+- UVa 10330
+- UVa 10480
+* UVa 10092
+* UVa 10511
+* UVa 10594
+* UVa 10735
+* UVa 10779
+* UVa 10989
+* UVa 11506
+* Topcoder TCO 2005 round 3 easy
+* Topcoder TCO 2005 semifinal 3 medium
+* NCPC 2005 kingdom
+
+place these in either maxflow, mincostmaxflow or bipartite
+
+* Topcoder TCCC 2004 finals hard
+* UVa 11528
+* UVa live 3708 (NEERC 2006 problem G: graveyard) (+ binary search)
+* UVa 11381 (mincost)
+* UVa 11383 (mincost)
+* Topcoder SRM 506 div 1 600
+* UVa 10911
+
+1.1.1.1 minimum cut
+
+- UVa 10480
+
+1.1.2 mincost maxflow
+
+* Topcoder SRM 372 div 1 1000
+* Topcoder SRM 506 div 1 600 (mincost maxflow)
+* UVa 10746
+
+1.1.3 maximum matching in bipartite graph
+
+- Topcoder SRM 200 div 1 hard (+careful graph construction to satisfy lexicographic smallest)
+- Topcoder SRM 236 div 1 1000 (+binary search)
+- Topcoder SRM 303 div 1 500
+- Topcoder SRM 477 div 1 500
+- Topcoder TCO 2003 semifinals 4 1050
+- UVa 259 (very small constraints, my backtrack solution is faster)
+- UVa 663
+- UVA 670
+- UVa 753 (maxflow is faster, floyd-warshall is expensive)
+- UVa 10080
+- UVa 10092 (plain bipartite is slow, higher capacity or proper maxflow is better)
+- UVa 10122
+- UVa 10349
+- UVa 10804 (+binary search)
+- UVa 11418
+- UVa 11419 (+output vertex cover with könig's theorem)
+- Uva-live 4288 (NWERC 2008 problem C)
+- BAPC 2006 problem F (hnu 11025) (let left side be doors+times, sort by increasing time)
+* UVa 10380
+* Topcoder SRM 447 div 1 500
+* UVa 10615
+* UVa 10746
+* UVa 11045
+* UVa 11138
+* UVa 11159
+* UVa 11262
+* UVa 10511 (apparently it is possible with bipartite matching. how?)
+* POJ 3614/SDIBT 2247 (USACO NOV07 gold problem 3 "tanning") (might not be possible)
+
+1.1.3.1 maximum/minimum weight matching in bipartite graph (assignment problem/hungarian algorithm)
+
+- UVa 10072
+- UVa 10888
+- UVa 11383 (reading off node weights, rather obscure solution)
+- Topcoder SRM 371 div 1 500
+- Topcoder SRM 372 div 1 1000 (both min and max)
+- Topcoder SRM 526 div 1 250
+
+1.1.3.2 minimum vertex cover in bipartite graph (könig's theorem)
+
+- UVA 11419
+
+1.1.4 maximum matching in "tripartite graph"
+
+- SPOJ 9890 (NWERC 2001 problem D)
+
+1.2 shortest-path
+1.2.1 one-to-all shortest-path
+1.2.1.1 dijkstra
+
+- UVa 10986
+- UVa-live 4374 (NEERC 2008 problem D)
+- SPOJ 3465 DRIVE (NEERC 2008 problem D) (good stress test for Dijkstra)
+
+1.2.1.1.1 dijkstra with costs on nodes instead of edges
+
+- UVa 929
+- Project Euler 83
+
+1.2.1.2 bellman-ford
+1.2.1.3 johnson's algorithm
+1.2.2 all-pairs shortest-path
+1.2.2.1 floyd-warshall
+
+- Topcoder SRM 506, div 1 600
+
+1.3 graph search
+1.3.1 uninformed search
+1.3.1.1 breadth-first search
+
+- UVa 851
+- UVa 10704
+- UVa 10796
+- Topcoder SRM 236 div 1 1000
+
+1.3.1.1.1 0-1-breadth-first search
+
+- UVa 10770 (hard state space)
+
+1.3.1.1.2 breadth-first search with multiple queues
+
+1.3.1.2 depth-first search
+1.3.2 bidirectional search
+
+* free willy (?) from idi open
+
+1.3.3 informed search
+1.3.3.1 A*
+
+* UVa 851
+* UVa 10181
+- UVa-live 4374 (NEERC 2008 problem D)
+
+1.4 strongly connected components
+
+- UVa 11709
+- UVa live 4287 (NWERC 2008 problem B)
+* UVa 125
+* UVa 10319
+* UVa 10510
+* UVa 10731
+* UVa 11324
+* UVa 11390
+* UVa 11504
+* UVa 11721
+* UVa 247
+* UVa 11770
+* UVa 11838
+
+1.5 topological sort
+
+* UVa 11686
+* UVa 124
+* UVa 196
+* UVa 200
+* UVa 872
+* UVa 925
+* UVa 10259
+* UVa 10305
+* UVa 11174
+* UVa 11680
+* UVa 11724
+* UVa 11060
+
+1.6 steiner tree
+
+- Project Euler 143
+
+1.6.1 discrete steiner tree
+
+- UVa 10863
+* Topcoder SRM 303 div 1 1000
+
+1.7 eulerian path/cycle
+1.8 degree properties
+1.9 connectivity
+1.10 planarity
+1.11 hamilton path/cycle
+1.11.1 shortest hamilton path/cycle aka travelling salesman
+1.12 maximum matching in general graph (edmond's blossom algorithm)
+
+- UVa 11439 (+ binary search)
+- Topcoder TCO06 Round 1 350
+- UVa Live 3820 (South Pacific 2007 problem I: Mr. Thompson's Problem)
+- UVa Live 4130 (South Pacific 2008 problem H: P2P Currency Service)
+- GCJ AMER semifinal 2008, problem D: King
+* UVa 11156?
+
+1.12.1 weighted maximum matching in general graph (sum of weights)
+
+- UVa 10296
+
+1.13 minimum spanning tree
+1.13.1 minimum spanning tree in undirected graph
+
+- uva 10842
+
+1.13.1.1 prim's algorithm
+1.13.1.2 kruskal's algorithm
+1.13.2 minimum spanning tree (minimum arborescence) in directed graph
+
+2 discrete dynamic programming
+2.1 longest increasing/decreasing/common subsequence
+
+- NCPC ? nested dolls
+
+2.2 coin change
+2.2 edit distance and similar (partial match)
+2.3 bitmask dp
+
+- ncpc ? copying dna
+* Topcoder SRM 310 div 1 900
+
+2.4 profile layer dp
+
+- GCJ AMER semifinal 2008, problem D: King
+
+2.5 other dp
+
+- UVa 10157
+
+3 math
+3.1 number theory
+3.1.1 prime numbers
+
+- Project Euler 7
+- Project Euler 10
+
+3.1.1.1 primality testing
+3.1.1.1.1 miller-rabin
+
+- UVa 10956
+
+3.1.1.2 factorization
+
+- Project Euler 3
+
+3.1.1.2.1 pollard rho
+
+- UVa 11476
+- spoj 4942
+
+- spoj divsum something?
+
+3.1.2 number of divisors
+3.1.3 sum of divisors
+
+- spoj 1392
+
+3.1.4 euler's totient function (phi)
+
+- Project Euler 214
+
+3.1.4.1 inverse euler's totient
+
+- UVa 11073
+- Project Euler 248
+* UVa 10837
+
+3.1.5 gcd/lcm
+
+- Project Euler 5
+
+3.2 linear algebra
+
+3.2.1 solve a set of equations: gaussian elimination
+
+3.2.1.1 "incremental" gaussian elimination
+
+- project euler232
+- a hard problem from topcoder a few months ago TODO
+
+3.3 probability
+3.3.1 transition matrix
+3.4 geometry
+3.4.1 geometry on integer grid
+3.4.2 computational geometry
+3.4.2.1 pick's theorem
+
+- UVa 10088
+* one more which i've forgotten. i think it was a regional
+
+3.4.3 triangles
+3.4.3.1 pythagorean triangles
+
+- Project Euler 9
+
+3.5 combinatorics
+3.5.1 permutations
+3.5.1.1 permutation rank/unrank (no duplicates) 
+
+- UVa 10181
+- Project Euler 24
+
+3.5.1.2 permutation rank/unrank (duplicates allowed)
+
+- BAPC 2009 D
+
+3.6 calculus
+3.7 "trick" problems
+3.7.1 parity
+
+- IDI open 2009 I "Marble Madness"
+- UVa 10771
+
+3.8 arithmetic
+3.8.1 biginteger
+
+- UVa 10157
+
+3.8.1.1 advanced biginteger (more involving than +-*/%, like sqrt, log)
+
+- UVa 10023
+
+3.8.2 bigdecimal
+
+4 greedy
+
+5 ad-hoc
+5.1 simulation
+
+- UVa 10796 (hard)
+
+5.2 specific domains
+5.2.1 games
+5.2.1.1 chess
+5.2.1.1.1 retrograde analysis in chess
+
+- UVa 10383
+
+5.2.1.2 sokoban
+
+- UVa 10770
+
+5.2.1.3 sliding-block puzzles
+5.2.1.3.1 rush hour
+
+- UVa 10704
+
+5.2.1.3.2 15-puzzle
+
+- UVa 10181
+
+5.2.1.4 nurikabe
+
+- UVa-live 4103 (Tehran 2007 problem J)
+
+5.2.1.5 slitherlink
+
+- UVa-live 3848 (North-America Mid-Central 2007 problem C)
+- UVa-live 5126 (TODO find contest)
+
+5.2.1.6 sudoku
+
+- zstu 1076 (SEERC 2006) (16x16 sudoku)
+
+5.3 "gotcha"
+
+- NCPC 2006 G "Whac-a-Mole" (go outside maze)
+- UVa 10771 (parity)
+- UVa 10796 (exception to "cannot pass" restriction)
+- IDI Open 20?? marble madness (parity)
+
+5.4 calendar
+
+- Project Euler 19
+
+6 string
+6.1 palindromes
+
+6.2 string search
+6.2.1 aho-corasick
+
+* topcoder srm 519 div 1 medium
+
+6.2.? ???
+
+* uva 10679
+
+7 combinatorial game theory
+7.1 impartial games
+7.1.1 non-loopy impartial games
+
+- Project Euler 366
+
+7.1.1.1 nim
+
+- Project Euler 301
+
+7.1.2 loopy impartial games
+7.2 partizan games
+7.2.1 non-loopy partizan games
+7.2.2 loopy partizan games
+7.3 specific games
+
+8 logic
+8.1 "assume hypothesis, test it"
+
+- Topcoder TCO 2011 Qual 1 250
+
+9 binary/boolean tricks
+9.1 snoob/gosper's hack
+
+* topcoder SRM 523 div 1 900
+* topcoder SRM 528 div 1 500
+
+10 sorting
+
+11 search
+11.1 binary search
+
+12 data structures
+12.1 segment tree
+12.1.1 fenwick (binary indexed) tree
+
+* idi open 2011 "Beads"
+- NCPC 2011 B "mega-inversions" (plus binary search over cumulative[1..i])
+- NCPC 2010 I (2D tree)
+- topcoder SRM 310 div 1 500
+- UVa 501
+- UVa 10909
+- UVa 11525
+- UVa 12365
+- NWERC 2011 problem C "movie collection" (SPOJ 9889)
+* pku 1990
+* pku 1195
+* topcoder srm 315 div 2 900
+* spoj 1029 MATSUM
+* tju 3243
+* spoj HORRIBLE
+* spoj ORDERS
+* spoj CTRICK
+* topcoder 2010 TCO semifinal 2 div 1 hard
+* codechef nov 10 "bombing"
+* codechef TEMPQUE
+* spoj 8406 TEMPLEQ
+
+12.2 binary tree
+12.2.1 self-balancing binary tree (with insert, delete, find k-th element)
+
+- NWERC 2011 problem C "movie collection" (SPOJ 9889)
+- UVa 501
+- UVa 10909
+- UVa 11525
+* Topcoder SRM 310 div 1 medium
+* topcoder floatingmedian?
+
+12.2.2 "binary deletion tree" (no balancing) (with build tree (once), delete k-th element)
+
+- UVa 10909
+- UVa 11525
+
+12.2.3 binary tree for rmq
+
+* uva 12299
+
+12.3 heap
+
+- NCPC 2011 problem F "knig etellerannet" (maxheap)
+* UVa 501
+
+12.4 hash
+
+- UVa 851
+
+12.5 square buckets (for rmq, frequencies etc)
+
+- UVa 12299
+- NCPC 2011 B "mega-inversions"
+- SPOJ 61 BRCKTS
+
+13 compression
+
+14 brute force
+14.1 backtracking (prune when partial solution is illegal)
+14.2 generate all answers/candidates/elements
+14.3 meet-in-the-middle (divide solution in the middle, search each half, combine)
+
+- topcoder SRM 523 div 1 900
+
+15 "smart" brute force (try a subset of combinations after making an observation)
+
+- Topcoder TCO 2011 Qual 1 1000
+
+16 parsing
+
+
