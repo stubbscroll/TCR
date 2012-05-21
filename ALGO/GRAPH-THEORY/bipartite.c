@@ -38,6 +38,7 @@ int parent[2*MAXV];
 /*  OK UVa 11419 0.396 seconds, n,m<=1000, 07.08.2011 */
 /*  OK UVa-live 4288 (NWERC 2008 problem C) 0.032 seconds, n+m<=500, 08.08.2011 */
 /*  OK hnu 11025 (BAPC 2006 problem F) 15 ms, n<5120, m<100, 12.08.2011 */
+/*	OK IDI Open 2012 problem A (Boss Rush), n<=100, m<=300, 21.05.2012 */
 int bipartite() {
   int i,j,r=0,cur,qs,qe=0,q[2*MAXV];
   memset(mate,-1,m*sizeof(int));

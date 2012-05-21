@@ -13,12 +13,12 @@
     a forward edge (going right), 0 otherwise. then call maxflow().
     oh, and remember to split the center node when doing tripartite matching.
     
-    (this routine _might_ also work if all capacities are just set to 1 both
+    (this routine does _NOT_ work if all capacities are just set to 1 both
     ways)
 */
 
 /*  OK SPOJ 9890 (NWERC 2011 problem D), n<=333335, 2.32 seconds 30.11.2011 */
-/*  TODO test more. test on all bipartite matching problems */
+/*  OK Topcoder SRM 422 div-1-1000, 45 ms, n<=1802, ne<=405000 21.05.2012 */
 #define MAXE 2000000
 #define MAXV 333500
 #define INF 1000000000
@@ -39,11 +39,9 @@ int maxflow(int source,int sink) {
   memset(t,0,n);
   memset(parent,-1,n*sizeof(int));
   for(last=gs[source];last<gs[source+1];last++) {
-    t[source]=t[to[last]]=1;
-    q[qe++]=source;
+		t[to[last]]=1;
     q[qe++]=to[last];
-    parent[to[last]]=last;
-    for(k=1;k<qe;k++) if(t[i=q[k]]) for(l=gs[i];l<gs[i+1];l++) {
+    for(k=0;k<qe;k++) if(t[i=q[k]]) for(l=gs[i];l<gs[i+1];l++) {
       j=to[l];
       if(!t[j] && f[l]>0) {
         t[j]=1; parent[j]=l;

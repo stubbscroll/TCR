@@ -4,7 +4,7 @@
 /*  max flow with edge cost 1, but arbitrary capacities. efficient memory
     usage: O(E) */
 
-/*  TODO test this routine. */
+/*	OK Topcoder SRM 422 div-1 1000, 45 ms, n<=1802, ne<=405000, 21.05.2012 */
 
 #define MAXE 2000000
 #define MAXV 333500
@@ -83,19 +83,11 @@ void radixsort() {
 }
 
 /*  for each edge a->b, find index to b->a */
-/*  unfortunately, this step is O(E log E) */
 void inverseedges() {
-  int i,lo,hi,mid;
-  for(i=0;i<ne;i++) {
-    lo=gs[to[i]];
-    hi=gs[to[i]+1];
-    while(lo<hi) {
-      mid=lo+((hi-lo)>>1);
-      if(from[i]>to[mid]) lo=mid+1;
-      else hi=mid;
-    }
-    inv[i]=lo;
-  }
+  static int starts[MAXV+1];
+  int i;
+  memcpy(starts,gs,sizeof(int)*(n+1));
+  for(i=0;i<ne;i++) inv[i]=starts[to[i]]++;
 }
 
 char map[512][512];

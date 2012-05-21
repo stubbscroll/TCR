@@ -13,6 +13,7 @@ best algorithm for solving it.
 - UVa 820
 - UVa 10330
 - UVa 10480
+- Topcoder SRM 422-div1-hard
 * UVa 10092
 * UVa 10511
 * UVa 10594
@@ -91,6 +92,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.1.4 maximum matching in "tripartite graph"
 
 - SPOJ 9890 (NWERC 2001 problem D)
+- Topcoder SRM 422 div 1 1000
 
 1.2 shortest-path
 1.2.1 one-to-all shortest-path
@@ -470,6 +472,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 12.4 hash
 
 - UVa 851
+* UVa 1152
 
 12.5 square buckets (for rmq, frequencies etc)
 
@@ -484,7 +487,9 @@ place these in either maxflow, mincostmaxflow or bipartite
 14.2 generate all answers/candidates/elements
 14.3 meet-in-the-middle (divide solution in the middle, search each half, combine)
 
+- Project Euler 266
 - topcoder SRM 523 div 1 900
+* UVa 1152
 
 15 "smart" brute force (try a subset of combinations after making an observation)
 
