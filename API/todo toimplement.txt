@@ -1,0 +1,4 @@
+filesize som støtter 64-bits. test i vs (32/64), gcc32 (pc), gcc32/64 (linux)
+general set of file routines for 64-bits, working in all systems:
+filesize, fseek, fread, fwrite
+read directory

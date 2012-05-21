@@ -1,0 +1,8 @@
+write:
+
+createsieve
+isprime
+geometry routines
+dfs template
+
+sudoku-solver

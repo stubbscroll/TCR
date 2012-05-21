@@ -1,0 +1,137 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}																					% nødvendig for fonter
+\usepackage[latin1]{inputenc}																			% nødvendig for æøå
+\usepackage{amsmath,amsfonts,amssymb,yfonts,mathrsfs,gensymb}			% nødvendig for matematiske symboler
+\usepackage{parskip}																							% blank linje mellom avsnitt istedenfor innrykk
+\usepackage{enumerate}			% fancy enumerering
+\usepackage{graphicx,textcomp,varioref}
+\usepackage{cancel}					% kanseller ledd i math mode
+\usepackage{fullpage}
+
+\author{Ruben Spaans}
+\title{Algorithm}
+\date{\today}
+
+\begin{document}
+
+\section{Help, I got ``Wrong answer!''}
+
+\subsection{Understanding}
+
+\begin{itemize}
+	\item If you have mysterious errors, read the problem statement again. Make sure you're solving the correct problem.
+\end{itemize}
+
+\subsection{Correctness of algorithm}
+
+\begin{itemize}
+	\item Your fast greedy algorithm which works for the examples need not be correct. Prove it, or don't use it! In general, it is dangerous to use an algorithm which doesn't test all possibilities.
+	\item Check if your cute and super-short code optimization is correct. It is insidiously hard to get these correct. Don't attempt to do this unless you are certain that the algorithm is correct and there is no other way to avoid ``Time limit exceeded.''
+	\item Always be critical to your choice of algorithm. Try as hard as you can to find input which breaks it.
+\end{itemize}
+
+\subsection{Corner cases, ``gotcha'' elements}
+
+\begin{itemize}
+	\item Are you handling all corner cases? Try the graph with no nodes, graph with one node, graph with no edges, empty set, one-element set, and other kinds of cases.
+	\item Don't obey restrictions not mentioned in the problem statement. Move out of the grid unless prohibited!
+	\item Check if parity or other elements make the problem much simpler.
+	\item Beware the old ``input trap''. If you are given $a$ and $b$ and are asked to do something with this range, be sure to ensure that $a\leq b$ by swapping.
+\end{itemize}
+
+\subsection{Coding}
+
+\begin{itemize}
+	\item Be careful with indexes! Check that \texttt{i} and \texttt{j} aren't switched. Make sure that the \texttt{cx} in \texttt{x2~=~cx~+~dx[d]} isn't forgotten.
+\end{itemize}
+
+\subsection{Graph theory}
+
+\begin{itemize}
+	\item In an adjacency matrix, remember to set the diagonal to 0 to represent that it costs nothing to not move.
+	\item In min-cost maxflow, remember to set \texttt{cost[j][i]=-cost[i][j]}!
+	\item In BFS, remember to set the start node as visited with distance 0.
+	\item In BFS, return a distance of 0 if the start node is a goal node!
+	\item In Floyd-Warshall, use indexes $k,i,j$ in this order.
+	\item Beware of multiple edges between the same pair of nodes!
+\end{itemize}
+
+\subsection{Number theory}
+
+\begin{itemize}
+	\item Remember that \texttt{a \% b} for $\texttt{a}<0$ is nonpositive! Use \texttt{(a \% b + b) \% b}, for instance, or bitwise AND.
+\end{itemize}
+
+\subsection{Dynamic programming}
+
+\begin{itemize}
+	\item Don't use DP if the recurrence has cycles! Consider resolving all cycles with Gaussian elimination and use DP on the remaining state space.
+\end{itemize}
+
+\subsection{Debugging}
+
+\begin{itemize}
+	\item If the end result is a \texttt{long long}, be sure to let the intermediate variables be \texttt{long long} as well. \texttt{int} multiplication overflow is an extremely common mistake.
+	\item Please select easy-to-implement solutions with few/no special cases to consider (as long as they will be fast enough to pass).
+	\item Getting different results on the same test case? Is the answer to the first test case correct, while the rest is nonsense? Remember to clean up variables between test cases!
+\end{itemize}
+
+\section{Help! I got ``Time limit exceeded!'' }
+
+\subsection{Algorithmic complexity}
+
+\begin{itemize}
+	\item Check the worst case (number of test cases multiplied with the maximum constraints). If you are doing more than $10^9$ operations, reconsider your algorithm.
+	\item If the problem is of a combinatorial nature, try to think of a test case which invokes worst-case behaviour.
+\end{itemize}
+
+\subsection{Calculating stuff twice}
+
+\begin{itemize}
+	\item If something non-trivial is calculated more than once, calculate it once and store the results! For instance, it the problem is to solve several instances of the 8-puzzle, search once from the solved state, and look up each instance directly.
+\end{itemize}
+
+\subsection{Dynamic programming}
+
+\begin{itemize}
+	\item When doing memoization, make sure to distinguish between ``not yet calculated'' and no solution. Do not assign -1 to both! This will cause all subproblems with no solution to not be cached!
+\end{itemize}
+
+\subsection{Game theory}
+
+\begin{itemize}
+	\item Don't calculate grundy numbers if just \texttt{xor}-ing nim values is enough!
+\end{itemize}
+
+\section{Theorems and stuff}
+
+\subsection{General tips}
+
+\begin{itemize}
+	\item When manipulating math formulas, try many things. If a function has many variables, try all ways of fixing a subset of variables and observe the relationship in return value when varying the free variables.
+	\item When solving a problem involving bouncing and reflection, imagine that the object is instead continuing in a straight line in a mirrored environment. This way of viewing the problem domain can lead to new insights and an easier solution.
+\end{itemize}
+
+\subsection{Number theory}
+
+Pick's theorem TODO
+
+\begin{itemize}
+	\item Think a little bit before jumping into coding. Simple observations can make the code much simpler, shorter, faster and easier to implement.
+\end{itemize}
+
+\subsection{Probability}
+
+\begin{itemize}
+	\item Warning, don't underestimate the difficulty when conditional probabilities are involved. Be sure of what you're doing and stay sharp!
+	\item For DP problems of the type ``what's the probability of escaping through the ordeal'', consider not normalizing the probabilities, and do subtraction of non-normalized probabilities.
+	\item Given a random permutation of length n, the probability of it being in a cycle of length $k$ is $\frac{1}{n}$ for any $1\leq k \leq n$.
+\end{itemize}
+
+\subsection{Graph theory}
+
+\begin{itemize}
+	\item Given an undirected connected graph and an agent performing random walk: the probability that the agent is in a particular node is proportional to the node degrees such that the sum of all these probabilities are 1.
+\end{itemize}
+
+\end{document}

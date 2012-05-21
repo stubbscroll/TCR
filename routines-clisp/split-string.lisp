@@ -1,0 +1,11 @@
+(defun split (string)
+  (loop for i = 0 then (1+ j)
+	as j = (position #\Space string :start i)
+	collect (subseq string i j)
+	while j))
+
+(defun spliti (string)
+  (loop for i = 0 then (1+ j)
+	as j = (position #\Space string :start i)
+	collect (parse-integer (subseq string i j))
+	while j))

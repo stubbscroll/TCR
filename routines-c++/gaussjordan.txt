@@ -1,0 +1,127 @@
+#include <vector>
+#include <string>
+#include <cmath>
+
+using namespace std;
+
+typedef vector<int> vi;
+typedef vector<string> vs;
+typedef vector<long double> vd;
+
+typedef vector<vi> vvi;
+typedef vector<vd> vvd;
+
+#define fr(a,b,c) for(int a=b;a<c;++a)
+#define fir(n) for(int i=0;i<n;++i)
+#define fjr(n) for(int j=0;j<n;++j)
+#define fkr(n) for(int k=0;k<n;++k)
+
+#define si size()
+#define pb(x) push_back(x)
+
+#define EPS 1e-9
+
+vi spliti(string s)
+{
+   vi r; string t=""; s+=" ";
+   fir(s.si) if(s[i]==' ') {
+      int v;
+      sscanf(t.c_str(),"%d",&v);
+      r.pb(v); t="";
+   } else t+=s[i];
+   return r;
+}
+
+int deq(double v,double w)
+{
+   return fabs(v-w)<EPS;
+}
+
+vvi transpose(vvi a)
+{
+   vvi r(a[0].si,vi(a.si));
+   fir(a.si) fjr(a[0].si) r[j][i]=a[i][j];
+   return r;
+}
+
+bool gaussjordan(vvi Z,vi M,vd &r)
+{
+   int n=Z.si,m=Z[0].si; // n=number of rows, m=number of unknowns
+   if(n<m) return false; // fewer rows than unknowns => indeterminate
+   m++;
+   vvd z;
+   fir(Z.si) {
+      vd y;
+      fjr(Z[0].si) y.pb((double)Z[i][j]);
+      y.pb(M[i]);
+      z.pb(y);
+   }
+   // solve
+   int pos=0;
+   fir(n) {
+      if(pos==m-1) break;
+      // find line
+      fr(j,i,n) {
+         if(!deq(0,z[j][pos])) {
+            if(j!=i) swap(z[j],z[i]);
+            goto found;
+         }
+      }
+      pos++;
+      continue;
+   found:
+      if(!deq(z[i][pos],0)) {
+         // normalise line
+         double u=z[i][pos];
+         fjr(m) z[i][j]=z[i][j]/u;
+         // substract from all lines above
+         fr(j,0,n) if(j!=i) {
+            double t=z[j][pos];
+            if(!deq(t,0)) fkr(m) z[j][k]-=t*z[i][k];
+         }
+         pos++;
+      }
+   }
+   // check for non-desirable solution:
+   // - free variables
+   // - nullrows with b!=0
+   // - special here: don't allow negative solutions
+   fir(n) {
+      int count=0;
+      fjr(m-1) if(!deq(z[i][j],0)) count++;
+      if(count>1) return false; // free variable detected
+      if(!count && !deq(z[i][m-1],0)) return false; // nullrow with b!=0
+      if(count==1 && z[i][m-1]<0) return false;  // negative solution
+   }
+   r.clear();
+   fir(n) r.pb(z[i][z[i].si-1]);
+   return true;
+}
+
+class Mixture {
+public:
+double mix(vi m,vs A)
+{
+   int p2[16];
+   vvi a,b;
+   fir(16) p2[i]=1<<i;
+   fir(A.si) {
+      a.pb(spliti(A[i]));
+      b.pb(a[i]);
+      b[i].pop_back();
+   }
+   int n=a.si;
+   double best=1e100;
+   for(int i=p2[n]-1;i;--i) {
+      vvi z; vi c; vd r;
+      fjr(n) if(i&p2[j]) z.pb(b[j]),c.pb(a[j][a[j].si-1]);
+      if(gaussjordan(transpose(z),m,r)) {
+         double res=0;
+         fir(r.si) res+=c[i]*r[i];
+         best=min(res,best);
+      }
+   }
+   return best>1e50?-1.0:best;
+}
+
+};

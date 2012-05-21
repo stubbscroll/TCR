@@ -1,0 +1,5 @@
+TODO clean up this mess.
+
+some examples are hideous. clean up OPENGL, SDL, FREEGLUT.
+in general, write more examples to show more functionality as simply as
+possible.

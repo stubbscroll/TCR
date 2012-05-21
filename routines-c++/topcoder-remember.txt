@@ -1,0 +1,5 @@
+things to remember
+
+- cast to long long when doing anything else than small calculations
+- return type long long for functions doing anything else than small
+  calculations
