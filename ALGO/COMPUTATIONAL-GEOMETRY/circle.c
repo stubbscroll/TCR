@@ -42,7 +42,7 @@ void twocircletangent(double x1,double y1,int r1,double x2,double y2,int r2,int 
 /*	return 1 if line intersects or touches circle, 0 otherwise */
 /*	algorithm shamelessly borrowed from http://stackoverflow.com/questions/1073336/circle-line-collision-detection */
 /*	OK IDI Open 2012 problem H (Holey Road) 21.05.2012 */
-int linecircleintersect(double x1,double y1,double x2,double y2,double cx,double cy,int r) {
+int linesegmentcircleintersect(double x1,double y1,double x2,double y2,double cx,double cy,int r) {
 	double dx=x2-x1,dy=y2-y1;
 	double fx=x1-cx,fy=y1-cy;
 	double a=dx*dx+dy*dy;
@@ -57,4 +57,16 @@ int linecircleintersect(double x1,double y1,double x2,double y2,double cx,double
 	t1=(-b+D)/(2*a);
 	t2=(-b-D)/(2*a);
 	return (t1>=0 && t1<=1) || (t2>=0 && t2<=1);
+}
+
+/*	check if endless line intersects circle, return 1 if yes, 0 if no */
+/*	OK UVa 12454 0.232 seconds 22.05.2012 */
+int linecircleintersect(double x1,double y1,double x2,double y2,double cx,double cy,double r) {
+	double dx=x2-x1,dy=y2-y1;
+	double fx=x1-cx,fy=y1-cy;
+	double a=dx*dx+dy*dy;
+	double b=2*(fx*dx+fy*dy);
+	double c=fx*fx+fy*fy-r*r;
+	double D=b*b-4*a*c;
+	return D>=0;
 }

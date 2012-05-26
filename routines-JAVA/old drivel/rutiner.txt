@@ -1,0 +1,40 @@
+// pick's theorem: area = interior points + boundary points/2 - 1
+
+/* volume of pyramid with a capped top, consisting of bottom rectangle with side lengths b1,b2
+   and top rectangle with side lengths t1,t2 and height h */
+double pyramidVolume(double b1,double b2,double t1,double t2,double h) {
+	return h * (b1*b2 + t1*t2 + (b1+t1) * (b2+t2)) / 6.0;
+}
+
+/* return signed area*2 */
+int polygonarea(struct point_s *p,int n)
+{
+   int i,a;
+
+   for(a=0,i=1;i<=n;i++)
+      a+=p[i-1].x*p[i%n].y-p[i%n].x*p[i-1].y;
+   return a;
+}
+
+// signed triangle area*2
+long striarea2(int x[],int y[],int a,int b,int c) {
+	return (long)x[a]*y[b]+(long)x[b]*y[c]+(long)x[c]*y[a]
+          -(long)x[b]*y[a]-(long)x[c]*y[b]-(long)x[a]*y[c];
+	}
+
+// calculate center of gravity of any non-intersecting polygon with total area != 0
+double[] polygongravcenter(int x[],int y[],int n)
+{
+	long totarea=0;
+	long wx=0,wy=0;
+	for(int i=1;i<n-1;i++) {
+		long tarea=striarea2(x,y,0,i,i+1);
+		totarea+=tarea;
+		wx+=tarea*(x[0]+x[i]+x[i+1]);
+		wy+=tarea*(y[0]+y[i]+y[i+1]);
+	}
+	double d[]=new double[2];
+	d[0]=wx/(totarea*3.0);
+	d[1]=wy/(totarea*3.0);
+	return d;
+}

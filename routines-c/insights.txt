@@ -1,0 +1,10 @@
+centre of mass of line segment, triangle, square:
+
+	- take the average of all coordinates
+	* (i think this will work for all regular n-gons)
+
+given a list of one-dimensional points, which point minimises the sum of distances
+to all other points?
+
+	- sort all points, the desired point is the median
+

@@ -1,14 +1,22 @@
-UVa quicklink: http://uva.onlinejudge.org/external/115/11528.html
+UVa quicklink: http://uva.onlinejudge.org/external/abc/abcde.html
+
+-: tested
+*: untested, problem seems be a fit for given algorithm
 
 list of problems for testing different kinds of algorithms and methods. that
 problem p is listed under algorithm a does not necessarily mean that a is the
-best algorithm for solving it.
+best algorithm for solving p (often it's definitely not). in some cases the
+algorithm is only a minor part of a larger program, in these cases the
+algorithm is marked with (subroutine).
+
+algorithm classification is rather ad hoc, improve later.
 
 1 graph theory
 1.1 network flow
 1.1.1 maxflow
 
 - UVa 563 (with node splitting, huge graph needing edge list) (good stress test for max flow)
+  (commonly called "the escape problem")
 - UVa 753
 - UVa 820
 - UVa 10330
@@ -41,8 +49,8 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 1.1.2 mincost maxflow
 
-* Topcoder SRM 372 div 1 1000
-* Topcoder SRM 506 div 1 600 (mincost maxflow)
+* Topcoder SRM 372 div 1 1000 (both min- and maxcost)
+* Topcoder SRM 506 div 1 600
 * UVa 10746
 
 1.1.3 maximum matching in bipartite graph
@@ -50,7 +58,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 - Topcoder SRM 200 div 1 hard (+careful graph construction to satisfy lexicographic smallest)
 - Topcoder SRM 236 div 1 1000 (+binary search)
 - Topcoder SRM 303 div 1 500
-- Topcoder SRM 477 div 1 500
+- Topcoder SRM 477 div 1 500 "PythTriplets"
 - Topcoder TCO 2003 semifinals 4 1050
 - UVa 259 (very small constraints, my backtrack solution is faster)
 - UVa 663
@@ -66,7 +74,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 - Uva-live 4288 (NWERC 2008 problem C)
 - BAPC 2006 problem F (hnu 11025) (let left side be doors+times, sort by increasing time)
 * UVa 10380
-* Topcoder SRM 447 div 1 500
+* Topcoder SRM 447 div 1 500 "PeopleYouMayKnow"
 * UVa 10615
 * UVa 10746
 * UVa 11045
@@ -159,6 +167,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 1.5 topological sort
 
+- UVa 103
 * UVa 11686
 * UVa 124
 * UVa 196
@@ -186,15 +195,23 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.9 connectivity
 1.10 planarity
 1.11 hamilton path/cycle
+
+- hacker.org, puzzle Oneofus
+
 1.11.1 shortest hamilton path/cycle aka travelling salesman
+
+- UVa 216 (n<=8)
+
 1.12 maximum matching in general graph (edmond's blossom algorithm)
 
 - UVa 11439 (+ binary search)
 - Topcoder TCO06 Round 1 350
+- Topcoder SRM 477 div 1 500 "PythTriplets"
 - UVa Live 3820 (South Pacific 2007 problem I: Mr. Thompson's Problem)
 - UVa Live 4130 (South Pacific 2008 problem H: P2P Currency Service)
 - GCJ AMER semifinal 2008, problem D: King
 * UVa 11156?
+* topcoder problem with knights attacking each other?
 
 1.12.1 weighted maximum matching in general graph (sum of weights)
 
@@ -216,6 +233,9 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 2.2 coin change
 2.2 edit distance and similar (partial match)
+
+- UVa 363
+
 2.3 bitmask dp
 
 - ncpc ? copying dna
@@ -225,7 +245,11 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 - GCJ AMER semifinal 2008, problem D: King
 
-2.5 other dp
+2.5 longest/shortest/number of paths in DAG
+
+- UVa 103
+
+2.6 other dp
 
 - UVa 10157
 
@@ -271,6 +295,10 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 - Project Euler 5
 
+3.1.6 pythagorean triplets
+
+- Topcoder SRM 477 div 1 500 "PythTriplets" (subroutine)
+
 3.2 linear algebra
 
 3.2.1 solve a set of equations: gaussian elimination
@@ -284,11 +312,40 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.3.1 transition matrix
 3.4 geometry
 3.4.1 geometry on integer grid
-3.4.2 computational geometry
-3.4.2.1 pick's theorem
+
+3.4.1.1 pick's theorem
 
 - UVa 10088
-* one more which i've forgotten. i think it was a regional
+* one more which i've forgotten. i think it was a regional where we
+  were asked to deduce the formula
+
+3.4.2 computational geometry
+
+3.4.2.2 convex hull
+
+- UVa 109
+- UVa 811
+* UVa 132
+* UVa 218
+* UVa 361
+* UVa 681
+* UVa 10002
+* UVa 10065
+* UVa 10078
+* UVa 10135
+* UVa 10173
+* UVa 11626
+* UVa 11769
+
+3.4.2.3 intersection
+3.4.2.3.1 point inside polygon
+
+- UVa 109
+
+3.4.2.4 area/volume/surface etc
+3.4.2.4.1 area of polygon
+
+- UVa 109
 
 3.4.3 triangles
 3.4.3.1 pythagorean triangles
@@ -411,13 +468,18 @@ place these in either maxflow, mincostmaxflow or bipartite
 9 binary/boolean tricks
 9.1 snoob/gosper's hack
 
+- UVa 649 (subroutine)
 * topcoder SRM 523 div 1 900
 * topcoder SRM 528 div 1 500
+* idi open 2012 civilization
 
 10 sorting
 
 11 search
 11.1 binary search
+11.2 ternary search
+
+- Topcoder SRM 543 div 1 500 (discrete search space)
 
 12 data structures
 12.1 segment tree
@@ -466,7 +528,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 12.3 heap
 
-- NCPC 2011 problem F "knig etellerannet" (maxheap)
+- NCPC 2011 problem F "knigs of the forest" (maxheap)
 * UVa 501
 
 12.4 hash
@@ -485,7 +547,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 14 brute force
 14.1 backtracking (prune when partial solution is illegal)
 14.2 generate all answers/candidates/elements
-14.3 meet-in-the-middle (divide solution in the middle, search each half, combine)
+14.3 meet-in-the-middle (divide search space in half, process each half, combine)
 
 - Project Euler 266
 - topcoder SRM 523 div 1 900
