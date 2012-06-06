@@ -5,20 +5,22 @@ typedef long long ll;
 typedef unsigned long long ull;
 typedef unsigned char uchar;
 
-/*  hash! very simple hash table with linear probing to handle
-    collisions.
-    TODO i have yet to analyse the runtime of gethashpot, as well
-    as suggest sensible hash functions.
-    regarding hash table size and hash function:
-    - the size should be large enough to accomodate every entry, as well
-      as having some extra room so that the linear probe won't happen
-      too often.
-    - the hash function should be chosen so that the hash value is
-      distributed nicely across the hash table, and the number of
-      collisions should be low.
+/* hash! very simple hash table with linear probing to handle
+   collisions.
+   TODO i have yet to analyse the runtime of gethashpot, as well
+   as suggest sensible hash functions.
+   regarding hash table size and hash function:
+   - the size should be large enough to accomodate every entry, as well
+     as having some extra room so that the linear probe won't happen
+     too often.
+   - the hash function should be chosen so that the hash value is
+     distributed nicely across the hash table, and the number of
+     collisions should be low.
 */
-/*  OK UVa 851 17.08.2011 */
-/*  OK UVa 10181 17.08.2011 */
+/* OK UVa 851 17.08.2011 */
+/* OK UVa 10181 17.08.2011 */
+/* OK UVa 10226 n<=10000 0.496 seconds 05.06.2012 */
+/* OK GCJ 2012-R2-D-small 26.05.2012 */
 
 typedef struct {
   ull key;      /*  id of this state. mandatory field */
@@ -52,6 +54,12 @@ int gethashpos(ull key) {
   }
   return pos;
 }
+
+int exists(ull key) {
+	int pos=gethashpos(key);
+	return hashdata[pos].key==key);
+}
+
 
 /*  put an element into the hash table */
 void puthash(hashdata_t *h) {

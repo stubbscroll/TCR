@@ -1,6 +1,9 @@
 #define MAXSET 30000
 
-int p[MAXRSET],rank[MAXSET];
+/*	disjoint set! */
+/*	OK UVa 10397 26.05.2012 */
+
+int p[MAXSET],rank[MAXSET];
 
 int findset(int x) {
   if(x!=p[x]) p[x]=findset(p[x]);

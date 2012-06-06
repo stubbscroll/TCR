@@ -10,10 +10,38 @@
 
 \begin{document}
 
+\section{Number theory}
 
 pick's theorem
 
 pythagorean triplets
 
+
+\section{(Computational) Geometry}
+
+A \emph{median} in a triangle is a line from a vertex to the midpoint of its opposing edge. These relationships exist between side lengths $a,b,c$ and medians $m_a,m_b,m_c$:
+
+\subsection{Triangle}
+
+Triangle area given sides
+
+\subsubsection{Medians of a triangle}
+
+\begin{align*}
+	m_a &= \sqrt{\frac{2b^2+2c^2-a^2}{4}}\\
+	m_b &= \sqrt{\frac{2a^2+2c^2-b^2}{4}}\\
+	m_c &= \sqrt{\frac{2a^2+2b^2-c^2}{4}}\\
+	a &= \frac{2}{3}\sqrt{-m_a^2 + 2m_b^2 + 2m_c^2} \\
+	b &= \frac{2}{3}\sqrt{-m_b^2 + 2m_a^2 + 2m_c^2} \\
+	c &= \frac{2}{3}\sqrt{-m_c^2 + 2m_b^2 + 2m_a^2}
+\end{align*}
+
+When going from medians to side lengths, a triangle is valid if all expressions under the roots are positive, and $a+b>c$ for some permutation of $a,b,c$.
+
+\section{Combinatorics}
+
+Number of ways to pick $k$ objects (ordered) from a set of $n$: $$n P r = \frac{n!}{(n-k)!}$$
+
+Calculate the last non-zero digit of $\prod a_i$: Let $c=\sum (f(a_i)-g(a_i))$ where $f(x)$ is the largest power of 2 that divides $x$ and $g(x)$ is the largest power of 5 that divides $x$. Cast out all 2's and 5's from $a_i$, calculate the product and keep the last digit. Then, if $c<0$, the last digit is 5, and if $c>0$, multiply the last digit with $2^c$.
 
 \end{document}

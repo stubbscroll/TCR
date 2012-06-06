@@ -220,10 +220,14 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.13 minimum spanning tree
 1.13.1 minimum spanning tree in undirected graph
 
-- uva 10842
+- UVa 10397
+- UVa 10842
 
 1.13.1.1 prim's algorithm
 1.13.1.2 kruskal's algorithm
+
+- UVa 10369 (prim's won't work here!)
+
 1.13.2 minimum spanning tree (minimum arborescence) in directed graph
 
 2 discrete dynamic programming
@@ -235,6 +239,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 2.2 edit distance and similar (partial match)
 
 - UVa 363
+- UVa 10069
 
 2.3 bitmask dp
 
@@ -281,6 +286,10 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 - spoj 1392
 
+3.1.3.1 inverse sum of divisors
+
+- idi open 2012 "inverse divisor sums"
+
 3.1.4 euler's totient function (phi)
 
 - Project Euler 214
@@ -293,6 +302,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 3.1.5 gcd/lcm
 
+- UVa 11417
 - Project Euler 5
 
 3.1.6 pythagorean triplets
@@ -305,8 +315,8 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 3.2.1.1 "incremental" gaussian elimination
 
-- project euler232
-- a hard problem from topcoder a few months ago TODO
+- Project Euler 232
+- a hard problem from topcoder a few months ago (2011-ish) TODO
 
 3.3 probability
 3.3.1 transition matrix
@@ -318,6 +328,12 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 10088
 * one more which i've forgotten. i think it was a regional where we
   were asked to deduce the formula
+
+3.4.1.2 triangle
+
+3.4.1.2.1 triangle medians (line from vertex to midpoint of opposing line)
+
+- UVa 10347
 
 3.4.2 computational geometry
 
@@ -373,6 +389,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.8 arithmetic
 3.8.1 biginteger
 
+- UVa 10069
 - UVa 10157
 
 3.8.1.1 advanced biginteger (more involving than +-*/%, like sqrt, log)
@@ -381,7 +398,16 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 3.8.2 bigdecimal
 
+3.8.3 matrices
+
+3.8.3.1 matrix exponentiation with square-and-multiply
+
+- UVa 10229
+- UVa 12470
+
 4 greedy
+
+* UVa 10094 (find any solution to n-queens problem)
 
 5 ad-hoc
 5.1 simulation
@@ -436,7 +462,11 @@ place these in either maxflow, mincostmaxflow or bipartite
 6.1 palindromes
 
 6.2 string search
-6.2.1 aho-corasick
+6.2.1 knuth-morris-pratt
+
+- UVa 10679
+
+6.2.2 aho-corasick
 
 * topcoder srm 519 div 1 medium
 
@@ -534,6 +564,9 @@ place these in either maxflow, mincostmaxflow or bipartite
 12.4 hash
 
 - UVa 851
+- UVa 10181
+- UVa 10226
+- Google Code Jam 2012 Round 2 D-small
 * UVa 1152
 
 12.5 square buckets (for rmq, frequencies etc)

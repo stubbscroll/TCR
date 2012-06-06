@@ -43,7 +43,8 @@ void genprimes() {
 		smallest divisor. the datatype for sieve[] must be able to hold
 		sqrt(MAXP). same asymptotic runtime as normal sieve, but higher constant
 		because of the branch in the inner loop, and wider datatype */
-/*	WARNING, not yet rigorously tested. */
+/*	OK Project Euler 386 27.08.2011 */
+/*	OK Topcoder Inv 2002 finals (run 1) 500 04.06.2012 */
 int sieve2[MAXP];
 void fsieve() {
   int q=sqrt(MAXP),i,j;
@@ -53,7 +54,8 @@ void fsieve() {
 }
 /*	use factorization sieve to factor a number (requires n<MAXP), runs in time
 		linear to the number of prime factors (including duplicates). */
-/*	WARNING, not yet rigorously tested. */
+/*	OK Project Euler 386 27.08.2011 */
+/*	OK Topcoder Inv 2002 finals (run 1) 500 04.06.2012 */
 void ffactor(int n,int *f,int *fc,int *fn) {
 	*fn=0;
 	while(sieve2[n]) {
@@ -295,6 +297,7 @@ int ullwitness(ull n,ull a) {
 
 /*  deterministic miller-rabin for 64-bit numbers */
 /*  OK spoj (classical) 4942 04.08.2011 */
+/*	WRONG project euler 387, TODO fix */
 int ullmillerrabin(ull n) {
   if(n<4294967295LU) return millerrabin(n);
   if(n<4759123141LL)

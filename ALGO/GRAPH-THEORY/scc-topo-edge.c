@@ -66,7 +66,7 @@ void dfsvisit(int u,int c) {
 
 /*  topological sort! res[] contains the nodes in backwards order */
 /*	OK UVa 103, 0.008 seconds, n<=30,ne<=420 25.05.2011 */
-/*  ?? UVa 11686, ?.??? seconds, n,ne<=1000000 09.08.2011 */
+/*  OK UVa 11686, 0.452 seconds, n,ne<=1000000 26.05.2012 */
 void toposort() {
   int i;
   memset(vis,0,n);
