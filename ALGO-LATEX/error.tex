@@ -6,7 +6,6 @@
 \usepackage{enumerate}			% fancy enumerering
 \usepackage{graphicx,textcomp,varioref}
 \usepackage{cancel}					% kanseller ledd i math mode
-\usepackage{fullpage}
 
 \author{Ruben Spaans}
 \title{Algorithm}
@@ -39,11 +38,12 @@
 	\item Beware the old ``input trap''. If you are given $a$ and $b$ and are asked to do something with this range, be sure to ensure that $a\leq b$ by swapping.
 \end{itemize}
 
-\subsection{Coding}
+\subsection{Arrays}
 
 \begin{itemize}
-	\item Be careful with indexes! Check that \texttt{i} and \texttt{j} aren't switched. Make sure that the \texttt{cx} in \texttt{x2~=~cx~+~dx[d]} isn't forgotten.
+	\item Let arrays have the size you need plus 10 or so, and also precalculate stuff up to this extra limit. This headroom can save you if you miscalculate which elements you really need.
 \end{itemize}
+
 
 \subsection{Graph theory}
 
@@ -71,6 +71,7 @@
 \subsection{Debugging}
 
 \begin{itemize}
+	\item Be careful with indexes! Check that \texttt{i} and \texttt{j} aren't switched. Make sure that the \texttt{cx} in \texttt{x2~=~cx~+~dx[d]} isn't forgotten.
 	\item If the end result is a \texttt{long long}, be sure to let the intermediate variables be \texttt{long long} as well. \texttt{int} multiplication overflow is an extremely common mistake.
 	\item Please select easy-to-implement solutions with few/no special cases to consider (as long as they will be fast enough to pass).
 	\item Getting different results on the same test case? Is the answer to the first test case correct, while the rest is nonsense? Remember to clean up variables between test cases!
@@ -125,7 +126,7 @@ Pick's theorem TODO
 \begin{itemize}
 	\item Warning, don't underestimate the difficulty when conditional probabilities are involved. Be sure of what you're doing and stay sharp!
 	\item For DP problems of the type ``what's the probability of escaping through the ordeal'', consider not normalizing the probabilities, and do subtraction of non-normalized probabilities.
-	\item Given a random permutation of length n, the probability of it being in a cycle of length $k$ is $\frac{1}{n}$ for any $1\leq k \leq n$.
+	\item Given a random permutation of length n, the probability of it being in a cycle of length $k$ is $\frac{1}{n}$ for any $1\leq k \leq n$. TODO this doesn't make sense, figure out what I really meant and rewrite it.
 \end{itemize}
 
 \subsection{Graph theory}
