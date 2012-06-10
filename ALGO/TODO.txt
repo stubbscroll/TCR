@@ -1,18 +1,19 @@
-PQUEUE
-
-- balanced binary tree with insert, delete, get kth element
-- find bridge in graph
-
 ARITHMETIC
 
 issquare
 issquarefree
+iscube
 
 fast way to calculate issquare(n)
 
 http://stackoverflow.com/questions/295579/fastest-way-to-determine-if-an-integers-square-root-is-an-integer
 http://hansliten.wordpress.com/2010/07/31/faster-square-test/
 http://gmplib.org/manual/Perfect-Square-Algorithm.html#Perfect-Square-Algorithm
+
+BIGINT
+
+square root
+n-th root
 
 COMBINATORICS
 
@@ -39,11 +40,10 @@ COMPUTATIONAL-GEOMETRY
 
 ccw
 line-line intersection
-line-circle intersection
-polegon-polygon intersection
-convex hull (both with and without collinear points)
-point in polygon
-point in triangle (special case of above)
+polygon-polygon intersection
+convex hull with collinear points
+point in polygon that handles edge cases
+point in convex polygon (fast)
 distance from point to line, line segment, circle, polygon etc
 projection of point to line (2d), plane (3d)
 
@@ -53,7 +53,6 @@ DATA STRUCTURE
 
 binomial heap
 fibonacci heap
-red-black tree (looks rather complicated to implement)
 avl tree
 splay tree
 aa tree
@@ -61,57 +60,41 @@ scapegoat tree
 treap
 b-tree?
 
-some kind of balanced tree with the following operations:
-- insert element
-- delete element
-- find K-th element
-^ this one is important!
-
 GRAPH
 
-bellman-ford
-maxflow with edge lists, memory usage O(E), edge lookup time O(E)
-mincost maxflow
-bipartite matching with capacity >1 between each pair
-in an undirected graph, find articulation points in connected component
- (node such that if removed, the component is no longer connected)
-  check https://secure.wikimedia.org/wikipedia/en/wiki/Articulation_point
-in an undirected graph, find bridge in connected component (edge such
-  that if removed, the component is no longer connected)
-  check https://secure.wikimedia.org/wikipedia/en/wiki/Bridge_%28graph_theory%29
-tarjan's scc
-special maxflow code for the "tripartite matching in graph" problem: given
-  nodes X,Y,Z such that all edges are from X to Y or Y to Z, find a max
-  matching. not to be confused with the NP-complete problem.
+- bellman-ford
+- mincost maxflow with dijkstra
+- bipartite matching with capacity >1 between each pair
+  check 
+- find bridge in graph: edge that splits graph if removed
+  https://secure.wikimedia.org/wikipedia/en/wiki/Bridge_%28graph_theory%29
+- find articulation point in graph; node that splits graph if removed
+  https://secure.wikimedia.org/wikipedia/en/wiki/Articulation_point
+- tarjan's scc
 
 MATRIX
 
-matmul
-matmulmod
-matpowmod
-matadd
-determinant
-inverse
-gaussian elimination
-gaussian elimination mod
-for square matrix A, sum A^1+A^2+...+A^n
+- matadd
+- determinant
+- inverse
+- gaussian elimination
+- gaussian elimination mod
+- for square matrix A, sum A^1+A^2+...+A^n
 
 NUMBER-THEORY
 
-chinese remainder theorem
-
-faster ullmulmod
-faster powmod, without init and ugly macros
-
-upper bound for primtall nummer n: a(n) < n*(log n + log log n - 1/2) for n>=20
-find continued fraction from arbitrary real number
-solve pell equation
-solve more general diophantine equations
+- faster ullmulmod
+- faster powmod, without init and ugly macros
+- upper bound for primtall nummer n: a(n) < n*(log n + log log n - 1/2) for n>=20
+- find continued fraction from arbitrary real number
+- solve pell equation
+- solve more general diophantine equations
+- fix miller-rabin!
 
 NUMERIC
 
-laguerre's (numerical) method of finding roots of a polynomial
-robinson's recursion for solving "toeplitz" matrices
+- laguerre's (numerical) method of finding roots of a polynomial
+- robinson's recursion for solving "toeplitz" matrices
 
 PROBABILITY
 
@@ -126,7 +109,6 @@ find kth number in array in linear time (order statistics)
 
 STRING
 
-knuth-morris-pratt
 aho-corasick
 given a string, calculate transition table[a][b]:
   if we have matched to pos a and see char b, transition to position in table

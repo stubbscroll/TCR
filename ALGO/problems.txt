@@ -1,7 +1,7 @@
 UVa quicklink: http://uva.onlinejudge.org/external/abc/abcde.html
 
 -: tested
-*: untested, problem seems be a fit for given algorithm
+*: untested, problem seems to be a fit for given algorithm
 
 list of problems for testing different kinds of algorithms and methods. that
 problem p is listed under algorithm a does not necessarily mean that a is the
@@ -15,10 +15,11 @@ algorithm classification is rather ad hoc, improve later.
 1.1 network flow
 1.1.1 maxflow
 
-- UVa 563 (with node splitting, huge graph needing edge list) (good stress test for max flow)
-  (commonly called "the escape problem")
+- UVa 563 (with node splitting, huge graph needing edge list) (good stress test
+  for max flow) (commonly called "the escape problem")
 - UVa 753
 - UVa 820
+- UVa 10249
 - UVa 10330
 - UVa 10480
 - Topcoder SRM 422-div1-hard
@@ -53,9 +54,10 @@ place these in either maxflow, mincostmaxflow or bipartite
 * Topcoder SRM 506 div 1 600
 * UVa 10746
 
-1.1.3 maximum matching in bipartite graph
+1.1.3 maximum cardinality matching in bipartite graph
 
-- Topcoder SRM 200 div 1 hard (+careful graph construction to satisfy lexicographic smallest)
+- Topcoder SRM 200 div 1 hard (+careful graph construction to satisfy
+  lexicographic smallest)
 - Topcoder SRM 236 div 1 1000 (+binary search)
 - Topcoder SRM 303 div 1 500
 - Topcoder SRM 477 div 1 500 "PythTriplets"
@@ -65,14 +67,16 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVA 670
 - UVa 753 (maxflow is faster, floyd-warshall is expensive)
 - UVa 10080
-- UVa 10092 (plain bipartite is slow, higher capacity or proper maxflow is better)
+- UVa 10092 (plain bipartite is slow, higher capacity or proper maxflow is
+  better)
 - UVa 10122
 - UVa 10349
 - UVa 10804 (+binary search)
 - UVa 11418
 - UVa 11419 (+output vertex cover with könig's theorem)
 - Uva-live 4288 (NWERC 2008 problem C)
-- BAPC 2006 problem F (hnu 11025) (let left side be doors+times, sort by increasing time)
+- BAPC 2006 problem F (hnu 11025) (let left side be doors+times, sort by
+  increasing time)
 * UVa 10380
 * Topcoder SRM 447 div 1 500 "PeopleYouMayKnow"
 * UVa 10615
@@ -82,9 +86,11 @@ place these in either maxflow, mincostmaxflow or bipartite
 * UVa 11159
 * UVa 11262
 * UVa 10511 (apparently it is possible with bipartite matching. how?)
-* POJ 3614/SDIBT 2247 (USACO NOV07 gold problem 3 "tanning") (might not be possible)
+* POJ 3614/SDIBT 2247 (USACO NOV07 gold problem 3 "tanning") (might not be
+  possible)
 
-1.1.3.1 maximum/minimum weight matching in bipartite graph (assignment problem/hungarian algorithm)
+1.1.3.1 maximum/minimum weight matching in bipartite graph (assignment
+  problem/hungarian algorithm)
 
 - UVa 10072
 - UVa 10888
@@ -106,6 +112,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.2.1 one-to-all shortest-path
 1.2.1.1 dijkstra
 
+- UVa 10171
 - UVa 10986
 - UVa-live 4374 (NEERC 2008 problem D)
 - SPOJ 3465 DRIVE (NEERC 2008 problem D) (good stress test for Dijkstra)
@@ -116,6 +123,9 @@ place these in either maxflow, mincostmaxflow or bipartite
 - Project Euler 83
 
 1.2.1.2 bellman-ford
+
+- UVa 515
+
 1.2.1.3 johnson's algorithm
 1.2.2 all-pairs shortest-path
 1.2.2.1 floyd-warshall
@@ -127,18 +137,20 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.3.1.1 breadth-first search
 
 - UVa 851
+- UVa 10422 (huge state space, but it fits in memory)
 - UVa 10704
 - UVa 10796
 - Topcoder SRM 236 div 1 1000
 
-1.3.1.1.1 0-1-breadth-first search
+1.3.1.1.1 0-1-breadth-first search (bfs in a graph with edge costs 0 or 1)
 
-- UVa 10770 (hard state space)
+- UVa 10770 (exponential-sized state space with tricky encoding)
 
 1.3.1.1.2 breadth-first search with multiple queues
 
 1.3.1.2 depth-first search
 1.3.2 bidirectional search
+1.3.2.1 bidirectional breadth-first search
 
 * free willy (?) from idi open
 
@@ -168,7 +180,8 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.5 topological sort
 
 - UVa 103
-* UVa 11686
+- UVa 11686
+- UVa 12466
 * UVa 124
 * UVa 196
 * UVa 200
@@ -201,6 +214,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.11.1 shortest hamilton path/cycle aka travelling salesman
 
 - UVa 216 (n<=8)
+- UVa 10496 (n<=10)
 
 1.12 maximum matching in general graph (edmond's blossom algorithm)
 
@@ -226,37 +240,48 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.13.1.1 prim's algorithm
 1.13.1.2 kruskal's algorithm
 
+- UVa 10147 (using prim's is more hassle)
 - UVa 10369 (prim's won't work here!)
 
 1.13.2 minimum spanning tree (minimum arborescence) in directed graph
 
-2 discrete dynamic programming
+2 dynamic programming
 2.1 longest increasing/decreasing/common subsequence
 
+- UVa 10534 (preferably n log k)
 - NCPC ? nested dolls
 
 2.2 coin change
-2.2 edit distance and similar (partial match)
+
+* UVa 351
+
+2.3 edit/levenshtein distance and similar
 
 - UVa 363
 - UVa 10069
+- UVa 10739 (palindrome variant)
 
-2.3 bitmask dp
+2.4 bitmask dp
 
+- UVa 10496
 - ncpc ? copying dna
 * Topcoder SRM 310 div 1 900
 
-2.4 profile layer dp
+2.5 profile layer dp
 
 - GCJ AMER semifinal 2008, problem D: King
 
-2.5 longest/shortest/number of paths in DAG
+2.6 longest/shortest/number of paths in DAG
 
 - UVa 103
+- UVa 10051
 
-2.6 other dp
+2.7 other dp
 
 - UVa 10157
+- UVa 10271
+- UVa 10304
+- UVa 10306
 
 3 math
 3.1 number theory
@@ -304,6 +329,10 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 - UVa 11417
 - Project Euler 5
+
+3.1.5.1 extended euclid
+
+- UVa 10090
 
 3.1.6 pythagorean triplets
 
@@ -354,9 +383,9 @@ place these in either maxflow, mincostmaxflow or bipartite
 * UVa 11769
 
 3.4.2.3 intersection
-3.4.2.3.1 point inside polygon
+3.4.2.3.1 circle-circle
 
-- UVa 109
+- UVa 453
 
 3.4.2.4 area/volume/surface etc
 3.4.2.4.1 area of polygon
@@ -367,6 +396,11 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.4.3.1 pythagorean triangles
 
 - Project Euler 9
+
+3.4.4 point inside polygon
+
+- UVa 109
+- UVa 10112 (triangles only)
 
 3.5 combinatorics
 3.5.1 permutations
@@ -405,8 +439,17 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 10229
 - UVa 12470
 
+3.9 numerical optimization
+3.9.1 unconstrained optimization
+3.9.2 constrained optimization
+3.9.2.1 linear programmering
+3.9.2.1.1 system of difference constraints
+
+* UVa 515
+
 4 greedy
 
+- UVa 10249
 * UVa 10094 (find any solution to n-queens problem)
 
 5 ad-hoc
@@ -465,6 +508,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 6.2.1 knuth-morris-pratt
 
 - UVa 10679
+- UVa 12467 (search itself in reverse)
 
 6.2.2 aho-corasick
 
@@ -479,6 +523,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 7.1.1 non-loopy impartial games
 
 - Project Euler 366
+- UVa 12469 (win-loss-minimax)
 
 7.1.1.1 nim
 
@@ -507,19 +552,24 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 11 search
 11.1 binary search
+
+- UVa 10566 (continuous)
+
 11.2 ternary search
 
-- Topcoder SRM 543 div 1 500 (discrete search space)
+- Topcoder SRM 543 div 1 500 (discrete)
 
 12 data structures
 12.1 segment tree
 12.1.1 fenwick (binary indexed) tree
 
-* idi open 2011 "Beads"
+- idi open 2011 "Beads"
 - NCPC 2011 B "mega-inversions" (plus binary search over cumulative[1..i])
 - NCPC 2010 I (2D tree)
 - topcoder SRM 310 div 1 500
 - UVa 501
+- UVa 10015
+- UVa 10057
 - UVa 10909
 - UVa 11525
 - UVa 12365
@@ -574,6 +624,12 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 12299
 - NCPC 2011 B "mega-inversions"
 - SPOJ 61 BRCKTS
+
+12.6 disjoint set/union set find
+
+- UVa 10147
+- UVa 10301
+- UVa 10397
 
 13 compression
 
