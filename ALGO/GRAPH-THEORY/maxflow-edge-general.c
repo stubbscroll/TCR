@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
-/*  max flow with edge cost 1, but arbitrary capacities. efficient memory
-    usage: O(E) */
+/* max flow with edge cost 1, but arbitrary capacities. efficient memory
+   usage: O(E) */
+/* remember, f[] (initial capacities) must be initialized. the easiest way is
+   to define the graph from left to right, and set cap only on forward edges */
 
-/*	OK Topcoder SRM 422 div-1 1000, 45 ms, n<=1802, ne<=405000, 21.05.2012 */
+/* OK UVa 4.204 seconds n<=122 ne<=3620 08.06.2012 */
+/* OK Topcoder SRM 422 div-1 1000, 45 ms, n<=1802, ne<=405000, 21.05.2012 */
 
 #define MAXE 2000000
 #define MAXV 333500
@@ -82,7 +85,7 @@ void radixsort() {
   }
 }
 
-/*  for each edge a->b, find index to b->a */
+/* for each edge a->b, find index to b->a */
 void inverseedges() {
   static int starts[MAXV+1];
   int i;
@@ -90,82 +93,9 @@ void inverseedges() {
   for(i=0;i<ne;i++) inv[i]=starts[to[i]]++;
 }
 
-char map[512][512];
-int nodeno[512][512];
-int x,y;
-
-int dx[]={1,0,-1,0},dy[]={0,1,0,-1};
-
-int main() {
-  int cases,i,j,na,nb,nc,d,x2,y2,no,bb,np;
-  int source=0,sink,starta=1,startb,startc;
-  scanf("%d",&cases);
-  while(cases--) {
-    scanf("%d %d",&x,&y);
-    for(i=0;i<x;i++) scanf("%s",map[i]);
-    /*  na: number of white on even-numbered columns
-        nb: number of white on odd-numbered columns */
-    na=nb=nc=0;
-    for(i=0;i<x;i++) for(j=0;j<y;j++) {
-      if(map[i][j]=='B') nc++;
-      else if(map[i][j]=='W') {
-        if(j&1) nb++;
-        else na++;
-      }
-    }
-    /*  set up graph for "tripartite" matching */
-    if(na!=nb || na!=nc) { puts("NO"); continue; }
-    np=na;
-    startb=starta+na;
-    startc=startb+nb+nb;
-    sink=startc+nc;
-    n=sink+1;
-    na=1;
-    nb=startc;
-    nc=startb;
-    for(i=0;i<x;i++) for(j=0;j<y;j++) {
-      if(map[i][j]=='B') nodeno[i][j]=nc++;
-      else if(map[i][j]=='W') {
-        if(j&1) nodeno[i][j]=nb++;
-        else nodeno[i][j]=na++;
-      }
-    }
-    ne=0;
-    for(i=0;i<np;i++) {
-      /*  edges from source to all even white */
-      from[ne]=source; to[ne++]=i+starta;
-      from[ne]=i+starta; to[ne++]=source;
-      /*  edges from odd whites to sink */
-      from[ne]=startc+i; to[ne++]=sink;
-      from[ne]=sink; to[ne++]=startc+i;
-      /*  split black node */
-      from[ne]=i+startb; to[ne++]=i+startb+np;
-      from[ne]=i+startb+np; to[ne++]=i+startb;
-    }
-    for(i=0;i<x;i++) for(j=0;j<y;j++) if(map[i][j]=='B') {
-      bb=nodeno[i][j];
-      for(d=0;d<4;d++) {
-        x2=i+dx[d],y2=j+dy[d];
-        if(x2<0 || y2<0 || x2>=x || y2>=y || map[x2][y2]!='W') continue;
-        no=nodeno[x2][y2];
-        if(no<bb) {
-          /*  node to the left */
-          from[ne]=no; to[ne++]=bb;
-          from[ne]=bb; to[ne++]=no;
-        } else {
-          /*  node to the right */
-          from[ne]=no; to[ne++]=bb+np;
-          from[ne]=bb+np; to[ne++]=no;
-        }
-      }
-    }
-    radixsort();
-    inverseedges();
-/*    for(i=0;i<ne;i++) printf("edge %d: %d -> %d (inv %d)\n",i,from[i],to[i],inv[i]);*/
-    /*  hackish flow init: only forward edges have flow */
-    for(i=0;i<ne;i++) f[i]=from[i]<to[i];
-    if(maxflow(source,sink)==np) puts("YES");
-    else puts("NO");
-  }
-  return 0;
+/* add both directions of an edge */
+void addedge(int a,int b) {
+	from[ne]=a; to[ne++]=b;
+	from[ne]=b; to[ne++]=a;
 }
+
