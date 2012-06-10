@@ -1,9 +1,13 @@
+/* matrix multiplication and exponentiation!
+   when using these, remember to cast to long long if necessary
+	 (especially when multiplying the resulting matrix later on) */
+
 #define M 2
 
 typedef long long ll;
 
-/*	OK UVa 10229 N<2^31 26.05.2012 */
-/*	OK UVa 12470 N<=10^16 06.06.2012 */
+/* OK UVa 10229 N<2^31 26.05.2012 */
+/* OK UVa 12470 N<=10^16 06.06.2012 */
 void matrixmulmod(int a[M][M],int b[M][M],int mod,int r[M][M],int n) {
 	int x[M][M],i,j,k;
 	for(i=0;i<n;i++) for(j=0;j<n;j++) {
@@ -13,7 +17,9 @@ void matrixmulmod(int a[M][M],int b[M][M],int mod,int r[M][M],int n) {
 	for(i=0;i<n;i++) for(j=0;j<n;j++) r[i][j]=x[i][j];
 }
 
-/*	OK UVa 10229 N<2^31 26.05.2012 */
+/* OK UVa 10229 N<2^31 26.05.2012 */
+/* OK UVa 12470 N<=10^16 06.06.2012 */
+/* remember to change N to long long if needed */
 void matrixpowmod(int a[M][M],int N,int mod,int r[M][M],int n) {
 	int i,j;
 	int b[M][M],x[M][M];
