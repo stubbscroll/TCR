@@ -41,12 +41,13 @@ void genprimes() {
   for(primes=i=0;i<MAXP;i++) if(sieve[i]) prime[primes++]=i;
 }
 
-/*	factorization sieve: sieve[i] is 0 if i is prime, otherwise sieve[i] is
-		smallest divisor. the datatype for sieve[] must be able to hold
-		sqrt(MAXP). same asymptotic runtime as normal sieve, but higher constant
-		because of the branch in the inner loop, and wider datatype */
-/*	OK Project Euler 386 27.08.2011 */
-/*	OK Topcoder Inv 2002 finals (run 1) 500 04.06.2012 */
+/* factorization sieve: sieve[i] is 0 if i is prime, otherwise sieve[i] is
+   smallest divisor. the datatype for sieve[] must be able to hold
+   sqrt(MAXP). same asymptotic runtime as normal sieve, but higher constant
+   because of the branch in the inner loop, and wider datatype */
+/* OK Project Euler 386 27.08.2011 */
+/* OK Topcoder Inv 2002 finals (run 1) 500 04.06.2012 */
+/* OK UVa 10680 0.096 seconds n<=1000000 08.06.2012 */
 int sieve2[MAXP];
 void fsieve() {
   int q=sqrt(MAXP),i,j;
@@ -54,10 +55,11 @@ void fsieve() {
   sieve2[0]=sieve2[1]=0;
   for(i=2;i<=q;i++) if(sieve2[i]<1) for(j=i*i;j<MAXP;j+=i) if(!sieve2[j]) sieve2[j]=i;
 }
-/*	use factorization sieve to factor a number (requires n<MAXP), runs in time
-		linear to the number of prime factors (including duplicates). */
-/*	OK Project Euler 386 27.08.2011 */
-/*	OK Topcoder Inv 2002 finals (run 1) 500 04.06.2012 */
+/* use factorization sieve to factor a number (requires n<MAXP), runs in time
+   linear to the number of prime factors (including duplicates). */
+/* OK Project Euler 386 27.08.2011 */
+/* OK Topcoder Inv 2002 finals (run 1) 500 04.06.2012 */
+/* OK UVa 10680 0.096 seconds n<=1000000 08.06.2012 */
 void ffactor(int n,int *f,int *fc,int *fn) {
 	*fn=0;
 	while(sieve2[n]) {
@@ -101,8 +103,8 @@ ull lcm(ull a,ull b) {
   return a/binarygcd(a,b)*b;
 }
 
-/*  find x,y such that ax + by = gcd(a,b) */
-/*  NB, untested */
+/* find x,y such that ax + by = gcd(a,b) */
+/* UVa 10090 08.06.2012 */
 ll extendedeuclid(ll a,ll b,ll *lastx,ll *lasty) {
   ll x=0,y=1,t,q;
   *lastx=1; *lasty=0;
@@ -331,6 +333,7 @@ int ullmillerrabin(ull n) {
 /*  OK project euler 003 09.06.2011 */
 /*  OK spoj (tutorial) 1392 04.08.2011 */
 /*  OK UVa 11073 04.08.2011 */
+/* OK UVa 12465 n<=32000 06.06.2012 */
 void factor(ull n,ull *f,int *fc,int *fn) {
   int i;
   for(*fn=i=0;i<primes && (ull)prime[i]*prime[i]<=n;i++) if(n%prime[i]<1) {
@@ -498,6 +501,7 @@ void inversephi(ull left,ull *val,int *n) {
 
 /*  number of divisors, requires prime[]<=sqrt(n) */
 /*  OK-ish, n<100001 matches OEIS A000005 03.08.2011 */
+/* OK UVa 12465 n<=1000000000 06.06.2012 */
 ll numdiv(ll n) {
   ll ans=1,f[64];
   int i,fc[64],fn;
