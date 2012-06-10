@@ -1,3 +1,4 @@
+#define EPS 1e-6
 
 /*  given three circle radii, find radius of enclosed fourth circle */
 /*  radius can be negative! */
@@ -6,7 +7,12 @@ double enclosedcircle(double r1,double r2,double r3) {
   return 1/(1/r1 + 1/r2 + 1/r3 + 2*sqrt(1/(r1*r2)+1/(r1*r3)+1/(r2*r3)));
 }
 
-/*	subroutine used in circletangent */
+/* equality check used in circlecircleintersection */
+double deq(double a,double b) {
+	return fabs(a-b)<EPS;
+}
+
+/*	subroutine used in circletangent and circlecircleintersection */
 double dist2d(double x1,double y1,double x2,double y2) {
 	double dx=x1-x2,dy=y1-y2;
 	return sqrt(dx*dx+dy*dy);
@@ -70,3 +76,32 @@ int linecircleintersect(double x1,double y1,double x2,double y2,double cx,double
 	double D=b*b-4*a*c;
 	return D>=0;
 }
+
+/* circle-circle intersection! return:
+   0 if no intersection
+	 1 if circle is contained in other circle
+	 2 if circles are the same (infinitely many intersection points
+	 3 and *x3 *y3 *x4 *y4: intersections (points 3 and 4 can be equal)
+	 http://local.wasp.uwa.edu.au/~pbourke/geometry/2circle/
+*/
+/* OK UVa 453 07.06.2012 */
+int circlecircleintersect(double x0,double y0,double r0,double x1,double y1,double r1,
+		double *x3,double *y3,double *x4,double *y4) {
+	double d=dist2d(x0,y0,x1,y1),a,h,x2,y2;
+	if(d>r0+r1+EPS) return 0;
+	if(d+EPS<fabs(r0-r1)) return 1;
+	if(deq(d,0) && deq(r0,r1)) {
+		/* check nasty case where circles are equal with r=0 */
+		if(!deq(r0,0)) return 2;
+		*x3=*x4=x0;
+		*y3=*y4=y0;
+		return 3;
+	}
+	a=(r0*r0-r1*r1+d*d)/(2*d);
+	h=r0*r0-a*a<EPS?0:sqrt(r0*r0-a*a);
+	x2=x0+a*(x1-x0)/d;  y2=y0+a*(y1-y0)/d;
+	*x3=x2+h*(y1-y0)/d; *y3=y2-h*(x1-x0)/d;
+	*x4=x2-h*(y1-y0)/d; *y4=y2+h*(x1-x0)/d;
+	return 3;
+}
+
