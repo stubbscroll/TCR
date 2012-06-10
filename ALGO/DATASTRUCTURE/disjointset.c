@@ -1,7 +1,9 @@
 #define MAXSET 30000
 
-/*	disjoint set! */
-/*	OK UVa 10397 26.05.2012 */
+/* disjoint set! */
+/* OK UVa 10147 08.06.2012 */
+/* OK UVa 10301 08.06.2012 */
+/* OK UVa 10397 26.05.2012 */
 
 int p[MAXSET],rank[MAXSET];
 
