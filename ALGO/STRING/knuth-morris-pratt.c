@@ -3,7 +3,8 @@
 
 #define MAXP 1024
 
-/* OK UVa 10679 |s|<=1000000, |w|<=1000, 1.348 seconds, 06.05.2012 */
+/* OK UVa 10679 |s|<=1000000, |w|<=1000, 1.348 seconds, 05.06.2012 */
+/* OK UVa 12467 |s|<=1000000, |w|<=1000000, 0.080 seconds, 06.06.2012 */
 
 /* knuth-morris-pratt! */
 /* find pattern *w in text *s. return index of first match, or -1 if none */
