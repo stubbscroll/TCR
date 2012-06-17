@@ -18,6 +18,7 @@
 /* OK UVa 10057 n<=65537, 0.096 seconds, 08.06.2012 */
 /* OK UVa 10909 n<=1100000, 0.168 seconds, 04.10.2011 */
 /* OK UVa 11525 n<=50000, 0.152 seconds, 04.10.2011 */
+/* OK UVa 12086 n<=200000, 0.288 seconds, 15.06.2012 */
 /* OK UVa 12365 n<=100000, 0.488 seconds, 12.11.2011 */
 /* OK NCPC 2011 problem B Mega-inversions 01.10.2011 */
 /* OK SPOJ 9889 (NWERC 2011 problem C movie collection) n<=200000 0.95 seconds 15.01.2012 */
