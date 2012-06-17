@@ -92,12 +92,19 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.1.3.1 maximum/minimum weight matching in bipartite graph (assignment
   problem/hungarian algorithm)
 
+[nb, min-weight can be reduced to mincost-maxflow this way: create an edge with
+ cost 0 from source to left, and right to sink. create edges between every pair
+ in left+right with cost equal to the negative of the cost of choosing (i,j).
+ all edges have capacity 1. then, run mcmf and the answer is the negative
+ of the maximal cost.]
+
 - UVa 10072
 - UVa 10888
 - UVa 11383 (reading off node weights, rather obscure solution)
 - Topcoder SRM 371 div 1 500
 - Topcoder SRM 372 div 1 1000 (both min and max)
 - Topcoder SRM 526 div 1 250
+- Project Euler 345
 
 1.1.3.2 minimum vertex cover in bipartite graph (könig's theorem)
 
@@ -180,6 +187,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.5 topological sort
 
 - UVa 103
+- UVa 715 (need to consider the set of all topological sorts)
 - UVa 11686
 - UVa 12466
 * UVa 124
@@ -206,7 +214,12 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.7 eulerian path/cycle
 1.8 degree properties
 1.9 connectivity
+1.9.1 articulation point in graph
+1.9.2 bridge in graph
 1.10 planarity
+
+- UVa 10768
+
 1.11 hamilton path/cycle
 
 - hacker.org, puzzle Oneofus
@@ -342,7 +355,9 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 3.2.1 solve a set of equations: gaussian elimination
 
-3.2.1.1 "incremental" gaussian elimination
+- UVa 472 (over the complex numbers)
+
+3.2.1 "incremental" gaussian elimination (gauss + DP)
 
 - Project Euler 232
 - a hard problem from topcoder a few months ago (2011-ish) TODO
@@ -369,9 +384,11 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.4.2.2 convex hull
 
 - UVa 109
+- UVa 596 (include collinear points on hull)
+- UVa 675
 - UVa 811
 * UVa 132
-* UVa 218
+* UVa 218 (include collinear points on hull, i think)
 * UVa 361
 * UVa 681
 * UVa 10002
@@ -391,6 +408,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.4.2.4.1 area of polygon
 
 - UVa 109
+- UVa 12300
 
 3.4.3 triangles
 3.4.3.1 pythagorean triangles
@@ -445,7 +463,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.9.2.1 linear programmering
 3.9.2.1.1 system of difference constraints
 
-* UVa 515
+- UVa 515
 
 4 greedy
 
@@ -550,6 +568,18 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 10 sorting
 
+10.1 merge sort
+
+10.1.1 count inversions in merge sort
+
+* UVa 299
+* UVa 10327
+* UVa 10810
+* Topcoder SRM 234 div 1 850
+http://acm.sgu.ru/problem.php?contest=0&problem=180
+http://acm.zju.edu.cn/show_problem.php?pid=1440
+http://spoj.sphere.pl/problems/BRICKS/
+
 11 search
 11.1 binary search
 
@@ -564,14 +594,15 @@ place these in either maxflow, mincostmaxflow or bipartite
 12.1.1 fenwick (binary indexed) tree
 
 - idi open 2011 "Beads"
-- NCPC 2011 B "mega-inversions" (plus binary search over cumulative[1..i])
 - NCPC 2010 I (2D tree)
+- NCPC 2011 B "mega-inversions" (plus binary search over cumulative[1..i])
 - topcoder SRM 310 div 1 500
 - UVa 501
 - UVa 10015
 - UVa 10057
 - UVa 10909
 - UVa 11525
+- UVa 12086
 - UVa 12365
 - NWERC 2011 problem C "movie collection" (SPOJ 9889)
 * pku 1990
@@ -582,10 +613,13 @@ place these in either maxflow, mincostmaxflow or bipartite
 * spoj HORRIBLE
 * spoj ORDERS
 * spoj CTRICK
+* topcoder srm 234 div 1 850?
 * topcoder 2010 TCO semifinal 2 div 1 hard
 * codechef nov 10 "bombing"
 * codechef TEMPQUE
 * spoj 8406 TEMPLEQ
+* ioi 2001 "mobiles" (2d)
+* UVa 12232?
 
 12.2 binary tree
 12.2.1 self-balancing binary tree (with insert, delete, find k-th element)
@@ -624,6 +658,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 12299
 - NCPC 2011 B "mega-inversions"
 - SPOJ 61 BRCKTS
+* UVa 12232?
 
 12.6 disjoint set/union set find
 
@@ -648,4 +683,8 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 16 parsing
 
+- UVa 692
 
+16.1 lexical scanner
+
+- UVa 12421
