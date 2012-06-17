@@ -1,14 +1,14 @@
 #include <stdlib.h>
 
-/*	convex hull! (for integer coordinates)
-		input points in struct p, the resulting convex hull in struct h
-		n:number of points in input, hn:number of points in output
-		algorithm: graham scan, sort O(n log n), convex hull O(n)
-		note: input array is destroyed.
-		algorithm seems to be robust against degenerate cases.
-		source: computational geometry in c
+/* convex hull! (for integer coordinates)
+	 input points in struct p, the resulting convex hull in struct h
+	 n:number of points in input, hn:number of points in output
+	 algorithm: graham scan, sort O(n log n), convex hull O(n)
+	 note: input array is destroyed, including the value of n!
+	 algorithm seems to be robust against degenerate cases.
+	 source: computational geometry in c
 		
-		overflow is likely to occur whenever |x|,|y|>10^9.
+	 overflow is likely to occur whenever |x|,|y|>10^9.
 */
 
 #define MAX 100
@@ -43,8 +43,9 @@ int compp(const void *A,const void *B) {
 }
 
 /* graham's algorithm for 2d convex hull, O(n log n) */
-/*	OK UVa 109 0.008 seconds, n<=100 25.05.2012 */
-/*	OK UVa 811 0.032 seconds, n<=15 25.05.2012 */
+/* OK UVa 109 0.008 seconds, n<=100 25.05.2012 */
+/* OK UVa 675 0.116 seconds, n unknown, 13.06.2012 */
+/* OK UVa 811 0.032 seconds, n<=15 25.05.2012 */
 void convexhull() {
 	int i,j,m=0;
 	/* find lowest point, swap it to pos 0 */
