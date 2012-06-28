@@ -1,5 +1,3 @@
-trenger:
+need the following:
 
-gitt en streng, finn leksikografiske minste rotasjon (i lineær tid?)
-f.eks defabc => abcdef
-      010011 => 001101
+TODO!

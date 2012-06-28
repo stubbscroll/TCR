@@ -52,3 +52,54 @@
 			return String.format("%s/%s",a,b);
 		}
 	}
+
+/* it seems i wrote another version without knowing about the above */
+/* OK UVa 766 25.06.2012 */
+	class BigFraction implements Comparable<BigFraction> {
+		BigInteger teller;
+		BigInteger nevner;
+		static BigInteger gcd(BigInteger a,BigInteger b) { return b.compareTo(BigInteger.ZERO)==0?a:gcd(b,a.mod(b)); }
+		static BigInteger lcm(BigInteger a,BigInteger b) { return a.divide(gcd(a,b)).multiply(b); }
+		BigFraction(long a) { teller=BigInteger.valueOf(a); nevner=BigInteger.ONE; }
+		BigFraction(int a) { teller=BigInteger.valueOf(a); nevner=BigInteger.ONE; }
+		BigFraction(int a,int b) { teller=BigInteger.valueOf(a); nevner=BigInteger.valueOf(b); }
+		BigFraction(BigInteger a) { teller=a; nevner=BigInteger.ONE; }
+		BigFraction(BigInteger a, BigInteger b) { teller=a;	nevner=b; }
+		BigFraction(BigFraction a) { teller=a.teller; nevner=a.nevner; }
+		BigFraction fix() {
+			BigFraction res=new BigFraction(this);
+			BigInteger g=gcd(res.teller,res.nevner);
+			res.teller=res.teller.divide(g);
+			res.nevner=res.nevner.divide(g);
+			return res;
+		}
+		BigFraction mul(BigFraction b) {
+			return (new BigFraction(teller.multiply(b.teller),nevner.multiply(b.nevner))).fix();
+		}
+		BigFraction div(BigFraction b) {
+			return (new BigFraction(teller.multiply(b.nevner),nevner.multiply(b.teller))).fix();
+		}
+		BigFraction add(BigFraction b) {
+			return (new BigFraction(teller.multiply(b.nevner).add(nevner.multiply(b.teller)),nevner.multiply(b.nevner))).fix();
+		}
+		BigFraction sub(BigFraction b) {
+			return (new BigFraction(teller.multiply(b.nevner).subtract(nevner.multiply(b.teller)),nevner.multiply(b.nevner))).fix();
+		}
+		BigFraction inv() {
+			return new BigFraction(nevner,teller);
+		}
+		public int compareTo(BigFraction o) {
+			BigInteger left=teller.multiply(o.nevner);
+			BigInteger right=nevner.multiply(o.teller);
+			return left.compareTo(right);
+		}
+		public boolean equals(BigFraction o) {
+			BigInteger left=teller.multiply(o.nevner);
+			BigInteger right=nevner.multiply(o.teller);
+			return left.equals(right);
+		}
+		public String toString() {
+			if(nevner.compareTo(BigInteger.ONE)==0) return ""+teller;
+			else return teller+"/"+nevner;
+		}
+	}

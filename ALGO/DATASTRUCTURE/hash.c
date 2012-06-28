@@ -17,6 +17,7 @@ typedef unsigned char uchar;
      distributed nicely across the hash table, and the number of
      collisions should be low.
 */
+/* OK UVa 744 n<=100 0.112 seconds 27.06.2012 */
 /* OK UVa 851 17.08.2011 */
 /* OK UVa 10181 17.08.2011 */
 /* OK UVa 10226 n<=10000 0.496 seconds 05.06.2012 */

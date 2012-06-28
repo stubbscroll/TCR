@@ -117,12 +117,12 @@ ll extendedeuclid(ll a,ll b,ll *lastx,ll *lasty) {
   return a;
 }
 
-/*  nice short recursive extended euclid */
-/*  warning, doesn't calculate gcd(a,b), only finds x,y */
-/*  WARNING, not tested */
+/* nice short recursive extended euclid */
+/* warning, doesn't calculate gcd(a,b), only finds x,y */
+/* WARNING, not tested */
 void exeuclid(ll a,ll b,ll *x,ll *y) {
   if(!b) *x=1,*y=0;
-  return exeuclid(b,a%b,*y,*x),*y-=*x*(a/b);
+  else exeuclid(b,a%b,y,x),*y-=*x*(a/b);
 }
 
 /*  find the multiplicative inverse of a modulo mod */

@@ -1,25 +1,26 @@
 #include <stdio.h>
 #include <string.h>
 
-/*  regular dijkstra! (with binary heap)
-    tips:
-    - to eke out the last inch of speed, unroll the neighbours loop and
-      hardcode each case (can be done in a 2d grid graph, for instance)
+/* regular dijkstra! (with binary heap)
+   tips:
+   - to eke out the last inch of speed, unroll the neighbours loop and
+     hardcode each case (can be done in a 2d grid graph, for instance)
 */
-/*  OK UVa 10986 n<=20000,e<=100000 0.236 seconds, 16.08.2011 */
-/*  OK UVa-live 4374 (NEERC 2008 problem D) n<=4008004,e<=~16000000 7.724 seconds 16.08.2011 */
-/*  OK SPOJ 3465 DRIVE (NEERC 2008 problem D) n<=4008004,e<=~16000000 30.59 seconds 16.08.2011 */
-/*  OK TJU 3132 (NEERC 2008 problem D) n<=4008004,e<=~16000000 9.11 seconds 16.08.2011 */
-/*  OK UVa 11367 (NCPC 2007 problem F) n<=100000 0.108 seconds 29.09.2011 */
-/*	OK IDI Open 2012 problem F (Longest Common Path) n<=2000 21.05.2012 */
-/*	OK IDI Open 2012 problem H (Holey Road) n<=40000 21.05.2012 */
+/* OK UVa 721 n<=1000000, e<=1000000 0.116 seconds, 23.06.2012 */
+/* OK UVa 10986 n<=20000,e<=100000 0.064 seconds, 23.06.2012 */
+/* OK UVa 11367 (NCPC 2007 problem F) n<=100000 0.108 seconds 29.09.2011 */
+/* OK UVa-live 4374 (NEERC 2008 problem D) n<=4008004,e<=~16000000 7.724 seconds 16.08.2011 */
+/* OK SPOJ 3465 DRIVE (NEERC 2008 problem D) n<=4008004,e<=~16000000 30.59 seconds 16.08.2011 */
+/* OK TJU 3132 (NEERC 2008 problem D) n<=4008004,e<=~16000000 9.11 seconds 16.08.2011 */
+/* OK IDI Open 2012 problem F (Longest Common Path) n<=2000 21.05.2012 */
+/* OK IDI Open 2012 problem H (Holey Road) n<=40000 21.05.2012 */
 
-/*  dijkstra with costs on nodes! (see below for code) */
-/*  OK UVa 929 0.588 seconds 16.08.2011 */
+/* dijkstra with costs on nodes! (see below for code) */
+/* OK UVa 929 0.588 seconds 16.08.2011 */
 
 #define MAXV 20000
 #define MAXE 100000
-/*  TODO i have no idea of a lower bound for MAXH given n,ne */
+/* TODO i have no idea of a lower bound for MAXH given n,ne */
 #define MAXH 1000000
 
 int heap[MAXH];   /*  heap value (on which it is sorted)  */

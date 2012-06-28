@@ -119,6 +119,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.2.1 one-to-all shortest-path
 1.2.1.1 dijkstra
 
+- UVa 721
 - UVa 10171
 - UVa 10986
 - UVa-live 4374 (NEERC 2008 problem D)
@@ -291,6 +292,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 2.7 other dp
 
+- UVa 757
 - UVa 10157
 - UVa 10271
 - UVa 10304
@@ -340,6 +342,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 3.1.5 gcd/lcm
 
+- UVa 766 (subroutine)
 - UVa 11417
 - Project Euler 5
 
@@ -353,11 +356,12 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 3.2 linear algebra
 
-3.2.1 solve a set of equations: gaussian elimination
+3.2.1 solve a set of linear equations: gaussian elimination
 
 - UVa 472 (over the complex numbers)
+- UVa 766 (over fractions)
 
-3.2.1 "incremental" gaussian elimination (gauss + DP)
+3.2.2 "incremental" gaussian elimination (gauss + DP)
 
 - Project Euler 232
 - a hard problem from topcoder a few months ago (2011-ish) TODO
@@ -478,26 +482,26 @@ place these in either maxflow, mincostmaxflow or bipartite
 5.2 specific domains
 5.2.1 games
 5.2.1.1 chess
-5.2.1.1.1 retrograde analysis in chess
 
-- UVa 10383
+- UVa 10383 (retrograde analysis)
 
 5.2.1.2 sokoban
 
-- UVa 10770
+- UVa 10770 (solve)
 
 5.2.1.3 sliding-block puzzles
 5.2.1.3.1 rush hour
 
-- UVa 10704
+- UVa 10704 (solve)
 
 5.2.1.3.2 15-puzzle
 
-- UVa 10181
+- UVa 716 (generalised, check solvability)
+- UVa 10181 (solve)
 
 5.2.1.4 nurikabe
 
-- UVa-live 4103 (Tehran 2007 problem J)
+- UVa-live 4103 (Tehran 2007 problem J) (solve)
 
 5.2.1.5 slitherlink
 
@@ -506,7 +510,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 5.2.1.6 sudoku
 
-- zstu 1076 (SEERC 2006) (16x16 sudoku)
+- zstu 1076 (SEERC 2006) (solve 16x16 sudoku)
 
 5.3 "gotcha"
 
@@ -522,6 +526,8 @@ place these in either maxflow, mincostmaxflow or bipartite
 6 string
 6.1 palindromes
 
+- UVa 10739
+
 6.2 string search
 6.2.1 knuth-morris-pratt
 
@@ -532,9 +538,9 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 * topcoder srm 519 div 1 medium
 
-6.2.? ???
+6.3 lexicographic smallest rotation of cyclic string
 
-* uva 10679
+- UVa 719
 
 7 combinatorial game theory
 7.1 impartial games
@@ -620,6 +626,8 @@ http://spoj.sphere.pl/problems/BRICKS/
 * spoj 8406 TEMPLEQ
 * ioi 2001 "mobiles" (2d)
 * UVa 12232?
+* UVa 10327
+* UVa 10810
 
 12.2 binary tree
 12.2.1 self-balancing binary tree (with insert, delete, find k-th element)
@@ -647,6 +655,7 @@ http://spoj.sphere.pl/problems/BRICKS/
 
 12.4 hash
 
+- UVa 744
 - UVa 851
 - UVa 10181
 - UVa 10226
@@ -669,7 +678,11 @@ http://spoj.sphere.pl/problems/BRICKS/
 13 compression
 
 14 brute force
-14.1 backtracking (prune when partial solution is illegal)
+14.1 backtracking (prune when partial solution is not feasible)
+
+- UVa 772
+- NCPC 2010 problem H "polyomino powers"
+
 14.2 generate all answers/candidates/elements
 14.3 meet-in-the-middle (divide search space in half, process each half, combine)
 
