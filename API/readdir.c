@@ -1,9 +1,10 @@
 /* given a directory path, read all file entries
    (including file name, date, other flags).
-	 this mess is supposed to work on most platforms.
-	 TODO support file date
-	 TODO support file length and dir on unix
-	 TODO check on mac, dos
+   this mess is supposed to work on most platforms.
+   TODO support file date (meh, is troublesome on linux, need to call
+	   stat on every file or something)
+   TODO support file length on unix (meh, see above)
+   TODO check on mac, dos
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -42,7 +43,7 @@ int dirwin(dir_t *h) {
 }
 #else
 int dirunix(dir_t *h) {
-  h->f=readdir(h->d);
+	h->f=readdir(h->d);
 	if(!h->f) return 0;
 	h->s=h->f->d_name;
 #ifdef _DIRENT_HAVE_D_TYPE

@@ -1,5 +1,3 @@
-/*	TODO fix bug in ullmillerrabin. it occurs in project euler 387 */
-
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -243,6 +241,7 @@ int witness(uint n,uint a) {
 /*  OK spoj (classical) 4942 04.08.2011 */
 int millerrabin(uint n) {
   if(n<4) return n>1;
+	if(!(n&1)) return 0;
   if(n<1373653) return witness(n,2) && witness(n,3);
   if(n<9080191) return witness(n,31) && witness(n,73);
   return witness(n,2) && witness(n,7) && witness(n,61);
@@ -299,11 +298,12 @@ int ullwitness(ull n,ull a) {
   return 0;
 }
 
-/*  deterministic miller-rabin for 64-bit numbers */
-/*  OK spoj (classical) 4942 04.08.2011 */
-/*	WRONG project euler 387, TODO fix */
+/* deterministic miller-rabin for 64-bit numbers */
+/* OK spoj (classical) 4942 04.08.2011 */
+/* OK Project EUler 387 04.07.2012 */
 int ullmillerrabin(ull n) {
   if(n<4294967295LU) return millerrabin(n);
+	if(!(n&1)) return 0;
   if(n<4759123141LL)
     return ullwitness(n,2) && ullwitness(n,7) && ullwitness(n,61);
   if(n<2152302898747LL)

@@ -309,6 +309,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.1.1.1.1 miller-rabin
 
 - UVa 10956
+- Project Euler 387
 
 3.1.1.2 factorization
 

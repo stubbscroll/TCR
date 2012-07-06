@@ -1,0 +1,62 @@
+/* modular square root! */
+
+/* calculate the legendre/jacobi symbol, returns 0, 1 or -1 */
+/* 1: a is quadratic residue mod m, -1: a is not, 0: a mod m=0 */
+/* based on algorithm 2.3.5 in "prime numbers" (crandall, pomerance) */
+/* WARNING, not tested in competition code */
+int legendre(ll a,ll m) {
+	int t=1;
+	ll z;
+	a%=m;
+	while(a) {
+		while(!(a&1)) {
+			a>>=1;
+			if((m&7)==3 || (m&7)==5) t=-t;
+		}
+		z=a,a=m,m=z;
+		if((a&3)==3 && (m&3)==3) t=-t;
+		a%=m;
+	}
+	if(m==1) return t;
+	return 0;
+}
+
+ull rand64() {
+	return (rand()&32767LL)+((rand()&32767LL)<<15)
+		+((rand()&32767LL)<<30)+((rand()&32767LL)<<45)+((rand()&15LL)<<60);
+}
+
+/* find square root of a modulo p (p prime) */
+/* runtime O(ln^4 p) */
+/* mod 3,5,7: algorithm 2.3.8 from "prime numbers" (crandall, pomerance) */
+/* mod 1: from http://www.mast.queensu.ca/~math418/m418oh/m418oh11.pdf */
+/* WARNING, not tested in competition code */
+ull sqrtmod(ull a,ull p) {
+	int p8,alpha,i;
+	ull x,c,s,n,b,J,r2a,r;
+	if(p==2) return a&1;
+	a%=p;
+	if(legendre(a,p)!=1) return 0; /* no square root */
+	p8=p&7;
+	if(p8==3 || p8==5 || p8==7) {
+		if((p8&3)==3) return ullpowmod(a,(p+1)/4,p);
+		x=ullpowmod(a,(p+3)/8,p);
+		c=ullmulmod(x,x,p);
+		return c==a?x:ullmulmod(x,ullpowmod(2,(p-1)/4,p),p);
+	}
+	alpha=0;
+	s=p-1;
+	while(!(s&1)) s>>=1,alpha++;
+	r=ullpowmod(a,(s+1)/2,p);
+	r2a=ullmulmod(r,ullpowmod(a,(s+1)/2-1,p),p);
+	do n=rand64()%(p-2)+2; while(legendre(n,p)!=-1);
+	b=ullpowmod(n,s,p);
+	J=0;
+	for(i=0;i<alpha-1;i++) {
+		c=ullpowmod(b,2*J,p);
+		c=ullmulmod(r2a,c,p);
+		c=ullpowmod(c,1ULL<<(alpha-i-2),p);
+		if(c==p-1) J+=1ULL<<i;
+	}
+	return ullmulmod(r,ullpowmod(b,J,p),p);
+}

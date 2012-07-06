@@ -62,7 +62,6 @@ b-tree?
 
 GRAPH
 
-- bellman-ford
 - mincost maxflow with dijkstra
 - bipartite matching with capacity >1 between each pair
   check 
@@ -89,7 +88,6 @@ NUMBER-THEORY
 - find continued fraction from arbitrary real number
 - solve pell equation
 - solve more general diophantine equations
-- fix miller-rabin!
 
 NUMERIC
 
