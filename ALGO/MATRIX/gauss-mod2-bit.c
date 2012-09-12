@@ -1,3 +1,6 @@
+#define ISSET(a,row,col) (a[(row)][(col)>>6]&(1ULL<<((col)&63)))
+#define SET(a,row,col) a[(row)][(col)>>6]|=1ULL<<((col)&63)
+
 /* gaussian elimination mod 2 on bitmasks, A is n*m, b is n*o */
 /* a is a malloced array of pointers, each a[i] is of size
    sizeof(ull)*(m+o+63)/64 */

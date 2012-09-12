@@ -16,27 +16,29 @@ char sieve[MAXP];
 int prime[664579];
 int primes;
 
-/*  prime number generation! */
+/* prime number generation! */
 
-/*  OK project euler 214 03.08.2011 */
-/*  OK spoj (classical) 4942 04.08.2011 */
-/*  OK spoj (tutorial) 1392 04.08.2011 */
-/*  OK UVa 11073 04.08.2011 */
+/* OK project euler 214 03.08.2011 */
+/* OK spoj (classical) 4942 04.08.2011 */
+/* OK spoj (tutorial) 1392 04.08.2011 */
+/* OK UVa 11073 04.08.2011 */
+/* OK UVa 12101 (NWERC 2006 problem G) 0.004 ms n<10000 26.08.2012 */
+/* OK UVa-live 3639 (NWERC 2006 problem G) 0.004 ms n<10000 26.08.2012 */
 void createsieve() {
-  int i,j,q;
-  memset(sieve,1,sizeof(sieve));
-  q=sqrt(MAXP);
-  for(sieve[0]=sieve[1]=0,i=2;i<q;i++) if(sieve[i])
-    for(j=i*i;j<MAXP;j+=i) sieve[j]=0;
+	int i,j,q;
+	memset(sieve,1,sizeof(sieve));
+	q=sqrt(MAXP);
+	for(sieve[0]=sieve[1]=0,i=2;i<=q;i++) if(sieve[i])
+		for(j=i*i;j<MAXP;j+=i) sieve[j]=0;
 }
 
-/*  OK project euler 214 03.08.2011 */
-/*  OK spoj (classical) 4942 04.08.2011 */
-/*  OK spoj (tutorial) 1392 04.08.2011 */
-/*  OK UVa 11073 04.08.2011 */
+/* OK project euler 214 03.08.2011 */
+/* OK spoj (classical) 4942 04.08.2011 */
+/* OK spoj (tutorial) 1392 04.08.2011 */
+/* OK UVa 11073 04.08.2011 */
 void genprimes() {
-  int i;
-  for(primes=i=0;i<MAXP;i++) if(sieve[i]) prime[primes++]=i;
+	int i;
+	for(primes=i=0;i<MAXP;i++) if(sieve[i]) prime[primes++]=i;
 }
 
 /* factorization sieve: sieve[i] is 0 if i is prime, otherwise sieve[i] is

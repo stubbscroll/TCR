@@ -1,4 +1,5 @@
 typedef long long ll;
+typedef unsigned long long ull;
 
 #define MAXP 200
 ll pascal[MAXP][MAXP];
@@ -16,7 +17,12 @@ void genpascal() {
     ( a[0]+a[1]+...+a[n-1] ) */
 ull multinomial(int *a,int n) {
   ull res=1;
-  int upper=a[0],lower=0;
-  for(int i=1;i<n;i++) upper+=a[i],lower+=a[i-1],res*=pascal[upper][lower];
+  int upper=a[0],lower=0,i;
+  for(i=1;i<n;i++) upper+=a[i],lower+=a[i-1],res*=pascal[upper][lower];
   return res;
+}
+
+/* evaluate n choose k modulo 2 */
+int nck2(int n,int k) {
+	return (k&(~n))==0;
 }

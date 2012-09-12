@@ -59,7 +59,7 @@ ll permutationrank2(int n,int *p) {
     destroys the incoming string.
     works with duplicates as well.  */
 /*  datatype can be char *, int * etc */
-/*  WARNING, not tested on any online judge */
+/* OK UVA 12079 (NWERC 2005 problem D), n<=9, 08.09.2012 */
 int nextpermutation(char *a,int n) {
   int j,k,i;
   char t;  /*  datatype of permutation */

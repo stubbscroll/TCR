@@ -57,10 +57,11 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.1.3 maximum cardinality matching in bipartite graph
 
 - Topcoder SRM 200 div 1 hard (+careful graph construction to satisfy
-  lexicographic smallest)
+  lexicographically smallest)
 - Topcoder SRM 236 div 1 1000 (+binary search)
 - Topcoder SRM 303 div 1 500
 - Topcoder SRM 477 div 1 500 "PythTriplets"
+- Topcoder SRM 549 div 1 250 "PointyWizardHats"
 - Topcoder TCO 2003 semifinals 4 1050
 - UVa 259 (very small constraints, my backtrack solution is faster)
 - UVa 663
@@ -77,6 +78,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 - Uva-live 4288 (NWERC 2008 problem C)
 - BAPC 2006 problem F (hnu 11025) (let left side be doors+times, sort by
   increasing time)
+- NWERC 2005 problem G "guardian of decency"
 * UVa 10380
 * Topcoder SRM 447 div 1 500 "PeopleYouMayKnow"
 * UVa 10615
@@ -139,6 +141,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.2.2.1 floyd-warshall
 
 - Topcoder SRM 506, div 1 600
+- Topcoder SRM 551, div 1 450
 
 1.3 graph search
 1.3.1 uninformed search
@@ -148,6 +151,8 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 10422 (huge state space, but it fits in memory)
 - UVa 10704
 - UVa 10796
+- UVa 12101
+- UVa live 3639 (NWERC 2006 problem G)
 - Topcoder SRM 236 div 1 1000
 
 1.3.1.1.1 0-1-breadth-first search (bfs in a graph with edge costs 0 or 1)
@@ -210,6 +215,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.6.1 discrete steiner tree
 
 - UVa 10863
+- NWERC 2006 problem D "ticket to ride"
 * Topcoder SRM 303 div 1 1000
 
 1.7 eulerian path/cycle
@@ -252,6 +258,9 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 10842
 
 1.13.1.1 prim's algorithm
+
+- NWERC 2005 problem D "ticket to ride" (kruskal might be too slow)
+
 1.13.1.2 kruskal's algorithm
 
 - UVa 10147 (using prim's is more hassle)
@@ -297,6 +306,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 10271
 - UVa 10304
 - UVa 10306
+- Codeforces 131 Div 1 C
 
 3 math
 3.1 number theory
@@ -314,13 +324,20 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.1.1.2 factorization
 
 - Project Euler 3
+- SPOJ 4942 (15 digits)
+* SPOJ 4941 (20 digits)
+* SPOJ 4948 (29 digits)
 
 3.1.1.2.1 pollard rho
 
 - UVa 11476
-- spoj 4942
-
+- spoj 4942 (15 digits)
 - spoj divsum something?
+
+3.1.1.3 sieve of erathostenes
+
+- UVa 12101
+- UVa live 3639 (NWERC 2006 problem G)
 
 3.1.2 number of divisors
 3.1.3 sum of divisors
@@ -426,15 +443,33 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 10112 (triangles only)
 
 3.5 combinatorics
-3.5.1 permutations
-3.5.1.1 permutation rank/unrank (no duplicates) 
+3.5.1 permutations without duplicates
+3.5.1.1 iterate over all permutations
+
+- NWERC 2005 problem D "bowlstack"
+
+3.5.1.2 permutation rank/unrank (no duplicates) 
 
 - UVa 10181
 - Project Euler 24
 
-3.5.1.2 permutation rank/unrank (duplicates allowed)
+3.5.2 permutations with duplicates
+3.5.2.1 iterate over all permutations with duplicates
+3.5.2.2 permutation rank/unrank (duplicates allowed)
 
 - BAPC 2009 D
+
+3.5.3 partitions
+
+3.5.4 set partitions
+3.5.4.1 iterate over all set partitions
+
+- NWERC 2006 problem D "ticket to ride"
+
+3.5.5 subsets
+3.5.5.1 iterate over all subsets
+
+- NWERC 2006 problem D "ticket to ride"
 
 3.6 calculus
 3.7 "trick" problems
@@ -446,8 +481,72 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.8 arithmetic
 3.8.1 biginteger
 
-- UVa 10069
-- UVa 10157
+- UVa 10069 (addition)
+- UVa 10157 (addition)
+- UVa 10814 (gcd, modulo, division, subtraction, addition)
+- UVa 288 (addition, subtraction, multiplication, pow) (negative numbers)
+* UVa 254
+* UVa 290
+* UVa 324
+* UVa 424
+* UVa 465
+* UVa 485
+* UVa 495
+* UVa 568
+* UVa 619
+* UVa 623
+* UVa 713
+* UVa 763
+* UVa 787
+* UVa 10007
+* UVa 10012
+* UVa 10013
+* UVa 10070
+* UVa 10083
+* UVa 10106
+* UVa 10108
+* UVa 10131
+* UVa 10162
+* UVa 10183
+* UVa 10198
+* UVa 10207
+* UVa 10213
+* UVa 10220
+* UVa 10247
+* UVa 10254
+* UVa 10275
+* UVa 10302
+* UVa 10303
+* UVa 10328
+* UVa 10329
+* UVa 10334
+* UVa 10359
+* UVa 10450
+* UVa 10494
+* UVa 10519
+* UVa 10523
+* UVa 10527
+* UVa 10579
+* UVa 10606
+* UVa 10643
+* UVa 10669
+* UVa 10694
+* UVa 10722
+* UVa 10862
+* UVa 10925
+* UVa 10992
+* UVa 11115
+* UVa 11161
+* UVa 11375
+* UVa 11438
+* UVa 11544
+* UVa 11645
+* UVa 11664
+* UVa 11721
+* UVa 11734
+* UVa 11821
+* SPOJ 4941 (FACT1) (factorization, 20 digits)
+* SPOJ 4948 (FACT2) (factorization, 29 digits)
 
 3.8.1.1 advanced biginteger (more involving than +-*/%, like sqrt, log)
 
@@ -461,6 +560,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 - UVa 10229
 - UVa 12470
+- IDI open 2007 (?) virus-problem
 
 3.9 numerical optimization
 3.9.1 unconstrained optimization
@@ -469,6 +569,13 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.9.2.1.1 system of difference constraints
 
 - UVa 515
+
+3.10 interpolation
+3.10.1 lagrange interpolation
+
+- NWERC 2005 problem A "unequalled consumption"
+
+3.10.2 newton interpolation
 
 4 greedy
 
@@ -479,6 +586,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 5.1 simulation
 
 - UVa 10796 (hard)
+- NWERC 2005 problem C "laserbox"
 
 5.2 specific domains
 5.2.1 games
@@ -572,6 +680,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 * topcoder SRM 523 div 1 900
 * topcoder SRM 528 div 1 500
 * idi open 2012 civilization
+* ulm 1996 problem F lotto
 
 10 sorting
 
@@ -591,6 +700,7 @@ http://spoj.sphere.pl/problems/BRICKS/
 11.1 binary search
 
 - UVa 10566 (continuous)
+- NWERC 2005 problem I "up the stairs"
 
 11.2 ternary search
 
@@ -661,6 +771,7 @@ http://spoj.sphere.pl/problems/BRICKS/
 - UVa 10181
 - UVa 10226
 - Google Code Jam 2012 Round 2 D-small
+- Codeforces 131 div 1 A
 * UVa 1152
 
 12.5 square buckets (for rmq, frequencies etc)
@@ -683,6 +794,7 @@ http://spoj.sphere.pl/problems/BRICKS/
 
 - UVa 772
 - NCPC 2010 problem H "polyomino powers"
+- NWERC 2006 problem A "sudoku"
 
 14.2 generate all answers/candidates/elements
 14.3 meet-in-the-middle (divide search space in half, process each half, combine)

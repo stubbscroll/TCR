@@ -7,7 +7,7 @@ typedef long long ll;
 		xxxxxxx01
 		xxxxxxx10
 		xxxxxxx11
-		the bit pattern for the x's is equal for all, and is 0. bit 0 and 1
+		the bit pattern for the x's is equal for all, so the xor is 0. bit 0 and 1
 		are set an even number of times.
 */
 /*	return xor of all numbers from 0 to n, inclusive */

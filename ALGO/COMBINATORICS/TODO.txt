@@ -6,3 +6,12 @@ partial derangement http://mathworld.wolfram.com/PartialDerangement.html
 sjekk stirling number
 
 approksimasjon for partition number
+
+n choose k modulo p for large n,k:
+  http://stackoverflow.com/questions/10118137/fast-n-choose-k-mod-p-for-large-n
+  http://acm.uva.es/board/viewtopic.php?f=22&t=42690
+see editorial for div 1 500:
+  http://apps.topcoder.com/wiki/display/tc/SRM+467
+practice: SPOJ 78 marbles
+          http://www.codechef.com/COOK06/problems/CHEFTEAM
+          topcoder srm 467 div 1 500
