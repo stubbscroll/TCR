@@ -12,22 +12,25 @@
 
 \section{Number theory}
 
-pick's theorem
+\subsection{Pick's theorem}
 
-pythagorean triplets
+Given a simple polygon where all vertices have integer coordinates. Then, $$A=i+\frac{b}{2}-1$$ where $i$ is the number of internal points and $b$ is the number of points on the boundary. The number of boundary points can be found by taking gcd of the differences of $x$ and $y$ coordinates of the endpoints. This formula is typically used for calculating the number of internal points, given the rest.
 
+\subsection{Pythagorean triples}
+
+The fundamental triplets (such that $a,b,c$ are coprime) can be found by $$a=m^2-n^2, b=2mn, c=m^2+n^2$$ where $m,n$ are positive integers and $m>n$.
 
 \section{(Computational) Geometry}
 
-A \emph{median} in a triangle is a line from a vertex to the midpoint of its opposing edge. These relationships exist between side lengths $a,b,c$ and medians $m_a,m_b,m_c$:
-
 \subsection{Triangle}
 
-Triangle area given sides
+\subsubsection{Triangle area given sides}
+
+If $a,b,c$ are the sides, then the area is $$\frac{1}{4}\sqrt{(a+b+c)(a-b+c)(-a+b+c)(a+b+c)}.$$
 
 \subsubsection{Medians of a triangle}
 
-The median of a triangle is a line segment going from a vertex to the midpoint of the opposing line.
+A \emph{median} in a triangle is a line from a vertex to the midpoint of its opposing edge. These relationships exist between side lengths $a,b,c$ and median lengths $m_a,m_b,m_c$:
 
 \begin{align*}
 	m_a &= \sqrt{\frac{2b^2+2c^2-a^2}{4}}\\
@@ -44,14 +47,30 @@ When going from medians to side lengths, a triangle is valid if all expressions 
 
 Number of ways to pick $k$ objects (ordered) from a set of $n$: $$n P r = \frac{n!}{(n-k)!}$$
 
-Calculate the last non-zero digit of $\prod a_i$: Let $c=\sum (f(a_i)-g(a_i))$ where $f(x)$ is the largest power of 2 that divides $x$ and $g(x)$ is the largest power of 5 that divides $x$. Cast out all 2's and 5's from $a_i$, calculate the product and keep the last digit. Then, if $c<0$, the last digit is 5, and if $c>0$, multiply the last digit with $2^c$.
+Calculate the last non-zero digit of $\prod a_i$: Let $c=\sum (f(a_i)-g(a_i))$ where $f(x)$ is the largest power of 2 that divides $x$ and $g(x)$ is the largest power of 5 that divides $x$. Cast out all 2's and 5's from $a_i$, calculate the product and keep the last digit. Then, if $c<0$, the last digit is 5, and if $c>0$, multiply the last digit with $2^c$. To get more digits, calculate modulo $10^d$ where $d$ is the number of desired digits.
 
 \section{Graph theory}
+
+\subsection{Topological sort}
 
 In a graph that can be topologically sorted, we want to find the earliest and latest position a given node can have in the topological sort. This information is useful in UVa 715, for instance.
 
 {\bf Earliest}: The position (1-indexed) is the number of reachable nodes in the reverse graph, starting from the node in question.
 
 {\bf Latest}: Greedily chop off nodes with in-degree 0, and remove them from the graph. The position (0-indexed) is the same as the maximal number of nodes that can be chopped off without removing the node in question.
+
+\subsection{Probabilities}
+
+Given an undirected connected graph and an agent performing random walk: the probability that the agent is in a particular node is proportional to the node degrees such that the sum of all these probabilities are 1.
+
+\section{Programming tips}
+
+\subsection{Avoiding floating point numbers or rationals}
+
+If all values you are operating on is of the form $a/b$ for a fixed, low $b$, multiply all values by $b$ before processing. We will now have integer values only. Example: KTH Challenge 2012, problem C where some values were $a/2$. Also, areas of polygons with integer coordinates.
+
+\subsection{Avoid resetting memoization buffer}
+
+Assume you have a problem with several test cases solved with memoization, hopefully one with a lot of unused states. Let $[a,b]$ be the range of values used. Assume without loss of generality that $a,b$ are integers (if they are float, let $a'=\lfloor a \lfloor$ and $b'=\lceil b \rceil$). Before the first test case, initialize the array with some value less than $a$, then solve the first test case. When solving the $i$-th (0-indexed) test case, don't initialize the array, but instead use the range $[a+(b-a+1)*i,b+(b-a+1)*i]$. All values less than $a+(b-a+1)$ are now treated as unitialized. Disadvantages are that we might reach MAXINT quickly if the range is big (when using integers), or lose precision (when using floating point numbers). But it remains a nice trick if TLE is a concern.
 
 \end{document}

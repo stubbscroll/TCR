@@ -65,7 +65,7 @@
 \subsection{Dynamic programming}
 
 \begin{itemize}
-	\item Don't use DP if the recurrence has cycles! Consider resolving all cycles with Gaussian elimination and use DP on the remaining state space.
+	\item Don't use DP if the recurrence has cycles! Consider doing a simultaneous DP/gaussian elimination where the gaussian elimination operates on each strongly connected component, working its way through the topologically sorted component graph.
 \end{itemize}
 
 \subsection{Debugging}
@@ -101,7 +101,7 @@
 \subsection{Game theory}
 
 \begin{itemize}
-	\item Don't calculate grundy numbers if just \texttt{xor}-ing nim values is enough!
+	\item Don't calculate grundy numbers if just \texttt{xor}-ing nim values is enough (and the nim-values are easily obtainable without doing the mex calculations).
 \end{itemize}
 
 \section{Theorems and stuff}
@@ -114,8 +114,6 @@
 \end{itemize}
 
 \subsection{Number theory}
-
-Pick's theorem TODO
 
 \begin{itemize}
 	\item Think a little bit before jumping into coding. Simple observations can make the code much simpler, shorter, faster and easier to implement.
@@ -133,7 +131,6 @@ Pick's theorem TODO
 
 \begin{itemize}
 	\item If the graph is undirected, don't even think about finding strongly connected components.
-	\item Given an undirected connected graph and an agent performing random walk: the probability that the agent is in a particular node is proportional to the node degrees such that the sum of all these probabilities are 1. TODO mode this to tips
 \end{itemize}
 
 \end{document}

@@ -1,0 +1,88 @@
+\documentclass[a4paper,11pt]{book}
+\usepackage[T1]{fontenc}																					% nødvendig for fonter
+\usepackage[latin1]{inputenc}																			% nødvendig for æøå
+\usepackage{amsmath,amsfonts,amssymb,yfonts,mathrsfs,gensymb}			% nødvendig for matematiske symboler
+\usepackage{parskip}																							% blank linje mellom avsnitt istedenfor innrykk
+\usepackage{enumerate}			% fancy enumerering
+\usepackage{graphicx,textcomp,varioref}
+\usepackage{cancel}					% kanseller ledd i math mode
+
+\author{Ruben Spaans}
+\title{My notes on algorithmic problem solving}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+\label{cha:intro}
+
+In this book I will write down strategies I have used in problem solving so that I don't forget them.
+
+Suggested outline:
+
+\begin{itemize}
+	\item Sorting algorithms (bubble sort, quicksort, mergesort, counting sort, radix sort and how to augment some of these algorithms to solve more advanced problems)
+	\item Graph algorithms, including: single-pair shortest path, all-pairs shortest path, network flow (including mincost max-flow (and min-cut), bipartite matching, non-bipartite matching, ``tripartite matching'', assignment problem, feasible flow, circulation, multi-commodity flow), depth-first search, breadth-first search (and their variants), minimum spanning trees, discrete steiner trees, articulation point, bridge, strongly connected components, topological sort, eulerian path/cycle, hamilton path/cycle, planarity, longest path, informed search (A*). Mention common special cases about each problem kind and how to augment the algorithm to be more efficient in these cases. I guess it's best to split this into multiple chapters.
+	\item Arithmetic (including biginteger, fast exponention, digit sum, sums of consecutive integers)
+	\item Number theory
+	\item (Computational) geometry (convex hull, 2D/3D area/volume/surface, intersections)
+	\item Advanced arithmetic (matrices, linear algebra etc)
+	\item Combinatorics and probability (permutations, partitions, sets, trees)
+	\item Combinatorial game theory
+	\item Greedy algorithms
+	\item Dynamic programming
+	\item Brute force (various methods to generate all possitilities, backtracking, branch and bound, pruning, meet-in-the-middle)
+	\item String algorithms (search, palindromes, aho-corasick, suffix arrays/trees)
+	\item Data structures (need to split this, there are many and they are different, such as disjoint-set, (binary) trees of all kinds, hashtables, buckets, min/max-heap and other heaps, binary decision diagram)
+	\item Continuous optimization
+	\item Common ad hoc themes (spiral, roman numerals, calendar/dates, poker)
+	\item Combinatorial game theory
+	\item Simulation problems
+	\item Parsing and grammars
+	\item Boolean tricks
+	\item Search techniques (not string search, but binary search, ternary search)
+	\item Compression (huffman coding, RLE etc)
+	\item Output-based problems
+	\item 
+\end{itemize}
+
+\chapter{Arithmetic}
+\label{cha:arithmetic}
+
+This chapter contains discussion of problems that don't involve advanced mathematical concepts, only basic arithmetic.
+
+\chapter{Discrete optimization, other}
+\label{cha:discopt}
+
+This chapter contains discussion of optimization problems that don't fit in any of the other chapters.
+
+\section{Two-dimensional maximization}
+
+\subsection{Example problem: UVa 12520 ``Square garden''}
+
+{\bf Problem statement} Given a square grid consisting of $L\times L$ unit cells, colour $0 \leq N \leq L^2$ cells such that the perimeter of the coloured cells is maximized.
+
+\begin{tabular}{l|l}
+	\hline
+		{\bf Input}, $L \text{ }N$ & {\bf output} \\
+	\hline
+		1 0 & 0 \\
+		1 1 & 4 \\
+		2 3 & 8 \\
+		3 8 & 16 \\
+	\hline
+\end{tabular}
+
+{\bf Discussion} One way to attack this problem is to break it down into several cases and solve them separately. An easy upper bound for the answer is $4N$ which happens when no two neighbouring cells are coloured. By colouring cells in a chessboard pattern we can achieve the upper bound for $N \leq \lfloor \frac{L^2+1}{2} \rfloor$.
+
+For $N$ closer to $L^2$, let's look at the problem in reverse: Start with a completely coloured grid and uncolour cells until we have $N$ coloured cells. Ideally we want to uncolour cells that increase the perimeter by 4 each time. By creating a checkerboard pattern in the interior cells, we can uncolour up to $\lfloor \frac{(L-2)^2+1}{2} \rfloor$ cells until we run out of interior cells. Hence, If $N \geq L^2-\lfloor \frac{(L-2)^2+1}{2} \rfloor$ we can easily calculate the optimal perimeter.
+
+After we have uncoloured all interior cells, we need to uncolour non-corner border cells. Each one of these will increase the perimeter by 2 (as long we don't create adjacent uncoloured cells). Here we have two cases for odd $L$: We can uncolour $\lfloor \frac{(L-2)^2+1}{2} \rfloor$ interior cells and have $4\lfloor \frac{L-2}{2} \rfloor$ non-corner border cells, or $\lfloor \frac{(L-2)^2}{2} \rfloor$ interior cells and $4\lfloor \frac{L-1}{2} \rfloor$ non-corner border cells. We can simply calculate both alternatives and take the maximum. If we have run out of non-corner border cells, we need to take the corners. Uncolouring corner cells won't increase the perimeter. For even $L$, there are two available corner cells, and for odd $L$ there are 4 corner cells in the first case and none in the second case.
+
+This covers all cases, because if we have removed all possible interior cells and borner cells, we have arrived at the chessboard pattern.
+
+\end{document}
