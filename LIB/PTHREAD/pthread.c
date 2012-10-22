@@ -1,3 +1,6 @@
+/* NB, this example has several issues. it gives several
+   compiler warnings, and it casts back and forth between long
+	 and pointer */
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>

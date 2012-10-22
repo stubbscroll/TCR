@@ -1,3 +1,5 @@
+/* minimal example code for listing available opencl platforms */
+
 #include <cl/cl.h>
 #include <stdio.h>
 #include <stdlib.h>

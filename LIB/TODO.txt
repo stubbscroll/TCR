@@ -3,3 +3,5 @@ TODO clean up this mess.
 some examples are hideous. clean up OPENGL, SDL, FREEGLUT.
 in general, write more examples to show more functionality as simply as
 possible.
+
+fix the example for sdl_net, it is very bad. make something happen graphically.
