@@ -1,10 +1,10 @@
-/*  red-black tree (with order statistics)
-    NB, nodes start at index 1, index 0 is a sentinel node */
+/* red-black tree (with order statistics)
+   NB, nodes start at index 1, index 0 is a sentinel node */
 
-/*  OK SPOJ 9889 (NWERC 2011 problem C movie collection) n<=100000 1.61 seconds 14.01.2012 */
-/*  UVa 501 n<=30000 0.076 seconds 14.01.2012 */
-/*  UVa 10909 n<=350000 0.232 seconds 14.01.2012 */
-/*  UVa 11525 n<=50000 0.272 seconds 14.01.2012 */
+/* OK SPOJ 9889 (NWERC 2011 problem C "movie collection") n<=100000 1.61 seconds 14.01.2012 */
+/* UVa 501 n<=30000 0.076 seconds 14.01.2012 */
+/* UVa 10909 n<=350000 0.232 seconds 14.01.2012 */
+/* UVa 11525 n<=50000 0.272 seconds 14.01.2012 */
 
 #define MAX 131072
 

@@ -1,5 +1,5 @@
 
-typedef long long ull;
+typedef unsigned long long ull;
 
 /*	return next k-selection (bitmask) */
 /*	OK UVa 649 25.05.2012 */

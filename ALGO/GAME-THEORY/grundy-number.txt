@@ -1,0 +1,22 @@
+this applies to two-player games with perfect information, no randomness,
+the last player to move wins.
+
+how to calculate grundy number for game position:
+
+int grundyNumber(position pos) {
+    moves[] = possible positions to which I can move from pos
+    set s;
+    for (all x in moves) insert into s grundyNumber(x);
+    //return the smallest non-negative integer not in the set s;    
+    int ret=0;
+    while (s.contains(ret)) ret++;
+    return ret;
+}
+
+how to solve composite games:
+
+take xor of grundy numbers of every subgame.
+
+if value is 0, we lost
+
+no need to calculate grundy numbers if we know the nim values!

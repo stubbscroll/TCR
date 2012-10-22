@@ -3,7 +3,8 @@
 /*  template for A*!
     - need macro HEUR(cur,goal) which returns an underestimate of the
       distance from cur to goal (can be equal to the real distance)
-    - heap requirement is unknown, just make it large enough
+    - heap requirement: number of edges in graph is the upper bound, might
+		  survive with less, but not recommended
     - it's preferable to use instead of dijkstra or bfs when:
       - there's always a path to from start to goal
       - H(cur) isn't 0 everywhere (ie. we aren't doing dijkstra)
@@ -38,7 +39,7 @@ int astar(int start,int goal) {
       /*  if graph has equal edge costs, put check here */
       /*  however, only keep one of them */
       if(cur==goal) return val;
-      w=val+calcdist(x2,goal);
+      w=val+calcdist(cur,x2);
       h=HEUR(x2,goal);
       if(dist[x2]>w && w+h<INF) {
         dist[x2]=w;

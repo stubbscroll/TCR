@@ -60,6 +60,7 @@ ll permutationrank2(int n,int *p) {
     works with duplicates as well.  */
 /*  datatype can be char *, int * etc */
 /* OK UVA 12079 (NWERC 2005 problem D), n<=9, 08.09.2012 */
+/* OK TJU 2482 (NCPC 2006 problem B "tour guide", n<=8, 01.10.2012 */
 int nextpermutation(char *a,int n) {
   int j,k,i;
   char t;  /*  datatype of permutation */
@@ -73,7 +74,7 @@ int nextpermutation(char *a,int n) {
 
 /*  faster generating of all permutations (not lexicographic).
     permutations need not be sorted before call.
-    string can have no duplicates. */
+    string mustn't have duplicates. */
 /*  WARNING, not tested */
 void generatepermutations(char *a,int n) {
   int o[100],c[100],j,s,q;

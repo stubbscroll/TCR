@@ -32,13 +32,14 @@ algorithm classification is rather ad hoc, improve later.
 * UVa 11506
 * Topcoder TCO 2005 round 3 easy
 * Topcoder TCO 2005 semifinal 3 medium
-* NCPC 2005 kingdom
+* NCPC 2005 G "kingdom"
 
-place these in either maxflow, mincostmaxflow or bipartite
+place these in either bipartite, maxflow or mincostmaxflow (the first category
+  that applies)
 
 * Topcoder TCCC 2004 finals hard
 * UVa 11528
-* UVa live 3708 (NEERC 2006 problem G: graveyard) (+ binary search)
+* UVa live 3708 (NEERC 2006 G "graveyard") (+ binary search)
 * UVa 11381 (mincost)
 * UVa 11383 (mincost)
 * Topcoder SRM 506 div 1 600
@@ -76,9 +77,9 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 11418
 - UVa 11419 (+output vertex cover with könig's theorem)
 - Uva-live 4288 (NWERC 2008 problem C)
-- BAPC 2006 problem F (hnu 11025) (let left side be doors+times, sort by
+- BAPC 2006 F (hnu 11025) (let left side be doors+times, sort by
   increasing time)
-- NWERC 2005 problem G "guardian of decency"
+- NWERC 2005 G "guardian of decency"
 * UVa 10380
 * Topcoder SRM 447 div 1 500 "PeopleYouMayKnow"
 * UVa 10615
@@ -140,6 +141,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 1.2.2 all-pairs shortest-path
 1.2.2.1 floyd-warshall
 
+- UVa 104 (find "negative" weight cycle)
 - Topcoder SRM 506, div 1 600
 - Topcoder SRM 551, div 1 450
 
@@ -152,6 +154,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 10704
 - UVa 10796
 - UVa 12101
+- UVa 12491
 - UVa live 3639 (NWERC 2006 problem G)
 - Topcoder SRM 236 div 1 1000
 
@@ -259,20 +262,24 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 1.13.1.1 prim's algorithm
 
-- NWERC 2005 problem D "ticket to ride" (kruskal might be too slow)
+- NWERC 2005 D "ticket to ride" (kruskal might be too slow)
 
 1.13.1.2 kruskal's algorithm
 
 - UVa 10147 (using prim's is more hassle)
-- UVa 10369 (prim's won't work here!)
+- UVa 10369 (prim's won't work here)
 
 1.13.2 minimum spanning tree (minimum arborescence) in directed graph
+
+1.14 longest path in directed acyclic graph
+
+- UVa 103
 
 2 dynamic programming
 2.1 longest increasing/decreasing/common subsequence
 
 - UVa 10534 (preferably n log k)
-- NCPC ? nested dolls
+- NCPC 2007 G "Nested dolls"
 
 2.2 coin change
 
@@ -287,12 +294,17 @@ place these in either maxflow, mincostmaxflow or bipartite
 2.4 bitmask dp
 
 - UVa 10496
-- ncpc ? copying dna
+- NCPC 2007 D "Copying DNA"
 * Topcoder SRM 310 div 1 900
 
-2.5 profile layer dp
+2.5 frontier dp (also called "transfer matrix method")
 
 - GCJ AMER semifinal 2008, problem D: King
+- Project Euler 161
+- Project Euler 215
+- Project Euler 393
+* Project Euler 289
+* Timus 1519
 
 2.6 longest/shortest/number of paths in DAG
 
@@ -301,6 +313,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 2.7 other dp
 
+- UVa 108 (max subrectangle sum)
 - UVa 757
 - UVa 10157
 - UVa 10271
@@ -351,6 +364,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.1.4 euler's totient function (phi)
 
 - Project Euler 214
+- UVa 12493
 
 3.1.4.1 inverse euler's totient
 
@@ -378,6 +392,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 - UVa 472 (over the complex numbers)
 - UVa 766 (over fractions)
+- KTH Challenge 2012 F "xor maximization" (over GF(2))
 
 3.2.2 "incremental" gaussian elimination (gauss + DP)
 
@@ -386,13 +401,16 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 3.3 probability
 3.3.1 transition matrix
+
+- IDI Open "typing monkey"
+
 3.4 geometry
 3.4.1 geometry on integer grid
 
 3.4.1.1 pick's theorem
 
 - UVa 10088
-* one more which i've forgotten. i think it was a regional where we
+* one more which i've forgotten. i think it was an old regional where we
   were asked to deduce the formula
 
 3.4.1.2 triangle
@@ -403,7 +421,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 3.4.2 computational geometry
 
-3.4.2.2 convex hull
+3.4.2.1 convex hull
 
 - UVa 109
 - UVa 596 (include collinear points on hull)
@@ -421,10 +439,23 @@ place these in either maxflow, mincostmaxflow or bipartite
 * UVa 11626
 * UVa 11769
 
-3.4.2.3 intersection
-3.4.2.3.1 circle-circle
+3.4.2.1.1 convex hull in 3D
+
+3.4.2.2 intersection
+3.4.2.2.1 circle-circle
 
 - UVa 453
+
+3.4.2.3.2 convex polygon-convex polygon
+
+- UVa 137
+
+3.4.2.3.3 simple polygon-simple polygon
+
+* ACM World finals 1998 F "polygon intersections" (UVa 805 with no dataset)
+
+3.4.2.3.4 line-line
+3.4.2.3.4 circle-line
 
 3.4.2.4 area/volume/surface etc
 3.4.2.4.1 area of polygon
@@ -483,11 +514,11 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 - UVa 10069 (addition)
 - UVa 10157 (addition)
-- UVa 10814 (gcd, modulo, division, subtraction, addition)
+- UVa 10814 (gcd, modulo, division)
 - UVa 288 (addition, subtraction, multiplication, pow) (negative numbers)
+- UVa 324 (multiplication)
 * UVa 254
 * UVa 290
-* UVa 324
 * UVa 424
 * UVa 465
 * UVa 485
@@ -562,6 +593,10 @@ place these in either maxflow, mincostmaxflow or bipartite
 - UVa 12470
 - IDI open 2007 (?) virus-problem
 
+3.8.4 digit sum
+
+- UVa 12517 (digit sum in a range)
+
 3.9 numerical optimization
 3.9.1 unconstrained optimization
 3.9.2 constrained optimization
@@ -573,9 +608,15 @@ place these in either maxflow, mincostmaxflow or bipartite
 3.10 interpolation
 3.10.1 lagrange interpolation
 
-- NWERC 2005 problem A "unequalled consumption"
+- NWERC 2005 problem A "unequalled consumption" (+ dp, LCM, binary search)
 
 3.10.2 newton interpolation
+
+3.11 misc math
+
+3.11.1 Collatz conjecture (3n+1 problem)
+
+- UVa 100
 
 4 greedy
 
@@ -585,6 +626,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 5 ad-hoc
 5.1 simulation
 
+- UVa 101
 - UVa 10796 (hard)
 - NWERC 2005 problem C "laserbox"
 
@@ -686,7 +728,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 
 10.1 merge sort
 
-10.1.1 count inversions in merge sort
+10.1.1 count inversions using merge sort
 
 * UVa 299
 * UVa 10327
@@ -695,6 +737,7 @@ place these in either maxflow, mincostmaxflow or bipartite
 http://acm.sgu.ru/problem.php?contest=0&problem=180
 http://acm.zju.edu.cn/show_problem.php?pid=1440
 http://spoj.sphere.pl/problems/BRICKS/
+* KTH challenge 2011 problem D?
 
 11 search
 11.1 binary search
@@ -755,7 +798,7 @@ http://spoj.sphere.pl/problems/BRICKS/
 - UVa 10909
 - UVa 11525
 
-12.2.3 binary tree for rmq
+12.2.3 binary tree for range minimum query (rmq)
 
 * uva 12299
 
@@ -774,14 +817,22 @@ http://spoj.sphere.pl/problems/BRICKS/
 - Codeforces 131 div 1 A
 * UVa 1152
 
-12.5 square buckets (for rmq, frequencies etc)
+12.5 square root buckets (for range minimum query (rmq), frequencies etc)
 
 - UVa 12299
+- NCPC 2005 F "worst weather ever"
 - NCPC 2011 B "mega-inversions"
 - SPOJ 61 BRCKTS
 * UVa 12232?
 
-12.6 disjoint set/union set find
+12.6 range minimum query, construction O(n log n), query O(1)
+
+12.7 range minimum query, construction O(n), query O(log n)
+
+* UVa 11235
+* UVa 11297 (2D)
+
+12.8 disjoint set/union set find
 
 - UVa 10147
 - UVa 10301
@@ -803,6 +854,10 @@ http://spoj.sphere.pl/problems/BRICKS/
 - topcoder SRM 523 div 1 900
 * UVa 1152
 
+14.4 try all combinations
+
+- UVa 102 (only 6 combinations)
+
 15 "smart" brute force (try a subset of combinations after making an observation)
 
 - Topcoder TCO 2011 Qual 1 1000
@@ -814,3 +869,15 @@ http://spoj.sphere.pl/problems/BRICKS/
 16.1 lexical scanner
 
 - UVa 12421
+
+16.2 grammar parsing
+
+16.2.1 process a parsed grammar
+
+* UVa 10757 (the problem pretty much requires an implementation of SQL)
+* UVa 12422
+* UVa 12423 (actually, a full language interpreter)
+
+17 output-based problems
+
+* ACM World finals 1998 H "towers of powers" (Uva 807)

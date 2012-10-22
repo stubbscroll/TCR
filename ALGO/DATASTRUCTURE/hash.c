@@ -21,6 +21,7 @@ typedef unsigned char uchar;
 /* OK UVa 851 17.08.2011 */
 /* OK UVa 10181 17.08.2011 */
 /* OK UVa 10226 n<=10000 0.496 seconds 05.06.2012 */
+/* OK TJU 2486 (NCPC 2006 F "traveling salesman", n<=120000, 0.06 seconds, 01.10.2012 */
 /* OK GCJ 2012-R2-D-small 26.05.2012 */
 
 typedef struct {
@@ -35,7 +36,7 @@ typedef struct {
 int maxhash=MAXHASH;
 
 uchar hash[(MAXHASH+7)/8];  /*  bit i set if element i is taken */
-hashdata_t hashdata[MAXHASH];
+hashdata_t hashdata[MAXHASH]; /* this need not be initialized, actually */
 
 /*  hash function */
 #define GETHASH(key) key%maxhash
@@ -58,6 +59,7 @@ int gethashpos(ull key) {
 
 int exists(ull key) {
 	int pos=gethashpos(key);
+	if(!HASHBIT(pos)) return 0;
 	return hashdata[pos].key==key);
 }
 

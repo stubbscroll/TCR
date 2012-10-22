@@ -3,6 +3,7 @@ ARITHMETIC
 issquare
 issquarefree
 iscube
+ispower (also for bigint, find the significand as well)
 
 fast way to calculate issquare(n)
 
@@ -51,6 +52,8 @@ circle geometry http://en.wikipedia.org/wiki/Circle_segment
 
 DATA STRUCTURE
 
+interval tree (to represent union of intervals)
+range minimum query in <O(n),O(1)> http://wcipeg.com/wiki/RMQ
 binomial heap
 fibonacci heap
 avl tree
@@ -62,9 +65,9 @@ b-tree?
 
 GRAPH
 
+- dijkstra running in O(V log V)
 - mincost maxflow with dijkstra
 - bipartite matching with capacity >1 between each pair
-  check 
 - find bridge in graph: edge that splits graph if removed
   https://secure.wikimedia.org/wikipedia/en/wiki/Bridge_%28graph_theory%29
 - find articulation point in graph; node that splits graph if removed
@@ -78,7 +81,7 @@ MATRIX
 - inverse
 - gaussian elimination
 - gaussian elimination mod
-- for square matrix A, sum A^1+A^2+...+A^n
+- for square matrix A, sum A^1+A^2+...+A^n (not hard to deduce, though)
 
 NUMBER-THEORY
 

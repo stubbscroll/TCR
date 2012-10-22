@@ -33,7 +33,7 @@ void heapinsert(int val,int id) {
 /*  remove a value from the heap and put it in *val,*id */
 /*  don't call if heap is empty! */
 void heapremove(int *val,int *id) {
-  int pos=1,next=1,newval
+  int pos=1,next=1,newval;
   int newid;
   *val=heap[1]; *id=heapid[1];
   newval=heap[--heapn];

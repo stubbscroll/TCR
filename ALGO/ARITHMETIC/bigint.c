@@ -58,6 +58,7 @@ void bigcpy(big_t *a,big_t *b) {
 
 /* return a mod b (where b is int) */
 /* OK UVa 288 0.044 seconds 12.09.2012 */
+/* OK UVa 324 0.016 seconds 12.09.2012 */
 /* OK UVa 10157 0.048 seconds 11.09.2012 */
 /* OK UVa 10069 0.060 seconds 11.09.2012 */
 /* OK UVa 10814 0.004 seconds 11.09.2012 */
@@ -70,6 +71,7 @@ uint bigmodint(big_t *a,uint b) {
 
 /* calculate a/b where b is int */
 /* OK UVa 288 0.044 seconds 12.09.2012 */
+/* OK UVa 324 0.016 seconds 12.09.2012 */
 /* OK UVa 10069 0.060 seconds 11.09.2012 */
 /* OK UVa 10157 0.048 seconds 11.09.2012 */
 /* OK UVa 10814 0.004 seconds 11.09.2012 */
@@ -113,6 +115,7 @@ void bigaddat(uint *a,uint b) {
 
 /* used by bigstr! */
 /* OK UVa 288 0.044 seconds 12.09.2012 */
+/* OK UVa 324 0.016 seconds 12.09.2012 */
 /* OK UVa 10814 0.004 seconds 11.09.2012 */
 void bigmulint(big_t *a,uint b,big_t *c) {
 	int i;
@@ -139,6 +142,7 @@ void bigstr(char *s,big_t *a) {
 /* convert bigint to string */
 /* NB, uses bigcmpzero, bigcpy, bigmodint, bigdivint */
 /* OK UVa 288 0.044 seconds 12.09.2012 */
+/* OK UVa 324 0.016 seconds 12.09.2012 */
 /* OK UVa 10069 0.060 seconds 11.09.2012 */
 /* OK UVa 10157 0.048 seconds 11.09.2012 */
 /* OK UVa 10814 0.004 seconds 11.09.2012 */

@@ -4,6 +4,7 @@
 /* OK UVa 10147 08.06.2012 */
 /* OK UVa 10301 08.06.2012 */
 /* OK UVa 10397 26.05.2012 */
+/* OK NCPC 2009 H "beacons" (UVa 11696) 05.10.2012 */
 
 int p[MAXSET],rank[MAXSET];
 

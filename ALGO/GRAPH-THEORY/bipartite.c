@@ -38,8 +38,8 @@ int parent[2*MAXV];
 /* OK UVa 11418 0.008 seconds, n=m<=26, 07.08.2011 */
 /* OK UVa 11419 0.396 seconds, n,m<=1000, 07.08.2011 */
 /* OK UVa 12083 0.044 seconds, n+m<=500, 29.08.2012 */
+/* OK UVa-live 3415 (NWERC 2005 problem H) 0.040 seconds, n+m<=500, 29.08.2012 */
 /* OK UVa-live 4288 (NWERC 2008 problem C) 0.032 seconds, n+m<=500, 08.08.2011 */
-/* OK UVa-live 3415 (NWERC 2008 problem H) 0.040 seconds, n+m<=500, 29.08.2012 */
 /* OK hnu 11025 (BAPC 2006 problem F) 15 ms, n<5120, m<100, 12.08.2011 */
 /* OK IDI Open 2012 problem A (Boss Rush), n<=100, m<=300, 21.05.2012 */
 int bipartite() {
@@ -79,7 +79,7 @@ int bipartite() {
 
 /*  find minimum vertex cover in bipartite graph
     uses könig's theorem: let T be all unmatched left-side vertices, and all
-    vertices that can be reached from them in the residusl network. then
+    vertices that can be reached from them in the residual network. then
     the vertex cover is (L\T) union (R intersect T)
     runtime: O(n+m)
     run bipartite() first */

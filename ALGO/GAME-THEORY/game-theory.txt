@@ -1,0 +1,19 @@
+how to play 2-player games in reverse, and find the set of winning positions
+for player 1. this only applies to non-loopy impartial games.
+
+- find the game over positions (for example checkmate, all pieces removed).
+  define these as losing positions.
+- repeat until each game position is classified:
+  - for each position such that every move leads to a position where result
+    is known:
+    - if there is a move from this position to a losing position, the position
+      is won
+    - otherwise, it's lost
+
+example: a pile of n things, take 1 or 2 at a time, first to take last thing
+wins.
+- 0 things is game over (losing position)
+- 1 and 2 are winning positions, can take 1/2 and win directly
+- 3 is a losing position, taking 1/2 leads to 2/1, both are winning
+- 4 and 5 are winning positions, take 1/2 to reach 3
+- continuing this, we see that 6, 9, 12 etc are losing positions.

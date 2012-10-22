@@ -1,10 +1,11 @@
 /* modular square root! */
 
-/* calculate the legendre/jacobi symbol, returns 0, 1 or -1 */
+/* calculate the jacobi symbol, returns 0, 1 or -1 */
 /* 1: a is quadratic residue mod m, -1: a is not, 0: a mod m=0 */
 /* based on algorithm 2.3.5 in "prime numbers" (crandall, pomerance) */
-/* WARNING, not tested in competition code */
-int legendre(ll a,ll m) {
+/* WARNING, m must be an odd positive number */
+/* OK project euler 216 (only tested for m prime 1 or 7 mod 8) 19.10.2012 */
+int jacobi(ll a,ll m) {
 	int t=1;
 	ll z;
 	a%=m;
@@ -21,6 +22,14 @@ int legendre(ll a,ll m) {
 	return 0;
 }
 
+/* calculate legendre symbol, returns 0, 1 or -1 */
+/* 1: a is quadratic residue mod m, -1: a is not, 0: a mod p=0 */
+/* WARNING, p must be an odd prime */
+/* WARNING, not tested in competition code */
+int legendre(ll a,ll p) {
+	return ullpowmod(a%p,(p-1)>>1,p);
+}
+
 ull rand64() {
 	return (rand()&32767LL)+((rand()&32767LL)<<15)
 		+((rand()&32767LL)<<30)+((rand()&32767LL)<<45)+((rand()&15LL)<<60);
@@ -30,7 +39,7 @@ ull rand64() {
 /* runtime O(ln^4 p) */
 /* mod 3,5,7: algorithm 2.3.8 from "prime numbers" (crandall, pomerance) */
 /* mod 1: from http://www.mast.queensu.ca/~math418/m418oh/m418oh11.pdf */
-/* WARNING, not tested in competition code */
+/* OK project euler 216 (only tested for p=1 or 7 mod 8) 19.10.2012 */
 ull sqrtmod(ull a,ull p) {
 	int p8,alpha,i;
 	ull x,c,s,n,b,J,r2a,r;
