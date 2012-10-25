@@ -98,7 +98,7 @@ void init() {
 		printf("status %d\n",status);
 		error("error creating input buffer");
 	}
-	loadkernel("stuff.cl");
+	loadkernel("sieve.cl");
 }
 
 void shutdown() {
