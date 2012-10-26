@@ -8,7 +8,7 @@
    (2*N-1)*(2*N-1) kernels (with id equals to two of the x-coordinates,
    and receiving the third as a parameter), and loop over all y-coordinates
 
-   N=52 took 98 seconds, N=105 is expected to take 6272 seconds (not tried)
+   N=105 took 4360 seconds
 */
 
 #include <stdio.h>
@@ -153,7 +153,7 @@ void shutdownopencl() {
 
 /* here ends opencl-boilerplace */
 
-#define N 52
+#define N 105
 #define N2 (2*N-1)
 #define SIZE N2*N2*N2
 
@@ -165,7 +165,7 @@ int main() {
 	cl_program program;
 	cl_mem buffer;
 	cl_ulong ans,cur;
-	int i,z;
+	int i,x3,y3;
 	char *source;
 	size_t localws[3];
 	size_t globalws[3];
@@ -196,27 +196,31 @@ int main() {
 	localws[2]=1;
 
 	ans=0;
-	for(z=0;z<N;z++) {
-		/* set up kernel arguments */
-		if(CL_SUCCESS!=(err=clSetKernelArg(kernel,0,sizeof(cl_mem),&buffer))) clerror("error setting kernel argument 0",err);
-		if(CL_SUCCESS!=(err=clSetKernelArg(kernel,1,sizeof(cl_int),&z))) clerror("error setting kernel argument 1",err);
+	for(x3=0;x3<N;x3++) {
+		for(y3=0;y3<N;y3++) if(x3*x3+y3*y3<N*N) {
+			/* set up kernel arguments */
+			if(CL_SUCCESS!=(err=clSetKernelArg(kernel,0,sizeof(cl_mem),&buffer))) clerror("error setting kernel argument 0",err);
+			if(CL_SUCCESS!=(err=clSetKernelArg(kernel,1,sizeof(cl_int),&x3))) clerror("error setting kernel argument 1",err);
+			if(CL_SUCCESS!=(err=clSetKernelArg(kernel,2,sizeof(cl_int),&y3))) clerror("error setting kernel argument 2",err);
 
-		/* run kernel */
-		if(CL_SUCCESS!=(err=clEnqueueNDRangeKernel(queue,kernel,3,NULL,globalws,localws,0,NULL,NULL)))
-			clerror("error running kernel",err);
-		/* wait until kernel has finished */
-		if(CL_SUCCESS!=(err=clFinish(queue))) clerror("error waiting for queue",err);
+			/* run kernel */
+			if(CL_SUCCESS!=(err=clEnqueueNDRangeKernel(queue,kernel,3,NULL,globalws,localws,0,NULL,NULL)))
+				clerror("error running kernel",err);
+			/* wait until kernel has finished */
+			if(CL_SUCCESS!=(err=clFinish(queue))) clerror("error waiting for queue",err);
 
-		/* copy to host memory */
-		if(CL_SUCCESS!=(err=clEnqueueReadBuffer(queue,buffer,CL_TRUE,0,N2*N2*sizeof(cl_uint),a,0,NULL,NULL)))
-			clerror("error copying result to host",err);
-		if(CL_SUCCESS!=(err=clFinish(queue))) clerror("error waiting for queue",err);
+			/* copy to host memory */
+			if(CL_SUCCESS!=(err=clEnqueueReadBuffer(queue,buffer,CL_TRUE,0,N2*N2*sizeof(cl_uint),a,0,NULL,NULL)))
+				clerror("error copying result to host",err);
+			if(CL_SUCCESS!=(err=clFinish(queue))) clerror("error waiting for queue",err);
 
-		/* assemble final answer */
-		for(cur=i=0;i<N2*N2;i++) cur+=a[i];
-		if(z==N-1) ans+=cur;
-		else ans+=2*cur;
-		printf("after z=%d: cur "LL" tot "LL"\n",z,cur,ans);
+			/* assemble final answer */
+			for(cur=i=0;i<N2*N2;i++) cur+=a[i];
+			if(x3) cur*=2;
+			if(y3) cur*=2;
+			ans+=cur;
+		}
+		printf("done x3=%d/%d\n",x3+1,N);
 	}
 	printf("answer: "LL"\n",ans/6);
 

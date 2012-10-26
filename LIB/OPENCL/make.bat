@@ -1,3 +1,4 @@
+gcc -o hello.exe hello.c -O3 -Wall -lopencl
 gcc -o mandel.exe mandel.c -O2 -Wall -lopencl
 gcc -o matrix.exe matrix.c -O2 -Wall -lopencl
 gcc -o sieve.exe sieve.c -std=c99 -O2 -Wall -lopencl
