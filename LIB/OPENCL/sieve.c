@@ -1,5 +1,8 @@
 /* rather verbose example with full error-checking */
-/* nb, this program is much slower than a straightforward serial cpu implementation */
+/* nb, this program is much slower than a straightforward serial cpu
+   implementation. also, the division into work groups is messed up, i made
+   this program before i understood how it works.
+   also, no bitmasks make me sad */
 
 #include <cl/cl.h>
 #include <stdio.h>

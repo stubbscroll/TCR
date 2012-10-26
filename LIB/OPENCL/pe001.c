@@ -1,13 +1,7 @@
-/* create nice images of the mandelbrot set using opencl! */
+/* solution to project euler problem 1:
+   Find the sum of all the multiples of 3 or 5 below N
+   (where N is a multiple of the variable KERNEL) */
 
-/* usage:
-   mandel [n]
-	 no parameter: no image saved
-	 n=0: save image from host calculations
-	 n=1: save image from device calculations
-*/
-
-/* i got compile errors when i used double in the kernel, so this version uses float */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,36 +9,14 @@
 #include <sys/time.h>
 #include <cl/cl.h>
 
-typedef unsigned char uchar;
+#define PLATFORMID 0
+#define DEVICEID 0
 
-/* problem size (image resolution): must be multiples of LOCALX, LOCALY */
-/* it seems to be ok if these values exceed max dimension sizes */
-#define XSIZE 2560
-#define YSIZE 2048
-
-/* local work sizes */
-/* warning, must not exceed capabilities of device
-   - on radeon hd 6850, x*y<=1024 (so 16*16 is ok, 32*32 is not ok, 16*32 somehow isn't ok)
-   - on radeon mobility hd 4570, x*y<=128 (so 8*8 is ok, 8*16 is ok, 16*16 is not ok)
-*/
-/* warning, these values should not be too far away from the device's capability as possible,
-   or cores will be wasted */
-#define LOCALX 8
-#define LOCALY 8
-
-#define MAXITER 255
-
-/* mandelbrot variables */
-double xleft=-2.01;
-double xright=1;
-double yupper;
-double ycenter=1e-6;
-double step;
-
-int host_pixel[XSIZE*YSIZE];
-int device_pixel[XSIZE*YSIZE];
-
-#define PIXEL(i,j) ((i)+(j)*XSIZE)
+#if defined(__MINGW32__) || defined(__MINGW64__)
+	#define LL "%I64d"
+#else
+	#define LL "%lld"
+#endif
 
 /* given error code, return error string */
 const char *errorstr(cl_int err) {
@@ -109,53 +81,6 @@ void error(char *s) {
 	exit(1);
 }
 
-/* host mandelbrot routines */
-void host_calculate() {
-	int i,j,iter;
-	double cx,cy,zx,zy,temp;
-	for(j=0;j<YSIZE;j++) {
-		for(i=0;i<XSIZE;i++) {
-			/* Calculate the number of iterations until divergence for each pixel.
-			   If divergence never happens, return MAXITER */
-			iter=0;
-			zx=cx = (xleft + step*i);
-			zy=cy = (yupper - step*j);
-			while(zx*zx + zy*zy < 4) {
-				temp = zx*zx - zy*zy + cx;
-				zy = 2*zx*zy + cy;
-				zx = temp;
-				if(++iter==MAXITER) break;
-			}
-			host_pixel[PIXEL(i,j)]=iter;
-		}
-	}
-}
-
-/* save 24-bits bmp file, buffer must be in bmp format: upside-down */
-void savebmp(char *name,uchar *buffer,int x,int y) {
-	FILE *f=fopen(name,"wb");
-	unsigned int size=x*y*3+54;
-	uchar header[54]={'B','M',size&255,(size>>8)&255,(size>>16)&255,size>>24,0,
-		0,0,0,54,0,0,0,40,0,0,0,x&255,x>>8,0,0,y&255,y>>8,0,0,1,0,24,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-	if(!f) {
-		printf("Error writing image to disk.\n");
-		return;
-	}
-	fwrite(header,1,54,f);
-	fwrite(buffer,1,x*y*3,f);
-	fclose(f);
-}
-
-/* given iteration number, set a colour */
-void fancycolour(uchar *p,int iter) {
-	if(iter==MAXITER);
-	else if(iter<8) { p[0]=128+iter*16; p[1]=p[2]=0; }
-	else if(iter<24) { p[0]=255; p[1]=p[2]=(iter-8)*16; }
-	else if(iter<160) { p[0]=p[1]=255-(iter-24)*2; p[2]=255; }
-	else { p[0]=p[1]=(iter-160)*2; p[2]=255-(iter-160)*2; }
-}
-
 /* get system time in seconds */
 double walltime () {
 	static struct timeval t;
@@ -181,148 +106,110 @@ char *getsource(char *s) {
 /* opencl variables */
 cl_context context;
 cl_command_queue queue;
-cl_kernel kernel;
-cl_program program;
+cl_platform_id *platforms;
+cl_device_id *devices;
+cl_uint numplatforms;
+cl_uint numdevices;
 
-/* hardcode id */
-#define PLATFORMID 0
-#define DEVICEID 0
-
-#define MAXCHAR 1024
-
-int main(int argc,char **argv) {
-	double hosttime=0,devtime=0,memtime=0,overheadtime=0,start;
+/* create context and create command queue, use platform and device as
+   indicated by PLATFORMID and DEVICEID */
+void initopencl() {
 	cl_int err;
-	cl_uint numplatforms;
-	cl_uint numdevices;
-	cl_platform_id *platforms;
-	cl_device_id *devices;
-	cl_mem devmem;
-	char *source;
-	int i,j,k,p,xsize=XSIZE,ysize=YSIZE,d,errors;
-	unsigned char *buffer;
-	size_t localws[2];
-	size_t globalws[2];
-	float fxleft,fyupper,fstep;
-
-	step=(xright-xleft)/XSIZE;
-	yupper=ycenter+(step*YSIZE)/2;
-
-	/* host calculation */
-	start=walltime();
-	host_calculate();
-	hosttime+=walltime()-start;
-	
-	start=walltime();
 	/* get platform ids */
 	if(CL_SUCCESS!=(err=clGetPlatformIDs(0,NULL,&numplatforms)))
 		clerror("couldn't get number of platforms",err);
 	platforms=malloc(numplatforms*sizeof(cl_platform_id));
 	if(CL_SUCCESS!=(err=clGetPlatformIDs(numplatforms,platforms,NULL)))
 		clerror("couldn't get platforms",err);
-
 	/* get device */
 	if(CL_SUCCESS!=(err=clGetDeviceIDs(platforms[PLATFORMID],CL_DEVICE_TYPE_ALL,0,NULL,&numdevices)))
 		clerror("couldn't get number of devices",err);
 	devices=malloc(numdevices*sizeof(cl_device_id));
 	if(CL_SUCCESS!=(err=clGetDeviceIDs(platforms[PLATFORMID],CL_DEVICE_TYPE_ALL,numdevices,devices,NULL)))
 		clerror("couldn't get devices",err);
-
 	/* create context */
 	context=clCreateContext(NULL,1,devices+DEVICEID,NULL,NULL,&err);
 	if(CL_SUCCESS!=err) clerror("couldn't get context",err);
-
 	/* create command queue */
 	queue=clCreateCommandQueue(context,devices[DEVICEID],0,&err);
 	if(CL_SUCCESS!=err) clerror("couldn't create command queue",err);
+}
 
-	source=getsource("mandel.cl");
+void shutdownopencl() {
+	clReleaseCommandQueue(queue);
+	clReleaseContext(context);
+	free(devices);
+	free(platforms);
+}
 
+/* here ends opencl-boilerplace */
+
+/* number of values calculated (must be multiple of KERNEL*LOCAL) */
+#define N 1000000000
+/* nymber of values actually returned (must be multiple of KERNEL) */
+#define ACTUAL 1000000000
+#define LOCAL 64
+/* one work-item processes KERNEL number of elements to save memory */
+/* warning, the KERNEL variable must also be set in the kernel */
+#define KERNEL 1000
+#define MAX N/KERNEL
+
+cl_ulong a[MAX];
+
+int main() {
+	cl_int err;
+	cl_kernel kernel;
+	cl_program program;
+	cl_mem buffer;
+	cl_ulong ans;
+	int i;
+	char *source;
+	size_t localws[3];
+	size_t globalws[3];
+
+	initopencl();
+	source=getsource("pe001.cl");
 	/* create a program object and load source code into it */
 	program=clCreateProgramWithSource(context,1,(const char **)&source,NULL,&err);
 	if(CL_SUCCESS!=err) clerror("error creating program",err);
-
 	/* builds a program associated with a program object */
 	if(CL_SUCCESS!=(err=clBuildProgram(program,1,devices+DEVICEID,NULL,NULL,NULL)))
 		clerror("error building program",err);
-
 	/* create kernel object from built program */
-	kernel=clCreateKernel(program,"mandel",&err);
+	kernel=clCreateKernel(program,"pe001",&err);
 	if(CL_SUCCESS!=err) clerror("error creating kernel",err);
 	free(source);
-	overheadtime+=walltime()-start;
 
-	start=walltime();
-	/* create device memory buffer */
-	devmem=clCreateBuffer(context,CL_MEM_READ_WRITE, XSIZE*YSIZE*sizeof(int),NULL,&err);
+	/* create memory buffer: one cl_ulong for each kernel, a total of MAX=N/KERNEL */
+	buffer=clCreateBuffer(context,CL_MEM_READ_WRITE,MAX*sizeof(cl_ulong),NULL,&err);
 	if(CL_SUCCESS!=err) clerror("error creating buffer",err);
-	memtime+=walltime()-start;
 
-	start=walltime();
-	/* create kernel arguments */
-	fxleft=xleft; fyupper=yupper; fstep=step;
-	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,0,sizeof(cl_mem),&devmem))) clerror("error setting kernel argument 0",err);
-	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,1,sizeof(cl_float),&fxleft))) clerror("error setting kernel argument 1",err);
-	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,2,sizeof(cl_float),&fyupper))) clerror("error setting kernel argument 2",err);
-	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,3,sizeof(cl_float),&fstep))) clerror("error setting kernel argument 3",err);
-	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,4,sizeof(cl_int),&xsize))) clerror("error setting kernel argument 4",err);
-	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,5,sizeof(cl_int),&ysize))) clerror("error setting kernel argument 5",err);
+	/* set up kernel arguments */
+	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,0,sizeof(cl_mem),&buffer))) clerror("error setting kernel argument 0",err);
 
-	globalws[0]=XSIZE;
-	globalws[1]=YSIZE;
-	localws[0]=LOCALX;
-	localws[1]=LOCALY;
+	globalws[0]=MAX;
+	localws[0]=LOCAL;
 
 	/* run kernel */
-	if(CL_SUCCESS!=(err=clEnqueueNDRangeKernel(queue,kernel,2,NULL,globalws,localws,0,NULL,NULL)))
+	if(CL_SUCCESS!=(err=clEnqueueNDRangeKernel(queue,kernel,1,NULL,globalws,localws,0,NULL,NULL)))
 		clerror("error running kernel",err);
 	/* wait until kernel has finished */
 	if(CL_SUCCESS!=(err=clFinish(queue))) clerror("error waiting for queue",err);
-	devtime+=walltime()-start;
 
-	start=walltime();
 	/* copy to host memory */
-	if(CL_SUCCESS!=(err=clEnqueueReadBuffer(queue,devmem,CL_TRUE,0,XSIZE*YSIZE*sizeof(int),device_pixel,0,NULL,NULL)))
+	if(CL_SUCCESS!=(err=clEnqueueReadBuffer(queue,buffer,CL_TRUE,0,MAX*sizeof(cl_ulong),a,0,NULL,NULL)))
 		clerror("error copying result to host",err);
 	if(CL_SUCCESS!=(err=clFinish(queue))) clerror("error waiting for queue",err);
-	memtime+=walltime()-start;
-	
-	/* shutdown */
-	start=walltime();
+
+	/* assemble final answer */
+	ans=0;
+	for(i=0;i<ACTUAL/KERNEL;i++) ans+=a[i];
+	printf("ans: "LL"\n",ans);
+
+	/* TODO deallocate buffer */
+
 	clReleaseKernel(kernel);
 	clReleaseProgram(program);
-	clReleaseCommandQueue(queue);
-	clReleaseContext(context);
-	overheadtime+=walltime()-start;
-
-	printf("host calculation time   : %7.3f\n",hosttime);
-	printf("device calculation time : %7.3f\n",devtime);
-	printf("memory transfer time    : %7.3f\n",memtime);
-	printf("other opencl overhead   : %7.3f\n",overheadtime);
-	printf("total device time       : %7.3f\n",devtime+memtime+overheadtime);
-	printf("speedup                 : %7.3f\n",hosttime/(devtime+memtime+overheadtime));
-
-	/* compare results */
-	for(errors=i=0;i<XSIZE;i++) for(j=0;j<YSIZE;j++) {
-		d=host_pixel[PIXEL(i,j)]-device_pixel[PIXEL(i,j)];
-		if(d<0) d=-d;
-		if(d>1) errors++;
-	}
-	printf("errors: %d\n",errors);
-	
-	if(argc>1) {
-		k=strtol(argv[1],NULL,10);
-		/* create nice image from iteration counts. take care to create it upside
-			 down (bmp format) */
-		buffer=(unsigned char *)calloc(XSIZE*YSIZE*3,1);
-		for(i=0;i<XSIZE;i++) {
-			for(j=0;j<YSIZE;j++) {
-				p=((YSIZE-j-1)*XSIZE+i)*3;
-				fancycolour(buffer+p,(k?device_pixel:host_pixel)[PIXEL(i,j)]);
-			}
-		}
-		/* write image to disk */
-		savebmp("mandel.bmp",buffer,XSIZE,YSIZE);
-	}
+	shutdownopencl();
 	return 0;
 }
