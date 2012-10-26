@@ -1,4 +1,5 @@
 /* rather verbose example with full error-checking */
+/* nb, this program is much slower than a straightforward serial cpu implementation */
 
 #include <cl/cl.h>
 #include <stdio.h>
@@ -82,9 +83,6 @@ void init() {
 	if(NULL==(devices=malloc(n))) error("out of memory");
 	if(CL_SUCCESS!=clGetContextInfo(context,CL_CONTEXT_DEVICES,n,devices,NULL))
 		error("error getting context info 2");
-
-	/*  TODO display stats about devices? */
-
 	/*  create opencl command queue */
 	cmdq=clCreateCommandQueue(context,devices[0],0,&status);
 	if(CL_SUCCESS!=status) error("error creating command queue");
@@ -135,7 +133,7 @@ void calculate() {
 	printf("number of compute units: %u\n",computeunits);
 	printf("max dimensions: %u\n",maxdims);
 	printf("max work group size: %d [",(int)maxworkgroupsize);
-	for(int i=0;i<maxdims;i++) printf("%d ",(int)maxworkitemsizes[i]);
+	for(i=0;i<maxdims;i++) printf("%d ",(int)maxworkitemsizes[i]);
 	printf("]\n");
 
 	prim=2;
