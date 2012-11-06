@@ -2,7 +2,10 @@
 /* nb, this program is much slower than a straightforward serial cpu
    implementation. also, the division into work groups is messed up, i made
    this program before i understood how it works.
-   also, no bitmasks make me sad */
+   also, no bitmasks make me sad.
+	 
+	 apparently, this example is very wrong as it seems to run on the cpu
+	 instead of the gpu. */
 
 #include <cl/cl.h>
 #include <stdio.h>

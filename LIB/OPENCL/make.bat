@@ -1,3 +1,4 @@
+gcc -o printf.exe printf.c -O3 -Wall -lopencl
 gcc -o hello.exe hello.c -O3 -Wall -lopencl
 gcc -o mandel.exe mandel.c -O2 -Wall -lopencl
 gcc -o matrix.exe matrix.c -O2 -Wall -lopencl
