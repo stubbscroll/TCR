@@ -1,5 +1,7 @@
 /* find lexicographically smallest rotation of cyclic string! */
 /* algorithm by zhou yuan, called minimum expression */
+/* warning, input string s is destroyed and has another copy of
+   itself concatenated, the buffer needs to be large enough. */
 /* source: couldn't find any first-hand source, only this
    http://online-judge.uva.es/board/viewtopic.php?t=42601&f=22 */
 /* OK UVa 719 |s|<=10000 0.020 seconds 23.06.2012 */

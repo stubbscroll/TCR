@@ -20,7 +20,7 @@
 
 #define MAXV 20000
 #define MAXE 100000
-/* TODO i have no idea of a lower bound for MAXH given n,ne */
+/* upper bound is number of edges, i think */
 #define MAXH 1000000
 
 int heap[MAXH];   /*  heap value (on which it is sorted)  */

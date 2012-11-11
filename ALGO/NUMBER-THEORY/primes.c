@@ -74,6 +74,24 @@ void ffactor(int n,int *f,int *fc,int *fn) {
 	}
 }
 
+/* bit-packed sieve storing only odd numbers using 32-bit ints */
+uint psieve[(MAXP+63)/64];
+#define CLEARBIT(ix) psieve[(ix)>>6]&=~(1<<(((ix)>>1)&31))
+#define CHECKBIT(ix) (psieve[(ix)>>6]&(1<<(((ix)>>1)&31)))
+/* WARNING, not tested in competitions! */
+void pcreatesieve() {
+	ll i,j,q;
+	memset(psieve,255,(MAXP+63)/16);
+	q=sqrt(MAXP);
+	for(i=3;i<=q;i+=2) if(CHECKBIT(i)) for(j=i*i;j<MAXP;j+=i+i) CLEARBIT(j);
+}
+
+void pgenprimes() {
+	int i;
+	prime[0]=2;
+	for(primes=1,i=3;i<MAXP;i+=2) if(CHECKBIT(i)) prime[primes++]=i;
+}
+
 /*  gcd! */
 
 ull gcd(ull a,ull b) {
@@ -268,6 +286,26 @@ ull ullmulmod(ull a,ull b,ull mod) {
 		a=(a<<1)%mod;
 		b>>=1;
 	}
+	return r;
+}
+
+/* 128-bits version! faster than ullmulmod */
+/* warning, it apparently only works in 64-bits gcc */
+/* http://apps.topcoder.com/forums/?module=Thread&threadID=765421&start=0 */
+/* TODO find out which online judges this works on */
+/* TODO convert to 64-bits assembly */
+typedef __uint128_t ulll;
+ull ullmulmod2(ull a,ull b,ull mod) { return (ulll)a*b%mod; }
+
+/* 64-bits assembly version */
+/* slightly faster than ullmulmod2 (not by much) */
+ull ullmulmod3(ull x,ull y,ull mod) {
+	ull r;
+	/* only use the two next lines if x>=mod or y>=mod can happen! */
+	if(x>=mod) x%=mod;
+	if(y>=mod) y%=mod;
+	__asm__("mulq %2\n\t"
+	    "divq %3":"=&d"(r),"+%a"(x):"rm"(y),"rm"(mod):"cc");
 	return r;
 }
 
