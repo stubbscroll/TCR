@@ -12,17 +12,37 @@
 
 \section{Number theory}
 
+\section{(Computational) Geometry}
+
 \subsection{Pick's theorem}
 
 Given a simple polygon where all vertices have integer coordinates. Then, $$A=i+\frac{b}{2}-1$$ where $i$ is the number of internal points and $b$ is the number of points on the boundary. The number of boundary points can be found by taking gcd of the differences of $x$ and $y$ coordinates of the endpoints. This formula is typically used for calculating the number of internal points, given the rest.
 
-\subsection{Pythagorean triples}
-
-The fundamental triplets (such that $a,b,c$ are coprime) can be found by $$a=m^2-n^2, b=2mn, c=m^2+n^2$$ where $m,n$ are positive integers and $m>n$.
-
-\section{(Computational) Geometry}
-
 \subsection{Triangle}
+
+\subsubsection{Pythagorean triplets}
+
+All primitive triplets (such that $a,b,c$ are coprime) can be found by
+\begin{align*}
+	a&=m^2-n^2\\
+	b&=2mn\\
+	c&=m^2+n^2
+\end{align*}
+where $m,n$ are positive integers with $m>n$, $\gcd(m,n)=1$ and $m-n$ odd. To generate all triplets, multiply the primitive ones by integers $k>1$.
+
+\subsubsection{Integer sided triangles with exactly one 60 degree angle}
+
+All primitive triplets (such that $a,b,c$ are coprime) can be found by the following procedure.
+
+Determine $a,b,c$ by
+\begin{align*}
+	a&=m^2-n^2\\
+	b&=2nm+n^2\\
+	c&=m^2+mn+n^2
+\end{align*}
+where $m,n$ are positive integers with $m>2n$, $\gcd(m,n)=1$ and $m-n$ not divisible by 3. For each $m,n$ we get two triplets $a,b,c$ and $b-a,b,c$. To generate all triplets, multiply the primitive ones by integers $k>1$. The triplets satisfy $a^2+b^2-ab=c^2$.
+
+The area of such a triangle is $\frac{\sqrt{3}}{2}ab$.
 
 \subsubsection{Triangle area given sides}
 
@@ -43,11 +63,123 @@ A \emph{median} in a triangle is a line from a vertex to the midpoint of its opp
 
 When going from medians to side lengths, a triangle is valid if all expressions under the roots are positive, and $a+b>c$ for some permutation of $a,b,c$.
 
+\subsubsection{Radius of inscribed circle}
+
+Given triangle area $a$ and perimeter $p$: $$r=\frac{2a}{p}.$$
+
+Given side lengths $a,b,c$:
+$$r=\frac{\sqrt{k(k-a)(k-b)(k-c)}}{k}$$ where $k=\frac{a+b+c}{2}$. We recognise the triangle area in the numerator.
+
 \section{Combinatorics}
 
 Number of ways to pick $k$ objects (ordered) from a set of $n$: $$n P r = \frac{n!}{(n-k)!}$$
 
 Calculate the last non-zero digit of $\prod a_i$: Let $c=\sum (f(a_i)-g(a_i))$ where $f(x)$ is the largest power of 2 that divides $x$ and $g(x)$ is the largest power of 5 that divides $x$. Cast out all 2's and 5's from $a_i$, calculate the product and keep the last digit. Then, if $c<0$, the last digit is 5, and if $c>0$, multiply the last digit with $2^c$. To get more digits, calculate modulo $10^d$ where $d$ is the number of desired digits.
+
+\subsection{Partition numbers}
+
+$p(n,k)$ is the number of ways to partition $n$ into $k$ parts. For example:
+
+\begin{tabular}{|l|l|}
+\hline
+	$p(4,1)=1$ & 4  \\
+	$p(4,2)=2$ & 3+1 \,\, 2+2 \\
+	$p(4,3)=1$ & 2+1+1  \\
+	$p(4,4)=1$ & 1+1+1+1  \\
+\hline
+\end{tabular}
+
+$p(n)$ is the number of ways to partition $n$, we have $p(n)=\sum_{i=1}^n p(n,i)$.
+
+{\bf Recurrence 1}: $p(n,k)=\sum_{i=1}^k p(n-k,i)$ for $n>k$, $p(n,n)=1$. [A008284]
+
+{\bf Recurrence 2}: $p(n,1)=p(n,n)=1$, $p(n,k)=p(n-1,k-1)+p(n-k,k)$. [A008284]
+
+{\bf Fancy recurrence}: $p(n)=p(n-1)+p(n-2)-p(n-5)-p(n-7)+p(n-12)+p(n-15)- \cdots$ where the $k$ in $p(n-k)$ comes from $k(3k-1)/2$ with $k=0, 1, -1, 2, -2, 3, -3, \ldots$ with signs $+ + - - + + - - \cdots$, with initial conditions $p(0)=1$ and $p(n)=0$ for $n<0$. [A000041]
+
+{\bf Asymptotic formula}: $p(n)\approx \frac{1}{4\sqrt{3}}e^{\pi \sqrt{\frac{2n}{3}}}$
+
+Table showing largest $n$ such that $p(n)< k$ for some $k$:
+
+\begin{tabular}{|l|l|l|}
+\hline
+	$n$ & $p(n$) & $k$ \\
+\hline
+	16 & 231 & $256=2^8$ \\
+	21 & 792 & $1000=10^3$ \\
+	32 & 8349 & $10000=10^4$ \\
+	39 & 31185 & $32768=2^{15}$ \\
+	43 & 63261 & $65536=2^{16}$ \\
+	45 & 89134 & $100000=10^5$ \\
+	60 & 966467 & $1000000=10^6$ \\
+	76 & 9289091 & $10^7$ \\
+	94 & 92669720 & $10^8$ \\
+	114 & 952050665 & $10^9$ \\
+\hline
+\end{tabular}
+
+\subsection{Set partitions}
+
+$S(n,k)$ is the number of ways to partition $n$ elements into $k$ sets. For example:
+
+\begin{tabular}{|l|l|}
+\hline
+	$S(4,1)=1$ & 1234  \\
+	$S(4,2)=7$ & 12|34 \, 13|24 \, 14|23 \, 123|4 \, 124|3 \, 134|2 \, 1|234 \\
+	$S(4,3)=6$ & 12|3|4 \, 13|2|4 \, 14|2|3 \, 1|23|4 \, 1|24|3 \, 1|2|34 \\
+	$S(4,4)=1$ & 1|2|3|4  \\
+\hline
+\end{tabular}
+
+{\bf Recurrence 1}: $S(n,k)=S(n-1,k-1)+kS(n-1,k)$ with initial conditions $S(0,0)=1$ and $S(n,0)=0$ for $n>0$.
+
+{\bf Recurrence 2}: $S(n+1,k)=\sum_{i=0}^n S(n-i,k-1)$
+
+\subsection{The twelvefold way}
+
+\begin{tabular}{|l|l|}
+	\hline
+	\hline
+		What & Formula \\
+	\hline
+	\hline
+		Put $n$ equal balls in $k$ equal boxes & $\sum_{i=1}^k p(n,i)$ \\
+	\hline
+		Put $n$ equal balls in $k$ equal boxes,  & $p(n,k)$ if $n\geq k$ \\
+		 each box gets $\geq 1$ balls  & 0 if $n<k$ \\
+	\hline
+		Put $n$ equal balls in $k$ equal boxes,  & 1 if $n\leq k$ \\
+		 each box gets $\leq 1$ balls &  0 if $n > k$ \\
+	\hline
+	\hline
+		Put $n$ distinct balls in $k$ equal boxes  & $\sum_{i=1}^k S(n,i)$ \\
+	\hline
+		Put $n$ distinct balls in $k$ equal boxes,  & $S(n,k)$ \\
+		 each box gets $\geq 1$ balls  & \\
+	\hline
+		Put $n$ distinct balls in $k$ equal boxes,  & 1 if $n \leq k$ \\
+		 each box gets $\leq 1$ balls &  0 if $n > k$ \\
+	\hline
+	\hline
+		Put $n$ equal balls in $k$ distinct boxes  & $\binom{n+k-1}{k-1}$ \\
+	\hline
+		Put $n$ equal balls in $k$ distinct boxes,  & $\binom{n-1}{k-1}$ \\
+		 each box gets $\geq 1$ balls  & \\
+	\hline
+		Put $n$ equal balls in $k$ distinct boxes,  & $\binom{k}{n}$ if $n\leq k$ \\
+		 each box gets $\leq 1$ balls  & 0 if $n>k$ \\
+	\hline
+	\hline
+		Put $n$ distinct balls in $k$ distinct boxes  & $k^n$ \\
+	\hline
+		Put $n$ distinct balls in $k$ distinct boxes,  & $S(n,k)k!$ \\
+		 each box gets $\geq 1$ balls  & \\
+	\hline
+		Put $n$ distinct balls in $k$ distinct boxes,  & $k(k-1)(k-2)\cdots (k-n+1)$ if $n\leq k$ \\
+		 each box gets $\leq 1$ balls  & 0 if $n > k$ \\
+	\hline
+	\hline
+\end{tabular}
 
 \section{Graph theory}
 
@@ -71,6 +203,6 @@ If all values you are operating on is of the form $a/b$ for a fixed, low $b$, mu
 
 \subsection{Avoid resetting memoization buffer}
 
-Assume you have a problem with several test cases solved with memoization, hopefully one with a lot of unused states. Let $[a,b]$ be the range of values used. Assume without loss of generality that $a,b$ are integers (if they are float, let $a'=\lfloor a \lfloor$ and $b'=\lceil b \rceil$). Before the first test case, initialize the array with some value less than $a$, then solve the first test case. When solving the $i$-th (0-indexed) test case, don't initialize the array, but instead use the range $[a+(b-a+1)*i,b+(b-a+1)*i]$. All values less than $a+(b-a+1)$ are now treated as unitialized. Disadvantages are that we might reach MAXINT quickly if the range is big (when using integers), or lose precision (when using floating point numbers). But it remains a nice trick if TLE is a concern.
+Assume you have a problem with several test cases solved with memoization, hopefully one with a lot of unused states. Let $[a,b]$ be the range of values used. Assume without loss of generality that $a,b$ are integers (if they are float, let $a'=\lfloor a \rfloor$ and $b'=\lceil b \rceil$). Before the first test case, initialize the array with some value less than $a$, then solve the first test case. When solving the $i$-th (0-indexed) test case, don't initialize the array, but instead use the range $[a+(b-a+1)*i,b+(b-a+1)*i]$. All values less than $a+(b-a+1)$ are now treated as unitialized. Disadvantages are that we might reach MAXINT quickly if the range is big (when using integers), or lose precision (when using floating point numbers). But it remains a nice trick if TLE is a concern.
 
 \end{document}
