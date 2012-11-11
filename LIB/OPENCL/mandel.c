@@ -19,8 +19,9 @@ typedef unsigned char uchar;
 
 /* problem size (image resolution): must be multiples of LOCALX, LOCALY */
 /* it seems to be ok if these values exceed max dimension sizes */
-#define XSIZE 2560
-#define YSIZE 2048
+
+#define XSIZE 8192
+#define YSIZE 4096
 
 /* local work sizes */
 /* warning, must not exceed capabilities of device
@@ -29,7 +30,7 @@ typedef unsigned char uchar;
 */
 /* warning, these values should not be too far away from the device's capability as possible,
    or cores will be wasted */
-#define LOCALX 8
+#define LOCALX 16
 #define LOCALY 8
 
 #define MAXITER 255
@@ -208,11 +209,6 @@ int main(int argc,char **argv) {
 	step=(xright-xleft)/XSIZE;
 	yupper=ycenter+(step*YSIZE)/2;
 
-	/* host calculation */
-	start=walltime();
-	host_calculate();
-	hosttime+=walltime()-start;
-	
 	start=walltime();
 	/* get platform ids */
 	if(CL_SUCCESS!=(err=clGetPlatformIDs(0,NULL,&numplatforms)))
@@ -294,6 +290,11 @@ int main(int argc,char **argv) {
 	clReleaseCommandQueue(queue);
 	clReleaseContext(context);
 	overheadtime+=walltime()-start;
+
+	/* host calculation */
+	start=walltime();
+	host_calculate();
+	hosttime+=walltime()-start;
 
 	printf("host calculation time   : %7.3f\n",hosttime);
 	printf("device calculation time : %7.3f\n",devtime);

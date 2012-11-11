@@ -10,8 +10,79 @@
 
 \begin{document}
 
-\section{Stuff to remember about OpenCL}
+\section*{OpenCL for the dummy (me)}
 
 Make sure to run on the correct device! Use \texttt{platform.c} to get more detailed info if desired. It seems that plaform 0, device 0 is correct most of the time.
+
+A {\bf work-item} is the smallest execution entity. It is one instance of a kernel, and it has its own global id which can be obtained (in kernel functions) by \texttt{get\_global\_id(i)} for a given dimension \texttt{i}. Work-items are sometimes called \emph{threads}.
+
+A {\bf work-group} is a collection of work-items. A work-group executes on a single compute unit (of which a device has \texttt{CL\_MAX\_COMPUTE\_UNITS}), and a compute unit consists of one of more processing elements and its own local memory. For example, my hardware (Radeon HD6850) has 12 compute units and 960 stream processors, implying that one compute unit can have lots of processing units.
+
+An {\bf ND-range} is a collection of work-groups.
+
+It's possible to organize these in 3 dimensions (or possibly more). The Mandelbrot example has a work-group size of $\{8,8\}$ and a global size (total number of work-items) of $\{2560,2048\}$, shich is identical to the image resolution.
+
+See the glossary in the specification (page 14) for more.
+
+Check \texttt{CL\_DEVICE\_MAX\_WORK\_GROUP\_SIZE} and make sure that the product of all sizes of the local work groups doesn't exceed this value. To be safe, don't let the product be equal to this value either.
+
+Some useful functions that can be called from kernels:
+
+\begin{tabular}{|l|l|}
+	\hline
+	{\bf Function} & {\bf What it does} \\
+	\hline
+	\texttt{get\_global\_id} & Get the work-item's global unique id \\
+	\texttt{get\_local\_id} & Get the work-item's unique id within the work-group \\
+	\hline
+\end{tabular}
+
+For the full list, see the OpenCL 1.2 specification, page 242.
+
+\section{Initializing OpenCL}
+
+Before kernels can be called, OpenCL must be initialized.
+
+\begin{itemize}
+	\item Choose platform ID and device ID
+	\item Create context
+	\item Load, build and compile kernel
+	\item Create command queue
+\end{itemize}
+
+Preparations before running kernels:
+
+\begin{itemize}
+	\item Create memory buffers and copy data from host to device
+	\item Set global and local workgroup sizes
+	\item Set parameters to kernel
+\end{itemize}
+
+Then, run the kernel, and afterwards, copy data from device to host if required.
+
+The local workgroup sizes correspond to the number of work-items per work-group, and the global workgroup sizes correspond to the number of work-items per ND-range (that is, the total amount of work-items to be launched).
+
+\section{Buffers}
+
+Buffers are created with \texttt{clCreateBuffer}. It seems that the allocated memory area is uninitialized. There is a function \texttt{clEnqueueFillBuffer} that fills a buffer object with a given pattern, but this is overkill if one just wants to zero-clear a buffer. One can either have a kernel that clears the buffer, or structure the problem so that each work-item writes its result to a designated memory cell (in which case each work-item can initialize its memory cell to 0 before calculating stuff).
+
+\section{Kernels}
+
+\texttt{\#define} is allowed in kernels. TODO find a good way to share \texttt{\#define}s between main program and kernels. Kernels do NOT use the \texttt{cl\_} data types, but rather types like \texttt{char}, \texttt{int}, \texttt{long}, \texttt{bool}, \texttt{float} and \texttt{double}. For the integer types, prepend \texttt{u} to get the unsigned type.
+
+It is possible to use barriers that every work-item within a \emph{work-group} must reach before it can be passed.
+
+Bitwise operators are not allowed, unfortunately.
+
+\section{Sample code}
+
+\begin{tabular}{|l|l|}
+	\hline
+		\texttt{mandel.c} & Calculate Mandelbrot set, verbose with full error checking \\
+		\texttt{matrix.c} & Matrix multiplication \\
+		\texttt{platform.c} & List platforms, devices and their capabilities \\
+		\texttt{sieve.c} & Calculate Sieve of Erathostenes (inefficient) \\
+	\hline
+\end{tabular}
 
 \end{document}
