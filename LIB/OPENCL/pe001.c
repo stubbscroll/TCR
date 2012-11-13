@@ -99,6 +99,7 @@ char *getsource(char *s) {
 	fseek(f,0,SEEK_SET);
 	t=malloc(len+1);
 	fread(t,len,1,f);
+	t[len]=0;
 	fclose(f);
 	return t;
 }

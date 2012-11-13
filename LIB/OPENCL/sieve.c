@@ -40,6 +40,7 @@ void loadkernel(char *s) {
 	fseek(f,0,SEEK_SET);
 	t=malloc(len+1);
 	fread(t,len,1,f);
+	t[len]=0;
 	fclose(f);
 	len=strlen(t);
 	program=clCreateProgramWithSource(context,1,(const char **)&t,&len,&status);
