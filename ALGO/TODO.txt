@@ -15,6 +15,7 @@ BIGINT
 
 square root
 n-th root
+fast multiply
 
 COMBINATORICS
 
@@ -24,7 +25,6 @@ generate all n-tuples
 generate all multisets
 
 generate all subsets of submask
-generate all k-element subsets (snoob)
 
 return next/previous (combinatorial structure of some kind)
 - permutation, subset, n-tuple, partition, k-partition, k-subset, etc
@@ -42,9 +42,9 @@ COMPUTATIONAL-GEOMETRY
 ccw
 line-line intersection
 polygon-polygon intersection
-convex hull with collinear points
+convex hull with collinear points in O(n log n)
 point in polygon that handles edge cases
-point in convex polygon (fast)
+point in convex polygon in O(log N)
 distance from point to line, line segment, circle, polygon etc
 projection of point to line (2d), plane (3d)
 
@@ -52,16 +52,17 @@ circle geometry http://en.wikipedia.org/wiki/Circle_segment
 
 DATA STRUCTURE
 
-interval tree (to represent union of intervals)
-range minimum query in <O(n),O(1)> http://wcipeg.com/wiki/RMQ
-binomial heap
-fibonacci heap
-avl tree
-splay tree
-aa tree
-scapegoat tree
-treap
-b-tree?
+- interval tree (to represent union of intervals)
+- range minimum query in <O(n),O(1)> http://wcipeg.com/wiki/RMQ
+- range minimum query in <O(n),O(log n)> with O(log n) update
+- binomial heap
+- fibonacci heap
+- avl tree with order statistics
+- splay tree
+- aa tree
+- scapegoat tree
+- treap
+- b-tree?
 
 GRAPH
 
@@ -73,6 +74,9 @@ GRAPH
 - find articulation point in graph; node that splits graph if removed
   https://secure.wikimedia.org/wikipedia/en/wiki/Articulation_point
 - tarjan's scc
+- feasible flow (maxflow with min/max capacity per edge)
+- multicommodity flow
+- out-of-kilter algorithm
 
 MATRIX
 
@@ -85,17 +89,25 @@ MATRIX
 
 NUMBER-THEORY
 
-- faster ullmulmod
 - faster powmod, without init and ugly macros
 - upper bound for primtall nummer n: a(n) < n*(log n + log log n - 1/2) for n>=20
 - find continued fraction from arbitrary real number
 - solve pell equation
 - solve more general diophantine equations
+- black box factorization for huge numbers (tries a combination of appropriate
+  methods such as trial division, pollard rho, elliptic curve method,
+  quadratic sieve, number field sieve)
+- number-theoretic transform
+- cube root modulo prime http://stackoverflow.com/questions/6752374/cube-root-modulo-p-how-do-i-do-this
 
 NUMERIC
 
 - laguerre's (numerical) method of finding roots of a polynomial
 - robinson's recursion for solving "toeplitz" matrices
+- linear programming (simplex method)
+- linear programming (polynomial time method)
+- discrete fourier transform O(N^2)
+- fast fourier transform O(N log N)
 
 PROBABILITY
 
@@ -103,6 +115,7 @@ given n numbers, choose k unique numbers uniformly:
 http://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
 uniform random
 random from gaussian distribution (box muller)
+draw from other distributions
 
 SEARCH
 

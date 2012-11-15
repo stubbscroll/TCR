@@ -23,7 +23,7 @@ int jacobi(ll a,ll m) {
 }
 
 /* calculate legendre symbol, returns 0, 1 or -1 */
-/* 1: a is quadratic residue mod m, -1: a is not, 0: a mod p=0 */
+/* 1: a is quadratic residue mod p, -1: a is not, 0: a mod p=0 */
 /* WARNING, p must be an odd prime */
 /* WARNING, not tested in competition code */
 int legendre(ll a,ll p) {

@@ -29,7 +29,7 @@ void palindrome(char *s) {
    source: http://www.leetcode.com/2011/11/longest-palindromic-substring-part-ii.html
    string cannot contain ASCII-codes 1-2, sentinels are used with these values
    maximal length of input string: MAXSTR (change #define if needed) */
-/* WARNING, not tested in competitions */
+/* OK SPOJ 2426 PLD n<=30000 0.01s 11.11.2012 */
 void manacher(char *s) {
 	static char t[2*MAXSTR+5];
 	static int p[2*MAXSTR+5];
