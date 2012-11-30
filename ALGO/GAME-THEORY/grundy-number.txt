@@ -1,21 +1,27 @@
+/* OK Topcoder SRM 561 div 1-550 22.11.2012 */
+
 this applies to two-player games with perfect information, no randomness,
 the last player to move wins.
 
 how to calculate grundy number for game position:
 
-int grundyNumber(position pos) {
-    moves[] = possible positions to which I can move from pos
-    set s;
-    for (all x in moves) insert into s grundyNumber(x);
-    //return the smallest non-negative integer not in the set s;    
-    int ret=0;
-    while (s.contains(ret)) ret++;
-    return ret;
+int grundynumber(position p) {
+  set s={};
+  for(m:possible moves) {
+    c=0
+    for(q:position arising after doing move) c^=grundynumber(q)
+    s.insert(c)
+  }
+  return smallest nonnegative integer not in s
 }
 
-how to solve composite games:
+be aware that a move in a (sub)game can result in more than one game.
+example: green hackenbush on upsidedown tree (equivalent to
+topcoder srm 561 div 1-550), any problem that cuts the
+game board in more parts, 
 
-take xor of grundy numbers of every subgame.
+if the starting position is a composite game: take xor of grundy numbers
+of every subgame.
 
 if value is 0, we lost
 

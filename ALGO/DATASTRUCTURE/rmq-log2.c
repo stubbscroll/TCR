@@ -1,10 +1,19 @@
-/* range minimum query:
-   construction time O(n), query time O(log n), update O(log^2 n),
+/* range minimum query with binary trees
+   construction time O(n), query time O(log n), update O(log n),
    memory complexity O(n).
-	 return index of lowest value in a range. if there is a tie, one of the
-   lowest indices are returned (not necessarily the earlist).
-   if only value is needed, change construct to store value instead.
-   for range max query, reverse inequalities on lines marked with (<) */
+   return index of lowest value in a range. if there is a tie, one of the
+   lowest indices are returned (not necessarily the earliest).
+   if only value is needed, change construct() to store value instead.
+   for range max query, reverse inequalities on lines marked with (<)
+   for other operations, replace all lines marked with (<) as such:
+   - in construct/update: if(..>..) xx else xx
+     => rmq[j][i] = f(rmq[j-1][i*2], rmq[j-1][i*2+1])
+   - in query: if(min > ...) min = ...
+     => min = f(min, rmq[j][start or end])
+   - also, in query: replace min=start by min=identity
+   where f is any commutative operator with identity. for example,
+   sum (identity=0), product (identity=1), gcd (identity=0, but make sure to handle
+   gcd(0,0)), min (identity=INF), max (identity=-INF) etc */
 
 /* LOGN is ceil(log2(N)) */
 #define N 50000
@@ -15,15 +24,16 @@ int *rmq[LOGN+1];
 int rmq2[2*N];
 
 /* a is the array we want to construct from */
-/* if a needs a sentinel value at the end (when using sweepline),
-   make sure n includes this! */
-/* OK POJ 2637 (NCPC 2005 F "worst weather ever"), n<=50000 q<=10000, 219 ms, 02.10.2012 */
+/* if you need sentinels etc (when doing interval compression), make sure to
+   include them in the array (within n) */
+/* OK POJ 2637 (NCPC 2005 F "worst weather ever") (min), n<=50000 q<=10000, 219 ms, 02.10.2012 */
+/* OK Timus 1846 (gcd), n<=100000, q<=100000, 0.171 s, 18.11.2012 */
 void construct(int *a,int n) {
 	int i,j,p;
 	for(j=n,p=i=0;j>1;i++,p+=j,j>>=1) rmq[i]=rmq2+p;
 	rmq[i]=rmq2+p;
 	for(i=0;i<n;i++) rmq[0][i]=i;
-	for(j=1;(1<<(j+1))-1<=n;j++) for(i=0;(i<<j)<n;i++) {
+	for(j=1;(1<<j)<=n;j++) for(i=0;((i+1)<<j)<=n;i++) {
 		if(a[rmq[j-1][i*2]]>a[rmq[j-1][i*2+1]]) rmq[j][i]=rmq[j-1][i*2+1]; /* (<) */
 		else rmq[j][i]=rmq[j-1][i*2];
 	}
@@ -33,7 +43,8 @@ void construct(int *a,int n) {
    *a is the array with values, rmq contains index to smallest element */
 /* it is the caller's responsibility to avoid querying empty ranges
    (start>end) */
-/* OK POJ 2637 (NCPC 2005 F "worst weather ever"), n<=50000 q<=10000, 219 ms, 02.10.2012 */
+/* OK POJ 2637 (NCPC 2005 F "worst weather ever") (min), n<=50000 q<=10000, 219 ms, 02.10.2012 */
+/* OK Timus 1846 (gcd), n<=100000, q<=100000, 0.171 s, 18.11.2012 */
 int query(int *a,int start,int end) {
 	int j,min=start;
 	for(end++,j=0;start<end;j++,start>>=1,end>>=1) {
@@ -49,35 +60,34 @@ int query(int *a,int start,int end) {
 	return min;
 }
 
-/* change a[ix] to val, need to update every subinterval containing ix */
-/* WARNING, not tested in competition code */
+/* change a[ix] to val, update all subintervals in O(log n) */
+/* OK Timus 1846 (gcd), n<=100000, q<=100000, 0.171 s, 18.11.2012 */
 void update(int *a,int n,int ix,int val) {
+	int j,start=ix>>1;
+	if(a[ix]==val) return;
+	a[ix]=val;
+	for(j=1;((start+1)<<j)<=n;j++,start>>=1) {	
+		if(a[rmq[j-1][start*2]]>a[rmq[j-1][start*2+1]]) rmq[j][start]=rmq[j-1][start*2+1]; /* (<) */
+		else rmq[j][start]=rmq[j-1][start*2];
+	}
+}
+
+/* old, slower routine for updating, needs O(log^2 n),
+   kept for completeness, historical reasons etc */
+/* WARNING, not tested in competition code */
+void update_old(int *a,int n,int ix,int val) {
 	int j,start=ix>>1,end=(ix+1)>>1,iy,iz;
 	if(a[ix]==val) return;
 	a[ix]=val;
 	if(start==end) end++;
 	for(j=1;j<LOGN && (end<<j)<=n;j++) {
 		iy=(ix-(start<<j)>0)?query(a,start<<j,ix-1):ix;
-		if(a[ix]<a[iy]) iy=ix; /* (<) */
+		if(a[iy]>a[ix]) iy=ix; /* (<) */
 		iz=((end<<j)-ix>1)?query(a,ix+1,(end<<j)-1):ix;
-		if(a[iz]<a[iy]) iy=iz; /* (<) */
+		if(a[iy]>a[iz]) iy=iz; /* (<) */
 		rmq[j][start]=iy;
 		start>>=1;
 		end>>=1;
 		if(start==end) end++;
 	}
-}
-
-/* reksten's version here, it actually gives wrong answer on POJ 2637.
-   maybe my contruction is incompatible. */
-/* TODO try to understand reksten's rmq-query, it is shorter and neater */
-int magic(int *a,int start,int end) {
-	int min=start,i,j;
-	end++;
-	while(start<end) {
-		for(i=0,j=start;start+(1<<(i+1))<end && (j&1)==0;j>>=1,i++);
-		min=min>a[rmq[i][j]]?a[rmq[i][j]]:min;
-		start+=1<<i;
-	}
-	return min;
 }

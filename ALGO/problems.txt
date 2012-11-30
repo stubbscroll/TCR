@@ -7,7 +7,28 @@ list of problems for testing different kinds of algorithms and methods. that
 problem p is listed under algorithm a does not necessarily mean that a is the
 best algorithm for solving p (often it's definitely not). in some cases the
 algorithm is only a minor part of a larger program, in these cases the
-algorithm is marked with (subroutine).
+algorithm is marked with (subroutine). if the algorithm is an extremely minor
+part it's not listed.
+
+list of abbreviations i've used and their associated online judges:
+
+UVa http://uva.onlinejudge.org/
+UVa-live (live-archive) http://icpcarchive.ecs.baylor.edu/ http://livearchive.onlinejudge.org/
+SPOJ http://www.spoj.pl/
+Topcoder http://www.topcoder.com/tc
+POJ http://poj.org/
+Project Euler http://projecteuler.net/
+IPSC http://ipsc.ksp.sk/
+Codeforces http://codeforces.com/
+USACO competitions http://ace.delos.com/contestgate
+USACO training http://ace.delos.com/usacogate
+codechef http://www.codechef.com/
+Timus http://acm.timus.ru/
+
+(often problems from regionals and subregionals are listed directly without an
+online judge ID. regionals are at live-archive, while subregionals and other
+competitions have to be hunted down. many are listed here:
+http://www.pvv.org/~spaans/train.html )
 
 algorithm classification is rather ad hoc, improve later.
 
@@ -15,14 +36,18 @@ algorithm classification is rather ad hoc, improve later.
 1.1 network flow
 1.1.1 maxflow
 
-- UVa 563 (with node splitting, huge graph needing edge list) (good stress test
-  for max flow) (commonly called "the escape problem")
+- UVa 563 (with node splitting, huge graph needing edge list) (good for testing
+  correctness of edge list max flow, but bad for benchmarking) (commonly called
+  "the escape problem") (warning, there can be multiple banks on one cell. in
+  this case, return not possible)
 - UVa 753
 - UVa 820
 - UVa 10249
 - UVa 10330
 - UVa 10480
-- Topcoder SRM 422-div1-hard
+- UVa 10806
+- Topcoder SRM 422-div1-hard "WorkersOnPlane"
+- NWERC 2012 A "admiral"
 * UVa 10092
 * UVa 10511
 * UVa 10594
@@ -30,7 +55,7 @@ algorithm classification is rather ad hoc, improve later.
 * UVa 10779
 * UVa 10989
 * UVa 11506
-* Topcoder TCO 2005 round 3 easy
+* Topcoder TCO 2005 round 3 easy "PlayingCubes"
 * Topcoder TCO 2005 semifinal 3 medium
 * NCPC 2005 G "kingdom"
 
@@ -42,25 +67,28 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 * UVa live 3708 (NEERC 2006 G "graveyard") (+ binary search)
 * UVa 11381 (mincost)
 * UVa 11383 (mincost)
-* Topcoder SRM 506 div 1 600
+* Topcoder SRM 506 div 1 600 "SlimeXGrandSlimeAuto"
 * UVa 10911
 
 1.1.1.1 minimum cut
 
 - UVa 10480
+* UVa 11506
 
 1.1.2 mincost maxflow
 
-* Topcoder SRM 372 div 1 1000 (both min- and maxcost)
-* Topcoder SRM 506 div 1 600
+* Topcoder SRM 372 div 1 1000 "RadarGuns" (both min- and maxcost)
+* Topcoder SRM 506 div 1 600 "SlimeXGrandSlimeAuto"
+* UVa 10594?
 * UVa 10746
+* Topcoder TCO 2005 semifinal room 3, div 1 medium "Conference"
 
 1.1.3 maximum cardinality matching in bipartite graph
 
-- Topcoder SRM 200 div 1 hard (+careful graph construction to satisfy
-  lexicographically smallest)
-- Topcoder SRM 236 div 1 1000 (+binary search)
-- Topcoder SRM 303 div 1 500
+- Topcoder SRM 200 div 1 hard "Graduation" (+careful graph construction to
+  satisfy lexicographically smallest)
+- Topcoder SRM 236 div 1 1000 "Parking" (+binary search)
+- Topcoder SRM 303 div 1 500 "Knights"
 - Topcoder SRM 477 div 1 500 "PythTriplets"
 - Topcoder SRM 549 div 1 250 "PointyWizardHats"
 - Topcoder TCO 2003 semifinals 4 1050
@@ -81,16 +109,22 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
   increasing time)
 - NWERC 2005 G "guardian of decency"
 * UVa 10380
+* Topcoder TCO 2005 round 3 easy "PlayingCubes"
 * Topcoder SRM 447 div 1 500 "PeopleYouMayKnow"
+* Topcoder SRM 327 div 1 1000 "PostfixRLE" (among other algorithms)
+* Topcoder TCO 2003 semifinal round 4 hard "RookAttack"
+* Topcoder TCO 2009 qual 1 "PrimePairs"
 * UVa 10615
+* UVa 10735
 * UVa 10746
 * UVa 11045
 * UVa 11138
 * UVa 11159
 * UVa 11262
 * UVa 10511 (apparently it is possible with bipartite matching. how?)
-* POJ 3614/SDIBT 2247 (USACO NOV07 gold problem 3 "tanning") (might not be
-  possible)
+* UVa-live 4407
+* POJ 3614/SDIBT 2247 (USACO NOV07 gold problem 3 "tanning"/"suncreen")
+  (maxflow isn't the intended algorithm, might not be possible)
 
 1.1.3.1 maximum/minimum weight matching in bipartite graph (assignment
   problem/hungarian algorithm)
@@ -104,9 +138,12 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 10072
 - UVa 10888
 - UVa 11383 (reading off node weights, rather obscure solution)
-- Topcoder SRM 371 div 1 500
-- Topcoder SRM 372 div 1 1000 (both min and max)
-- Topcoder SRM 526 div 1 250
+- Topcoder SRM 371 div 1 500 "ChessMatchup"
+- Topcoder SRM 372 div 1 1000 "RadarGuns" (both min and max)
+- Topcoder SRM 526 div 1 250 "DucksAlignment" (this algorithm is overkill
+  for this problem)
+* Topcoder SRM 506 div 1 600 "SlimeXGrandSlimeAuto" (add multiple walk, add
+  dummy districts of cost 0)
 - Project Euler 345
 
 1.1.3.2 minimum vertex cover in bipartite graph (könig's theorem)
@@ -115,8 +152,8 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 1.1.4 maximum matching in "tripartite graph"
 
-- SPOJ 9890 (NWERC 2001 problem D)
-- Topcoder SRM 422 div 1 1000
+- SPOJ 9890 (NWERC 2011 problem D)
+- Topcoder SRM 422 div 1 1000 "WorkersOnPlane"
 
 1.2 shortest-path
 1.2.1 one-to-all shortest-path
@@ -124,9 +161,11 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 721
 - UVa 10171
+- UVa 10806
 - UVa 10986
 - UVa-live 4374 (NEERC 2008 problem D)
 - SPOJ 3465 DRIVE (NEERC 2008 problem D) (good stress test for Dijkstra)
+- NWERC 2012 A "admiral"
 
 1.2.1.1.1 dijkstra with costs on nodes instead of edges
 
@@ -136,14 +175,15 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 1.2.1.2 bellman-ford
 
 - UVa 515
+- UVa 10806
+- NWERC 2012 A "admiral"
 
 1.2.1.3 johnson's algorithm
 1.2.2 all-pairs shortest-path
 1.2.2.1 floyd-warshall
 
 - UVa 104 (find "negative" weight cycle)
-- Topcoder SRM 506, div 1 600
-- Topcoder SRM 551, div 1 450
+- Topcoder SRM 551, div 1 450 "ColorfulWolves"
 
 1.3 graph search
 1.3.1 uninformed search
@@ -156,7 +196,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 12101
 - UVa 12491
 - UVa live 3639 (NWERC 2006 problem G)
-- Topcoder SRM 236 div 1 1000
+* Topcoder TCO 06 round 2 hard
 
 1.3.1.1.1 0-1-breadth-first search (bfs in a graph with edge costs 0 or 1)
 
@@ -173,9 +213,9 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 1.3.3 informed search
 1.3.3.1 A*
 
-* UVa 851
-* UVa 10181
 - UVa-live 4374 (NEERC 2008 problem D)
+- UVa 851
+* UVa 10181
 
 1.4 strongly connected components
 
@@ -219,7 +259,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 10863
 - NWERC 2006 problem D "ticket to ride"
-* Topcoder SRM 303 div 1 1000
+* Topcoder SRM 303 div 1 1000 "FourBears"
 
 1.7 eulerian path/cycle
 1.8 degree properties
@@ -243,12 +283,13 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 11439 (+ binary search)
 - Topcoder TCO06 Round 1 350
-- Topcoder SRM 477 div 1 500 "PythTriplets"
+- Topcoder SRM 477 div 1 500 "PythTriplets" (the graph is non-trivially
+  bipartite)
 - UVa Live 3820 (South Pacific 2007 problem I: Mr. Thompson's Problem)
 - UVa Live 4130 (South Pacific 2008 problem H: P2P Currency Service)
 - GCJ AMER semifinal 2008, problem D: King
 * UVa 11156?
-* topcoder problem with knights attacking each other?
+* Topcoder SRM 303 div 1 500 "Knights"
 
 1.12.1 weighted maximum matching in general graph (sum of weights)
 
@@ -271,19 +312,33 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 1.13.2 minimum spanning tree (minimum arborescence) in directed graph
 
-1.14 longest path in directed acyclic graph
-
-- UVa 103
-
 2 dynamic programming
 2.1 longest increasing/decreasing/common subsequence
 
 - UVa 10534 (preferably n log k)
 - NCPC 2007 G "Nested dolls"
+* UVa 103
+* UVa 111
+* UVa 231
+* UVa 481 (need O(n log k))
+* UVa 497
+* UVa 10051
+* UVa 10534 (need O(n log k))
+* UVa 11790
+* UVa 11003
+* UVa 11456
+* UVa-live 2815
 
 2.2 coin change
 
+* UVa 147
+* UVa 166
 * UVa 351
+* UVa 674
+* UVa 10306
+* UVa 10313
+* UVa 11137
+* UVa 11517
 
 2.3 edit/levenshtein distance and similar
 
@@ -291,20 +346,32 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 10069
 - UVa 10739 (palindrome variant)
 
-2.4 bitmask dp
+2.4 bitmask dp (straightforward use of bitmask to mark selected elements
+    and similar)
 
 - UVa 10496
+- UVa 10746
 - NCPC 2007 D "Copying DNA"
-* Topcoder SRM 310 div 1 900
+* Topcoder SRM 310 div 1 900 "BoxTower"
+* UVa 10911
+* UVa 10364
+* UVa 10651
+* UVa 10908
+* Uva-live 3136
 
-2.5 frontier dp (also called "transfer matrix method")
+2.5 frontier (profile) dp (represent frontier between processed and
+    unprocessed portions of a partially completed data structure)
 
 - GCJ AMER semifinal 2008, problem D: King
 - Project Euler 161
+- Project Euler 189
 - Project Euler 215
+- Project Euler 237
 - Project Euler 393
 * Project Euler 289
 * Timus 1519
+* Topcoder SRM 532 div2-hard "DengklekPaintingSquares"
+* Topcoder problem (early, around 200-300) exam seating thing in classroom
 
 2.6 longest/shortest/number of paths in DAG
 
@@ -315,11 +382,58 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 108 (max subrectangle sum)
 - UVa 757
+- UVa 10001
 - UVa 10157
 - UVa 10271
 - UVa 10304
 - UVa 10306
 - Codeforces 131 Div 1 C
+- Topcoder TCCC05 Qual 5 Hard "NestedRandomness"
+- NWERC 2012 B "beer pressure"
+- NWERC 2012 E "edge case"
+* UVa 10003
+* UVa 836 (max subrectangle sum)
+* UVa 10074 (max subrectangle sum)
+* UVa 10667 (max subrectangle sum)
+* UVa 10827 (max subtorus sum)
+* UVa 507 (max 1D sum)
+* UVa 10684 (max 1D sum)
+* UVa 562 (knapsack)
+* UVa 990 (knapsack)
+* UVa 10130 (knapsack)
+* UVa-live 3619 (knapsack)
+* UVa 116
+* UVa 473
+* UVa 607
+* UVa 10337
+* UVa 10891
+* UVa-live 3404
+* UVa 10243
+* UVa 11307
+
+unclassified:
+* UVa 11450
+* SPOJ 101
+* UVa-live 4106
+* UVa-live 4143
+* UVa 590
+* UVa 910
+* UVa 10681
+* UVa 10702
+* Uva-live 4201
+* UVa-live 4106
+* UVa-live 4143
+* UVa-live 4146
+* UVa-live 4336
+* UVa-live 4337
+* UVa-live 4525
+* UVa-live 4526
+* UVa-live 4643
+* UVa-live 3685
+* UVa-live 3794
+* UVa-live 3794
+* UVa-live 3902
+* UVa-live 4141
 
 3 math
 3.1 number theory
@@ -364,7 +478,13 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 3.1.4 euler's totient function (phi)
 
 - Project Euler 214
+- Project Euler 351
 - UVa 12493
+* UVa 10179
+* UVa 10299
+* UVa 10820
+* UVa 11064
+* UVa 11327
 
 3.1.4.1 inverse euler's totient
 
@@ -515,8 +635,9 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 10069 (addition)
 - UVa 10157 (addition)
 - UVa 10814 (gcd, modulo, division)
-- UVa 288 (addition, subtraction, multiplication, pow) (negative numbers)
+- UVa 288 (addition, subtraction, multiplication, pow) + negative numbers)
 - UVa 324 (multiplication)
+- NWERC 2012 E "edge case" (addition)
 * UVa 254
 * UVa 290
 * UVa 424
@@ -622,6 +743,16 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 10249
 * UVa 10094 (find any solution to n-queens problem)
+* UVa 714 (+ discrete binary search)
+* UVa 410
+* UVa 10020
+* UVa 10340
+* UVa 10440
+* UVa 10670
+* UVa 10763
+* UVa 11054
+* UVa 11292
+* UVa 11369
 
 5 ad-hoc
 5.1 simulation
@@ -629,6 +760,9 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 101
 - UVa 10796 (hard)
 - NWERC 2005 problem C "laserbox"
+* UVa 10363
+* UVa 10082
+* UVa 661
 
 5.2 specific domains
 5.2.1 games
@@ -641,6 +775,9 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 10770 (solve)
 
 5.2.1.3 sliding-block puzzles
+
+* Topcoder 353 div 1-1000 "FurnitureRobbery" (not sure if it's even possible)
+
 5.2.1.3.1 rush hour
 
 - UVa 10704 (solve)
@@ -674,6 +811,15 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - Project Euler 19
 
+5.5 roman numerals
+
+* UVa 344
+* UVa 11616
+
+5.6 7-segment number display
+
+- NWERC 2012 D
+
 6 string
 6.1 palindromes
 
@@ -687,20 +833,25 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 6.2.2 aho-corasick
 
-* topcoder srm 519 div 1 medium
+* Topcoder SRM 519 div 1 medium "RequiredSubstrings"
 
 6.3 lexicographic smallest rotation of cyclic string
 
 - UVa 719
+- NCPC 2005 problem H "necklace decomposition"
 
 7 combinatorial game theory
 7.1 impartial games
-7.1.1 non-loopy impartial games
+7.1.1 non-loopy impartial games (grundy number)
 
 - Project Euler 366
 - UVa 12469 (win-loss-minimax)
 
 7.1.1.1 nim
+
+7.1.1.2 composite games
+
+- Topcoder SRM 561 div 1 medium
 
 - Project Euler 301
 
@@ -715,12 +866,19 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - Topcoder TCO 2011 Qual 1 250
 
+8.2 satisfiability
+8.2.1 2SAT
+
+- NWERC 2012 I "Idol"
+* NCPC 2011 K "Kindergarten"
+* NWERC 2011 D "Piece it together"
+
 9 binary/boolean tricks
 9.1 snoob/gosper's hack
 
 - UVa 649 (subroutine)
-* topcoder SRM 523 div 1 900
-* topcoder SRM 528 div 1 500
+* Topcoder SRM 523 div 1 900 "AlphabetPaths" (subroutine)
+* Topcoder SRM 528 div 1 500 "SPartition" (subroutine)
 * idi open 2012 civilization
 * ulm 1996 problem F lotto
 
@@ -730,24 +888,42 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 10.1.1 count inversions using merge sort
 
+[is's also possible to count the number of inversions using fenwick tree
+or similar if the range of values is small.]
+
+- Topcoder SRM 234 div 1 850 "HowUnsorted"
+- UVa 10810
 * UVa 299
 * UVa 10327
-* UVa 10810
-* Topcoder SRM 234 div 1 850
-http://acm.sgu.ru/problem.php?contest=0&problem=180
-http://acm.zju.edu.cn/show_problem.php?pid=1440
-http://spoj.sphere.pl/problems/BRICKS/
+* http://acm.sgu.ru/problem.php?contest=0&problem=180
+* http://acm.zju.edu.cn/show_problem.php?pid=1440
+* http://spoj.sphere.pl/problems/BRICKS/
 * KTH challenge 2011 problem D?
+* NCPC 2012 problem B "bread sorting" (only need to calculate modulo 2)
+* UVa 11495
 
 11 search
 11.1 binary search
 
 - UVa 10566 (continuous)
-- NWERC 2005 problem I "up the stairs"
+- NWERC 2005 problem I "up the stairs" (discrete)
+* UVa 679
+* UVa 714 (discrete + greedy)
+* UVa 957
+* UVa 10077
+* UVa 10341
+* UVa 10369
+* UVa 10474
+* UVa 10611
+* UVa 11262
+* UVa-live 2565
+* UVa-live 2949
+* UVa-live 3795
+* UVa-live 4445
 
 11.2 ternary search
 
-- Topcoder SRM 543 div 1 500 (discrete)
+- Topcoder SRM 543 div 1 500 "EllysRivers" (discrete) (subroutine)
 
 12 data structures
 12.1 segment tree
@@ -755,8 +931,12 @@ http://spoj.sphere.pl/problems/BRICKS/
 
 - idi open 2011 "Beads"
 - NCPC 2010 I (2D tree)
-- NCPC 2011 B "mega-inversions" (plus binary search over cumulative[1..i])
-- topcoder SRM 310 div 1 500
+- NCPC 2011 B "mega-inversions"
+- NCPC 2012 B "bread sorting" (only need to count modulo 2)
+- NCPC 2012 C "cookie selection" (needs ~1.2 GB RAM)
+- Topcoder SRM 234 div 1 850 "HowUnsorted" (+ interval compression or hash map)
+- Topcoder SRM 310 div 1 500 "FloatingMedian"
+- Topcoder Member SRM 482 div 1 250 "LockersDivOne"
 - UVa 501
 - UVa 10015
 - UVa 10057
@@ -765,16 +945,15 @@ http://spoj.sphere.pl/problems/BRICKS/
 - UVa 12086
 - UVa 12365
 - NWERC 2011 problem C "movie collection" (SPOJ 9889)
-* pku 1990
-* pku 1195
-* topcoder srm 315 div 2 900
+* poj 1990
+* poj 1195 (2D)
+* topcoder 2010 TCO semifinal 2 hard "FunnyGames"
+* Topcoder SRM 315 div 2 900 "KidsGame"
 * spoj 1029 MATSUM
 * tju 3243
 * spoj HORRIBLE
 * spoj ORDERS
 * spoj CTRICK
-* topcoder srm 234 div 1 850?
-* topcoder 2010 TCO semifinal 2 div 1 hard
 * codechef nov 10 "bombing"
 * codechef TEMPQUE
 * spoj 8406 TEMPLEQ
@@ -782,30 +961,43 @@ http://spoj.sphere.pl/problems/BRICKS/
 * UVa 12232?
 * UVa 10327
 * UVa 10810
+* UVa 11495
 
 12.2 binary tree
-12.2.1 self-balancing binary tree (with insert, delete, find k-th element)
+12.2.1 self-balancing binary tree (with insert, delete, order statistics)
+       (red-black tree, for example)
 
 - NWERC 2011 problem C "movie collection" (SPOJ 9889)
 - UVa 501
 - UVa 10909
 - UVa 11525
-* Topcoder SRM 310 div 1 medium
-* topcoder floatingmedian?
+* Topcoder SRM 310 div 1 medium "FloatingMedian"
 
-12.2.2 "binary deletion tree" (no balancing) (with build tree (once), delete k-th element)
+12.2.2 "binary deletion tree" (no balancing) (with delete, order statistics)
 
 - UVa 10909
 - UVa 11525
+- Topcoder Member SRM 482 div 1 250 "LockersDivOne"
 
-12.2.3 binary tree for range minimum query (rmq)
+12.2.3 binary tree for range (minimum) query (rmq)/segment tree
 
+- timus 1846
+* UVa 11235
+* UVa 11297 (2D)
 * uva 12299
+* codechef FLIPCOIN
+* UVa 11402
+* UVa-live 2191
+* UVa-live 3294 (2D)
+* UVa-live 4108
+
+12.2.3.1 range (minimum) query with range update (lazy propagation)
 
 12.3 heap
 
 - NCPC 2011 problem F "knigs of the forest" (maxheap)
 * UVa 501
+* NCPC 2012 C "cookie selection"
 
 12.4 hash
 
@@ -825,42 +1017,67 @@ http://spoj.sphere.pl/problems/BRICKS/
 - SPOJ 61 BRCKTS
 * UVa 12232?
 
-12.6 range minimum query, construction O(n log n), query O(1)
-
-12.7 range minimum query, construction O(n), query O(log n)
-
-* UVa 11235
-* UVa 11297 (2D)
-
-12.8 disjoint set/union set find
+12.6 disjoint set/union set find
 
 - UVa 10147
 - UVa 10301
 - UVa 10397
+* UVa 459
+* UVa 793
+* UVa 912
+* UVa 10158
+* UVa 10301
+* UVa 10369
+* UVa 10505
+* UVa 10583
+* UVa 10608
+* UVa 11503
 
 13 compression
 
 14 brute force
-14.1 backtracking (prune when partial solution is not feasible)
+14.1 backtracking with pruning/branch and bound
 
 - UVa 772
 - NCPC 2010 problem H "polyomino powers"
 - NWERC 2006 problem A "sudoku"
+- NWERC 2012 H "hip to be square"
+* UVa 750
+* UVa 639
+* UVa 193
+* UVa 222
+* UVa 524
+* UVa 624
+* UVa 729
+* UVa 10285
+* UVa 10496
+* UVa-live 4793
 
 14.2 generate all answers/candidates/elements
-14.3 meet-in-the-middle (divide search space in half, process each half, combine)
+14.3 meet-in-the-middle (divide search space in half, process each half,
+     combine)
 
 - Project Euler 266
-- topcoder SRM 523 div 1 900
+- topcoder SRM 523 div 1 900 "AlphabetPaths"
 * UVa 1152
 
 14.4 try all combinations
 
 - UVa 102 (only 6 combinations)
+* UVa 725
+* UVa 154
+* UVa 441
+* UVa 10662
+* UVa 10360
+* UVa 11804
+* UVa 11242 (?)
 
-15 "smart" brute force (try a subset of combinations after making an observation)
+15 "smart" brute force (try a subset of all combinations after making an
+   observation)
 
 - Topcoder TCO 2011 Qual 1 1000
+- NWERC 2012 H "hip to be square"
+- idi open 2012 "inverse divisor sums"
 
 16 parsing
 
@@ -874,7 +1091,7 @@ http://spoj.sphere.pl/problems/BRICKS/
 
 16.2.1 process a parsed grammar
 
-* UVa 10757 (the problem pretty much requires an implementation of SQL)
+* UVa 10757 (the problem pretty much asks to implement SQL)
 * UVa 12422
 * UVa 12423 (actually, a full language interpreter)
 

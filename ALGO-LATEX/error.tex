@@ -21,6 +21,13 @@
 	\item If you have mysterious errors, read the problem statement again. Make sure you're solving the correct problem.
 \end{itemize}
 
+\subsection{Choice of algorithm}
+
+\begin{itemize}
+	\item Keep things simple! Choose the simplest algorithm that will run in time.
+	\item If a lot of teams have solved a problem, there is likely to be an easier algorithm.
+\end{itemize}
+
 \subsection{Correctness of algorithm}
 
 \begin{itemize}
@@ -34,14 +41,14 @@
 \begin{itemize}
 	\item Are you handling all corner cases? Try the graph with no nodes, graph with one node, graph with no edges, empty set, one-element set, and other kinds of cases.
 	\item Don't obey restrictions not mentioned in the problem statement. Move out of the grid unless prohibited!
-	\item Check if parity or other elements make the problem much simpler.
+	\item Check if parity or other properties make the problem much simpler.
 	\item Beware the old ``input trap''. If you are given $a$ and $b$ and are asked to do something with this range, be sure to ensure that $a\leq b$ by swapping.
 \end{itemize}
 
 \subsection{Arrays}
 
 \begin{itemize}
-	\item Let arrays have the size you need plus 10 or so, and also precalculate stuff up to this extra limit. This headroom can save you if you miscalculate which elements you really need.
+	\item Let arrays have the size you need plus 10 or so, and also precalculate stuff up past the original maximal constraints. This headroom can save you if you have off-by-one errors on the max size.
 \end{itemize}
 
 
@@ -52,7 +59,7 @@
 	\item In min-cost maxflow, remember to set \texttt{cost[j][i]=-cost[i][j]}!
 	\item In BFS, remember to set the start node as visited with distance 0.
 	\item In BFS, return a distance of 0 if the start node is a goal node!
-	\item In Floyd-Warshall, use indexes $k,i,j$ in this order.
+	\item In Floyd-Warshall, use indexes $k,i,j$ in this order when checking if it is faster to go from $i$ to $j$ via $k$.
 	\item Beware of multiple edges between the same pair of nodes!
 \end{itemize}
 
@@ -65,7 +72,7 @@
 \subsection{Dynamic programming}
 
 \begin{itemize}
-	\item Don't use DP if the recurrence has cycles! Consider doing a simultaneous DP/gaussian elimination where the gaussian elimination operates on each strongly connected component, working its way through the topologically sorted component graph.
+	\item Don't use DP if the recurrence has cycles! Consider doing a simultaneous DP/gaussian elimination where the gaussian elimination operates within each strongly connected component, working its way through the topologically sorted component graph.
 \end{itemize}
 
 \subsection{Debugging}
@@ -84,7 +91,51 @@
 \begin{itemize}
 	\item Check the worst case (number of test cases multiplied with the maximum constraints). If you are doing more than $10^9$ operations, reconsider your algorithm.
 	\item If the problem is of a combinatorial nature, try to think of a test case which invokes worst-case behaviour.
+	\item Try to reduce the polynomial exponent by preprocessing, for instance DP for prefix sums.
 \end{itemize}
+
+
+Look at the constraints and see if you can get any hints from them. Look at the following table to get ideas on which algorithm to choose if $n$ is the main parameter.
+
+\begin{tabular}{|c|c|l|}
+\hline
+$n$ & Time complexity & Method \\
+\hline
+11 & $n!$ & Try all permutations \\
+\hline
+16 & $3^n$ & Try all ways of setting 3 states \\
+ & & Try all subsets of subsets \\
+\hline
+22 & $2^n$ & Meet in the middle (snoob) \\
+ & & Bitmask DP \\
+ & & Try all subsets \\
+ & & Backtracking with two choices \\
+\hline
+40 & $2^{n/2}$ & Meet in the middle: split problem in half, \\
+ & & solve each half separately and recombine \\
+\hline
+? TODO & $1.5^n$ & Try all integer partitions \\
+\hline
+500 & $n^3$ & Matrix stuff \\
+\hline
+8000 & $n^2$ & \\
+\hline
+$10^5$ & $n^{1.5}$ & Square root bins \\
+\hline
+$10^6$ & $n \log n$ & Sorting \\
+ & & Binary tree \\
+\hline
+$5\cdot 10^7$ & $n$ & Try all $n$ \\
+ & & Linear scan \\
+\hline
+$10^{18}$ & $\log n$ & Exponentiation \\
+ & & Discrete binary search \\
+\hline
+any $n$ & $O(1)$ & Clever stuff \\
+\hline
+\end{tabular}
+
+If your algorithm has higher constraints than the suggested $n$ in the left column, try to come up with a new idea (or prune!).
 
 \subsection{Calculating stuff twice}
 
@@ -102,6 +153,29 @@
 
 \begin{itemize}
 	\item Don't calculate grundy numbers if just \texttt{xor}-ing nim values is enough (and the nim-values are easily obtainable without doing the mex calculations).
+\end{itemize}
+
+\subsection{Optimization}
+
+\begin{itemize}
+	\item Don't put loops in the wrong order. When traversing a multidimensional array, let the innermost loop run through the rightmost dimension. Doing it the wrong way hurts cache performance and it could potentially be the only thing preventing correct answer in time.
+\end{itemize}
+
+\section{Help! I'm stuck! I can't solve the problem etc}
+
+Here are some algorithms to try.
+
+\begin{itemize}
+	\item Brute force or backtracking
+	\item Dynamic programming
+	\item Maximum flow
+	\item Breadth-first, depth-first or priority-first search
+	\item Shortest path
+	\item Gaussian elimination
+	\item Binary search
+	\item Sweep line/interval compression
+	\item Meet-in-the-middle
+	\item Binary tree data structure thingy
 \end{itemize}
 
 \section{Theorems and stuff}

@@ -11,10 +11,9 @@
 using namespace std;
 typedef long long ll;
 struct  {
-   {
-    
-    return 0;
-  }
+	 {
+		return 0;
+	}
 };
 
 /*  optional */
@@ -29,6 +28,6 @@ int dy[]={0,1,0,-1};
 char m[64][64];
 int x,y;
 
-    int i,j;
-    x=M.size(); y=M[0].size();
-    for(i=0;i<x;i++) for(j=0;j<y;j++) m[i][j]=M[i][j];
+		int i,j;
+		x=M.size(); y=M[0].size();
+		for(i=0;i<x;i++) for(j=0;j<y;j++) m[i][j]=M[i][j];

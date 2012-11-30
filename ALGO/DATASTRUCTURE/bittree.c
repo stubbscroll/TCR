@@ -12,7 +12,9 @@
 /* WARNING: don't use index 0. this case can happen if you want
    to count values in a range. instead, shift the range. */
 /* OK IDI Open 2010 F Beads ??.??.2011 */
+/* OK Topcoder SRM 234 div 1 850 worst case 133 ms, 22.11.2012 */
 /* OK Topcoder SRM 310 div 1 500 worst case 69 ms, 03.10.2011 */
+/* OK Topcoder Member SRM 482 div 1 250 worst case 716 ms, 22.11.2012 */
 /* OK UVa 501 n<=30000, 0.164 seconds, 14.01.2012 */
 /* OK UVa 10015 n<=3501, 0.356 seconds, 08.06.2012 */
 /* OK UVa 10057 n<=65537, 0.096 seconds, 08.06.2012 */

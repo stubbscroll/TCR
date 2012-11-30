@@ -23,6 +23,8 @@ generate all permutations
 generate all subsets
 generate all n-tuples
 generate all multisets
+generate all partitions
+generate all set partitions
 
 generate all subsets of submask
 
@@ -52,9 +54,11 @@ circle geometry http://en.wikipedia.org/wiki/Circle_segment
 
 DATA STRUCTURE
 
+- range minimum query in <O(n),O(log n)>, update O(log n), range update (as
+  fast as possible) http://wcipeg.com/wiki/Segment_tree
 - interval tree (to represent union of intervals)
 - range minimum query in <O(n),O(1)> http://wcipeg.com/wiki/RMQ
-- range minimum query in <O(n),O(log n)> with O(log n) update
+- segment tree
 - binomial heap
 - fibonacci heap
 - avl tree with order statistics
@@ -66,17 +70,25 @@ DATA STRUCTURE
 
 GRAPH
 
-- dijkstra running in O(V log V)
 - mincost maxflow with dijkstra
-- bipartite matching with capacity >1 between each pair
+- maxflow with dinic's algorith
+- bipartite matching with capacity >1 between each pairs such that
+  the array g[][]>1 (supporting multiple of each item on each side)
+- bipartite matching with g[][]=1, but where one of the sides can be
+  chosen >1 times, should be faster and should use less memory than
+  maxflow-tripartite
 - find bridge in graph: edge that splits graph if removed
   https://secure.wikimedia.org/wikipedia/en/wiki/Bridge_%28graph_theory%29
 - find articulation point in graph; node that splits graph if removed
   https://secure.wikimedia.org/wikipedia/en/wiki/Articulation_point
+- dilworth's theorem (minimum number of chains in a DAG or something like that)
+- kth shortest path
 - tarjan's scc
 - feasible flow (maxflow with min/max capacity per edge)
 - multicommodity flow
-- out-of-kilter algorithm
+- out-of-kilter algorithm (but only if it isn't dominated by mincost maxflow
+  with dijkstra)
+- dijkstra running in O(V log V+E) (is it of any use?)
 
 MATRIX
 
@@ -123,9 +135,10 @@ find kth number in array in linear time (order statistics)
 
 STRING
 
-aho-corasick
-given a string, calculate transition table[a][b]:
+- aho-corasick
+- given a string, calculate transition table[a][b]:
   if we have matched to pos a and see char b, transition to position in table
+- suffix array
 
 OTHER
 

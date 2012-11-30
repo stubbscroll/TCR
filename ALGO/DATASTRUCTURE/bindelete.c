@@ -1,13 +1,13 @@
-/*  binary deletion tree!
-    supports:
-    - build balanced binary tree from array in O(n)
-    - get n-th element in O(log n)
-    - get and delete n-th element in O(log n)
-    - convert tree to array in O(n)
-    - find index, given value of item in O(n)
+/* binary deletion tree!
+   supports:
+   - build balanced binary tree from array in O(n)
+   - get n-th element in O(log n)
+   - get and delete n-th element in O(log n)
+   - convert tree to array in O(n)
+   - find index, given value of item in O(n)
 
-    since no insertions occur, no rebalancing need
-    to be done.
+   since no insertions occur, no rebalancing need
+   to be done.
 */
 
 #include <stdio.h>
@@ -29,9 +29,10 @@ int buildbtr(int lo,int hi) {
   return mid;
 }
 
-/*  build tree from array, it will be sorted on INDEX, not content. */
-/*  OK UVa 10909 0.220 s, n=335000, 21.09.2011 */
-/*  OK UVa 11525 0.168 s, n=50000, 04.10.2011 */
+/* build tree from array, it will be sorted on INDEX, not content. */
+/* OK UVa 10909 0.220 s, n=335000, 21.09.2011 */
+/* OK UVa 11525 0.168 s, n=50000, 04.10.2011 */
+/* OK Topcoder Member SRM 482 div 1 250, worst case 1154 ms, n<=2000000, 22.11.2012 */
 void build(int *a,int num) {
   memset(pleft,-1,sizeof(int)*num);
   memset(pright,-1,sizeof(int)*num);
@@ -56,9 +57,10 @@ int extractnthbtr(int node,int ix) {
   }
 }
 
-/*  get n-th element and mark it as removed (0-indexed) */
-/*  OK UVa 10909 220 ms, n=335000, 21.09.2011 */
-/*  OK UVa 11525 0.168 s, n=50000, 04.10.2011 */
+/* get n-th element and mark it as removed (0-indexed) */
+/* OK UVa 10909 220 ms, n=335000, 21.09.2011 */
+/* OK UVa 11525 0.168 s, n=50000, 04.10.2011 */
+/* OK Topcoder Member SRM 482 div 1 250, worst case 1154 ms, n<=2000000, 22.11.2012 */
 int extractnth(int ix) {
   return extractnthbtr(root,ix);
 }
@@ -69,21 +71,23 @@ int getnthbtr(int node,int ix) {
   else return getnthbtr(pright[node],ix-cleft[node]-has[node]);
 }
 
-/*  get n-th element (0-indexed) without removing it */
-/*  OK UVa 10909 220 ms, n=335000, 21.09.2011 */
+/* get n-th element (0-indexed) without removing it */
+/* OK UVa 10909 220 ms, n=335000, 21.09.2011 */
+/* OK Topcoder Member SRM 482 div 1 250, worst case 1154 ms, n<=2000000, 22.11.2012 */
 int getnth(int ix) {
   return getnthbtr(root,ix);
 }
 
-/*  convert tree to array */
-/*  TODO test this routine */
+/* convert tree to array */
+/* TODO test this routine */
 void toarray(int *a,int *num) {
   int i;
   for(i=*num=0;i<n;i++) if(has[i]) a[(*num)++]=val[i];
 }
 
-/*  return number of elements in tree, O(1) */
-/*  OK  UVa 10909 220 ms, n=335000, 21.09.2011 */
+/* return number of elements in tree, O(1) */
+/* OK  UVa 10909 220 ms, n=335000, 21.09.2011 */
+/* OK Topcoder Member SRM 482 div 1 250, worst case 1154 ms, n<=2000000, 22.11.2012 */
 int getsize() {
   return cleft[root]+cright[root]+has[root];
 }
@@ -96,9 +100,9 @@ int getindexbtr(int node,int v) {
   else return cleft[node]+has[node]+getindexbtr(pright[node],v);
 }
 
-/*  given that the original array was sorted, and given a value:
-    return its current index or -1 if element doesn't exist */
-/*  TODO test this routine */
+/* given that the original array was sorted, and given a value:
+   return its current index or -1 if element doesn't exist */
+/* TODO test this routine */
 int getindex(int v) {
   return getindexbtr(root,v);
 }

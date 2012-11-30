@@ -26,13 +26,13 @@ double dist2d(double x1,double y1,double x2,double y2) {
 }
 
 /* subroutine for calculating tangent to two circles */
-void twocircletangentsub(double x1,double y1,int r1,double x2,double y2,int r2,double *tx1,double *ty1,double *tx2,double *ty2) {
+void twocircletangentsub(double x1,double y1,double r1,double x2,double y2,double r2,double *tx1,double *ty1,double *tx2,double *ty2) {
 	double a,b,d=dist2d(x1,y1,x2,y2),x=x2-x1,y=y2-y1,R,X,Y;
-	int r=r2-r1;
+	double r=r2-r1;
 	X=x/d; Y=y/d; R=r/d;
 	/* calculate a,b,c so that line is ax+by+c=0 */
-	a=R*X-Y*sqrt(1-R*R);
-	b=R*Y+X*sqrt(1-R*R);
+	a=R*X-Y*sqrt(1.-R*R);
+	b=R*Y+X*sqrt(1.-R*R);
 	/* follow the line's normal from the circle centres */
 	*tx1=x1-a*r1;
 	*ty1=y1-b*r1;
@@ -45,11 +45,23 @@ void twocircletangentsub(double x1,double y1,int r1,double x2,double y2,int r2,d
    where the tangent touches the circle in (x1,y1) and (x2,y2) */
 /* http://en.wikipedia.org/wiki/Tangent_lines_to_circles */
 /* OK IDI Open 2012 problem H (Holey Road) 21.05.2012 */
-void twocircletangent(double x1,double y1,int r1,double x2,double y2,int r2,int side1,int side2,double *tx1,double *ty1,double *tx2,double *ty2) {
+/* OK Project Euler 246 18.11.2012 */
+void twocircletangent(double x1,double y1,double r1,double x2,double y2,double r2,int side1,int side2,double *tx1,double *ty1,double *tx2,double *ty2) {
 	if(side1+side2==2) return twocircletangentsub(x1,y1,r1,x2,y2,r2,tx1,ty1,tx2,ty2);
 	else if(side1+side2==0) twocircletangentsub(x2,y2,r2,x1,y1,r1,tx2,ty2,tx1,ty1);
 	else if(side2==1) twocircletangentsub(x1,y1,-r1,x2,y2,r2,tx1,ty1,tx2,ty2);
 	else if(side1==1) twocircletangentsub(x1,y1,r1,x2,y2,-r2,tx1,ty1,tx2,ty2);
+}
+
+/* given point px,py and ellipse with center x,y, semi-axes a,b and side
+   (0 left, 1 right), return tangent to ellipse that goes through point in
+   *tx,*ty. uses twocircletangent(), twocircletangentsub(), dist2d() by
+   scaling the x-axis to transform ellipse into a circle */
+/* OK Project Euler 246 18.11.2012 */
+void ellipsetangent(double px,double py,double x,double y,double a,double b,int side,double *tx,double *ty) {
+	double s=b/a,dx,dy;
+	twocircletangent(px*s,py,0.,x*s,y,b,0,side,&dx,&dy,tx,ty);
+	*tx/=s;
 }
 
 /* TODO make a variant that returns intersection points */
