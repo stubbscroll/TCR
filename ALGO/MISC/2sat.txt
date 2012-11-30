@@ -1,0 +1,33 @@
+/* OK NWERC 2012 I "Idol" n<=1000 e<=2000 25.12.2012 */
+
+how to solve 2sat problems!
+
+a 2sat instance is given by a boolean expression of the form
+
+(var1 OR var2) AND (var3 OR var4) AND ... AND (vari OR varj)
+
+where each in clause (vari OR varj), vari refers to a boolean variable or its
+negation. for example, (x0 OR x2) AND (~x1 OR x2).
+
+given an expression with n variables and e clauses, construct a directed graph
+(implication graph) with 2n nodes and 2e edges. from each clause
+(vari OR varj), construct two edges (~vari -> varj) and (~varj -> vari).
+the 2sat instance is satisfiable IFF no variable belongs to the same strongly
+connected component as its negation. this can be checked in linear time with a
+standard scc algorithm.
+
+how to find a satisfying assignment in linear time: (TODO not tested) (TODO
+make some code for this)
+- construct a new graph from the scc where each strongly connected component
+  in the old graph is a node in the new graph
+- do a topological sort on the new graph
+- for each component, assign all variables that don't yet have a truth
+  assignment to false
+
+other things:
+- if just one variable needs to have a certain truth assignment: do a bfs
+  from the variable that represents the negation of this truth assignment and
+  check if it can reach the variable representing the desired truth assignment.
+  if it is reachable, the 2sat instance isn't satisfiable with the variable set
+  that way. example, if we need x0=true, do a bfs from ~x0. if x0 is reachable,
+  x0 cannot be true. (runtime: linear time per variable)

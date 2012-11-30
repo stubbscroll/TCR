@@ -1,19 +1,21 @@
+/* load a file from web */
+
 #include <stdio.h>
 #include <string.h>
 #include <curl/curl.h>
 #include <curl/easy.h>
 
 #define BUF 1000000
-char buffer[BUF];
+unsigned char buffer[BUF];
 int bptr;
 
 /*  need to collect everything in one huge buffer, as data can be split in the
     middle of a line */
 size_t webline(void *ptr,size_t size,size_t n,void *userdata) {
   int i;
-  char *t=(char *)ptr;
-  for(i=0;i<n;i++) buffer[bptr++]=t[i];
-  buffer[bptr]=0;
+  unsigned char *t=(unsigned char *)ptr;
+	memcpy(buffer+bptr,t,n);
+	bptr+=n;
   return n;
 }
 
@@ -29,7 +31,17 @@ void loadwebpage(char *url) {
 
 /*  small example showing how to open a webpage */
 int main() {
-  loadwebpage("http://www.pvv.org/~spaans/");
-  puts(buffer);
+	FILE *f;
+  loadwebpage("http://community.topcoder.com/i/header_statistics.gif");
+	f=fopen("bilde.gif","wb");
+	if(!f) {
+		printf("error opening file\n");
+		exit(1);
+	}
+	fwrite(buffer,1,bptr,f);
+	if(fclose(f)) {
+		printf("error saving and closing file\n");
+		exit(1);
+	}
   return 0;
 }
