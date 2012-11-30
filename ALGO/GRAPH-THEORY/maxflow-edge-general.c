@@ -3,10 +3,25 @@
 
 /* max flow with edge cost 1, but arbitrary capacities. efficient memory
    usage: O(E) */
-/* remember, f[] (initial capacities) must be initialized. the easiest way is
-   to define the graph from left to right, and set cap only on forward edges */
+/* usage:
+   - set MAXV,MAXE to guaranteed maximum values for the problem (MAXE
+     includes back edges!)
+   - set n to desired number of nodes, set ne=0
+   - clear f[] to zero
+   - define edges by using addedge(), preferably from left to right.
+     back edges are added automatically.
+   - radixsort()
+   - inverseedges()
+   - do a separate pass where caps are set in f[]. only set forward caps,
+     back edges have cap 0.
+   - finally, call maxflow()
+*/
 
-/* OK UVa 4.204 seconds n<=122 ne<=3620 08.06.2012 */
+/* warning, there shouldn't be more than one edge between any two given
+   nodes */
+
+/* OK UVa 563 0.060 seconds, n<=5002, 30.11.2012 */
+/* OK UVa lol which problem? 4.204 seconds n<=122 ne<=3620 08.06.2012 */
 /* OK Topcoder SRM 422 div-1 1000, 45 ms, n<=1802, ne<=405000, 21.05.2012 */
 
 #define MAXE 2000000
@@ -26,7 +41,7 @@ int maxflow(int source,int sink) {
   memset(t,0,n);
   memset(parent,-1,n*sizeof(int));
   memset(min,126,n*sizeof(int));
-  /*  TODO change from bfs to dfs */
+  /* TODO change from bfs to dfs */
   do {
     done=1;
     t[source]=1;
@@ -64,7 +79,7 @@ int maxflow(int source,int sink) {
 void radixsort() {
   static int newfrom[MAXE],newto[MAXE];
   int i,j;
-  /*  sort on to */
+  /* sort on to */
   memset(gs,0,sizeof(int)*(n+1));
   for(i=0;i<ne;i++) gs[to[i]]++;
   for(i=1;i<n;i++) gs[i]+=gs[i-1];
@@ -73,7 +88,7 @@ void radixsort() {
     newto[j]=to[i];
     newfrom[j]=from[i];
   }
-  /*  (stable) sort on from */
+  /* (stable) sort on from */
   memset(gs,0,sizeof(int)*(n+1));
   for(i=0;i<ne;i++) gs[newfrom[i]]++;
   for(i=1;i<n;i++) gs[i]+=gs[i-1];
@@ -98,4 +113,3 @@ void addedge(int a,int b) {
 	from[ne]=a; to[ne++]=b;
 	from[ne]=b; to[ne++]=a;
 }
-

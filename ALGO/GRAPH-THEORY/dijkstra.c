@@ -14,6 +14,7 @@
 /* OK TJU 3132 (NEERC 2008 problem D) n<=4008004,e<=~16000000 9.11 seconds 16.08.2011 */
 /* OK IDI Open 2012 problem F (Longest Common Path) n<=2000 21.05.2012 */
 /* OK IDI Open 2012 problem H (Holey Road) n<=40000 21.05.2012 */
+/* OK NWERC 2012 A "Admiral" n<=2000 e<=10000 25.11.2012 */
 
 /* dijkstra with costs on nodes! (see below for code) */
 /* OK UVa 929 0.588 seconds 16.08.2011 */

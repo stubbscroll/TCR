@@ -9,7 +9,8 @@ int dist[MAXV];
 
 /* bellman-ford! return 1 if no negative cycle, 0 if it has. */
 /* yes, that goto is a significant speedup */
-/* UVa 515 0.096 seconds n<=102 m<=202 10.06.2012 */
+/* OK UVa 515 0.096 seconds n<=102 m<=202 10.06.2012 */
+/* OK NWERC 2012 A "Admiral" n<=2000 e<=10000 25.11.2012 */
 int bellmanford(int start) {
 	int i,iter;
 	for(i=0;i<n;i++) dist[i]=INF;

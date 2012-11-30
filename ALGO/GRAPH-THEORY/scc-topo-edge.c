@@ -75,10 +75,11 @@ void toposort() {
   for(resn=cycle=i=0;i<n;i++) if(!vis[i]) dfsvisit(i,-1); 
 }
 
-/*  return the number of connected components */
-/*  for vertex i, id of component is in con[i] */
-/*  OK UVa 11709 0.860 seconds, n<=1000, ne<=999000 09.08.2011 */
-/*  OK UVa-live 4287 (NWERC 2008 problem B), n<=20000, ne<=50000, 0.088 seconds, 09.08.2011 */
+/* return the number of connected components */
+/* for vertex i, id of component is in con[i] */
+/* OK UVa 11709 0.860 seconds, n<=1000, ne<=999000 09.08.2011 */
+/* OK UVa-live 4287 (NWERC 2008 problem B), n<=20000, ne<=50000, 0.088 seconds, 09.08.2011 */
+/* OK NWERC 2012 I "Idol" n<=2000 e<=4000 25.11.2012 */
 int scc() {
   static int dfsres[MAXV];
   int i,t,c=0;

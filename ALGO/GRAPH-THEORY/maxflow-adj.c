@@ -93,15 +93,15 @@ int fastmaxflow(int source,int sink) {
 #define MAXE 1000
 int cutfrom[MAXE],cutto[MAXE],cutn;
 
-/*  find cheapest minimum cut in a graph (that is, set of edges of minimum
-    weight resulting in two disjoint subgraphs with the source and sink
-    separated).
-    do a bfs from the source to find all reachable nodes.
-    the mincut is the set of edges connecting reachable nodes to unreachable
-    nodes.
-    edges included in the min cut are in cutfrom[],cutto[],cutn.
-    maxflow() must be run first */
-/*  OK UVa 10480 0.004 seconds, n<=50, 14.08.2011 */
+/* find cheapest minimum cut in a graph (that is, set of edges of minimum
+   weight resulting in two disjoint subgraphs with the source and sink
+   separated).
+   do a bfs from the source to find all reachable nodes.
+   the mincut is the set of edges connecting reachable nodes to unreachable
+   nodes.
+   edges included in the min cut are in cutfrom[],cutto[],cutn.
+   maxflow() must be run first */
+/* OK UVa 10480 0.004 seconds, n<=50, 14.08.2011 */
 void mincut(int source) {
   static int q[MAXV];
   static char t[MAXV];
