@@ -42,7 +42,6 @@ rank/unrank (combinatorial structure)
 COMPUTATIONAL-GEOMETRY
 
 ccw
-line-line intersection
 polygon-polygon intersection
 convex hull with collinear points in O(n log n)
 point in polygon that handles edge cases
@@ -58,7 +57,6 @@ DATA STRUCTURE
   fast as possible) http://wcipeg.com/wiki/Segment_tree
 - interval tree (to represent union of intervals)
 - range minimum query in <O(n),O(1)> http://wcipeg.com/wiki/RMQ
-- segment tree
 - binomial heap
 - fibonacci heap
 - avl tree with order statistics
@@ -70,11 +68,12 @@ DATA STRUCTURE
 
 GRAPH
 
-- mincost maxflow with dijkstra
-- maxflow with dinic's algorith
+- bron-kerbosch (max clique in undirected graph)
+- mincost maxflow with dijkstra (potensials)
+- maxflow with dinic's algorithm
 - bipartite matching with capacity >1 between each pairs such that
   the array g[][]>1 (supporting multiple of each item on each side)
-- bipartite matching with g[][]=1, but where one of the sides can be
+- bipartite matching with edge weights=1, but where one of the sides can be
   chosen >1 times, should be faster and should use less memory than
   maxflow-tripartite
 - find bridge in graph: edge that splits graph if removed
@@ -88,6 +87,7 @@ GRAPH
 - multicommodity flow
 - out-of-kilter algorithm (but only if it isn't dominated by mincost maxflow
   with dijkstra)
+- proper polynomial-time mincost maxflow
 - dijkstra running in O(V log V+E) (is it of any use?)
 
 MATRIX
@@ -98,6 +98,10 @@ MATRIX
 - gaussian elimination
 - gaussian elimination mod
 - for square matrix A, sum A^1+A^2+...+A^n (not hard to deduce, though)
+
+MISC
+
+- chess routines (move generator, detect check, checkmate, stalemate etc)
 
 NUMBER-THEORY
 
@@ -142,4 +146,4 @@ STRING
 
 OTHER
 
-take old c routines and fix them
+take old c routines and fix them (or delete the useless ones)

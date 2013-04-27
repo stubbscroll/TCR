@@ -9,12 +9,13 @@
 */
 /* TODO maybe make edge list version later */
 
-/* OK Topcoder TCO2006 round 1 350, worst case 3 ms, N=18 */
 /* OK UVa 11439 0.024 seconds, N=64 */
 /* OK UVa-live 3820 (Pacific 2007 problem I) 0.016 seconds, N=200 */
 /* OK UVa-live 4130 (Pacific 2008 problem H) 0.032 seconds, N=300 */
 /* OK GCJ 2008 AMER semifinal problem D, N=225 */
-/* OK Topcoder SRM 477 div 1-500, 7 ms, N<=200, 24.05.2012 */
+/* OK Topcoder TCO2006 round 1 350, worst case 3 ms, N=18 */
+/* OK Topcoder SRM 303 div 1-500, worst case 22 ms, N<=676, 14.12.2012 */
+/* OK Topcoder SRM 477 div 1-500, worst case 7 ms, N<=200, 24.05.2012 */
 
 /* graph */
 #define MAXV 64

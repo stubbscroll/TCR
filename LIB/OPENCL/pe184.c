@@ -225,8 +225,7 @@ int main() {
 	}
 	printf("answer: "LL"\n",ans/6);
 
-	/* TODO deallocate buffer */
-
+	clReleaseMemObject(buffer);
 	clReleaseKernel(kernel);
 	clReleaseProgram(program);
 	shutdownopencl();

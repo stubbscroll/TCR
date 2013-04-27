@@ -4,17 +4,17 @@
 #define MAXV 100
 #define INF 1000000000
 
-/*  maxflow! uses adjacency matrix and assumes that cost=1 everywhere */
+/* maxflow! uses adjacency matrix */
 
-int f[MAXV][MAXV];      /*  initial flow, 0 means no edge */
+int f[MAXV][MAXV]; /* capacity, 0 means no edge */
 int n;
 
-/*  slower maxflow, but shorter to type in. faster search than bfs (?),
-    but slow array clearing */
-/*  OK UVa 753 0.028 seconds, n<=502, 13.08.2011 */
-/*  OK UVa 820 0.032 seconds, n<=100, 12.08.2011 */
-/*  OK UVa 10330 0.048 seconds, n<=202, 13.08.2001 */
-/*  OK UVa 10480 0.004 seconds, n<=50, 14.08.2011 */
+/* slower maxflow, but shorter to type in. faster search than bfs for
+   adjacency matrices, but slow array clearing */
+/* OK UVa 753 0.028 seconds, n<=502, 13.08.2011 */
+/* OK UVa 820 0.032 seconds, n<=100, 12.08.2011 */
+/* OK UVa 10330 0.048 seconds, n<=202, 13.08.2001 */
+/* OK UVa 10480 0.004 seconds, n<=50, 14.08.2011 */
 int maxflow(int source,int sink) {
   int i,j,done,flow=0,done2,a,r;
   static char t[MAXV];
@@ -47,11 +47,11 @@ int maxflow(int source,int sink) {
   return flow;
 }
 
-/*  faster maxflow, uses BFS and smart array clearing */
-/*  OK UVa 753 0.020 seconds, n<=502, 13.08.2011 */
-/*  OK UVa 820 0.020 seconds, n<=100, 12.08.2011 */
-/*  OK UVa 10330 0.032 seconds, n<=202, 13.08.2001 */
-/*  OK UVa 10480 0.004 seconds, n<=50, 14.08.2011 */
+/* faster maxflow, uses BFS and smart array clearing */
+/* OK UVa 753 0.020 seconds, n<=502, 13.08.2011 */
+/* OK UVa 820 0.020 seconds, n<=100, 12.08.2011 */
+/* OK UVa 10330 0.032 seconds, n<=202, 13.08.2001 */
+/* OK UVa 10480 0.004 seconds, n<=50, 14.08.2011 */
 int fastmaxflow(int source,int sink) {
   int i,j,done,flow=0,done2,a,r,qe=0,k;
   static char t[MAXV];

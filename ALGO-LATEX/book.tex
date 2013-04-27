@@ -40,7 +40,6 @@ Suggested outline:
 	\item Data structures (need to split this, there are many and they are different, such as disjoint-set, (binary) trees of all kinds, hashtables, buckets, min/max-heap and other heaps, binary decision diagram)
 	\item Continuous optimization
 	\item Common ad hoc themes (spiral, roman numerals, calendar/dates, poker)
-	\item Combinatorial game theory
 	\item Simulation problems
 	\item Parsing and grammars
 	\item Boolean tricks
@@ -64,7 +63,7 @@ This chapter contains discussion of optimization problems that don't fit in any 
 
 \subsection{Example problem: UVa 12520 ``Square garden''}
 
-{\bf Problem statement} Given a square grid consisting of $L\times L$ unit cells, colour $0 \leq N \leq L^2$ cells such that the perimeter of the coloured cells is maximized.
+{\bf Problem statement} Given a square grid consisting of $L\times L$ unit cells and a given integer $0 \ leq N <\leq N^2$, colour $N$ cells such that the perimeter of the coloured cells is maximized. What is the length of the perimeter?
 
 \begin{tabular}{l|l}
 	\hline
@@ -83,6 +82,6 @@ For $N$ closer to $L^2$, let's look at the problem in reverse: Start with a comp
 
 After we have uncoloured all interior cells, we need to uncolour non-corner border cells. Each one of these will increase the perimeter by 2 (as long we don't create adjacent uncoloured cells). Here we have two cases for odd $L$: We can uncolour $\lfloor \frac{(L-2)^2+1}{2} \rfloor$ interior cells and have $4\lfloor \frac{L-2}{2} \rfloor$ non-corner border cells, or $\lfloor \frac{(L-2)^2}{2} \rfloor$ interior cells and $4\lfloor \frac{L-1}{2} \rfloor$ non-corner border cells. We can simply calculate both alternatives and take the maximum. If we have run out of non-corner border cells, we need to take the corners. Uncolouring corner cells won't increase the perimeter. For even $L$, there are two available corner cells, and for odd $L$ there are 4 corner cells in the first case and none in the second case.
 
-This covers all cases, because if we have removed all possible interior cells and borner cells, we have arrived at the chessboard pattern.
+This covers all cases, because if we have removed all possible interior cells and border cells, we have arrived at the chessboard pattern.
 
 \end{document}

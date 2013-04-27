@@ -6,15 +6,15 @@ typedef long long ll;
 /* calculate recursive digit sum, call until sum is <10 */
 /* NB, untested */
 int recdigitsum(ll n) {
-  return !n?0:(n-1)%9+1;
+	return !n?0:(n-1)%9+1;
 }
 
 /* calculate digit sum */
 /* OK UVa 12517 n<=10^9 20.10.2012 */
 int digitsum(ll n) {
-  int r=0;
-  while(n) r+=n%10,n/=10;
-  return r;
+	int r=0;
+	while(n) r+=n%10,n/=10;
+	return r;
 }
 
 /* calculate sum of digit sums for all numbers from 1 to a (inclusive) */
@@ -46,7 +46,7 @@ ll res(ll a) {
 }
 
 int main() {
-  printf("num %d: %d\n",123765765,digitsum(123765765));
-  printf("recnum %d: %d\n",123765765,recdigitsum(123765765));
-  return 0;
+	printf("num %d: %d\n",123765765,digitsum(123765765));
+	printf("recnum %d: %d\n",123765765,recdigitsum(123765765));
+	return 0;
 }

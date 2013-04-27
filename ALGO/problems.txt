@@ -36,25 +36,25 @@ algorithm classification is rather ad hoc, improve later.
 1.1 network flow
 1.1.1 maxflow
 
-- UVa 563 (with node splitting, huge graph needing edge list) (good for testing
-  correctness of edge list max flow, but bad for benchmarking) (commonly called
-  "the escape problem") (warning, there can be multiple banks on one cell. in
-  this case, return not possible)
+- UVa 563 (with node splitting, huge, sparse graph needing edge list) (good for
+  testing correctness of edge list max flow, but bad for benchmarking)
+  (commonly called "the escape problem") (warning, there can be multiple banks
+  on one cell. in this case, return not possible)
 - UVa 753
 - UVa 820
 - UVa 10249
 - UVa 10330
 - UVa 10480
-- UVa 10806
+- UVa 10779
 - Topcoder SRM 422-div1-hard "WorkersOnPlane"
-- NWERC 2012 A "admiral"
 * UVa 10092
 * UVa 10511
 * UVa 10594
 * UVa 10735
-* UVa 10779
 * UVa 10989
 * UVa 11506
+* IDI Open 2007 E "party"
+* IDI Open 2013 "booking services"
 * Topcoder TCO 2005 round 3 easy "PlayingCubes"
 * Topcoder TCO 2005 semifinal 3 medium
 * NCPC 2005 G "kingdom"
@@ -66,22 +66,31 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 * UVa 11528
 * UVa live 3708 (NEERC 2006 G "graveyard") (+ binary search)
 * UVa 11381 (mincost)
-* UVa 11383 (mincost)
-* Topcoder SRM 506 div 1 600 "SlimeXGrandSlimeAuto"
 * UVa 10911
+* UVa 10380
+* UVa-live 2354
 
 1.1.1.1 minimum cut
 
 - UVa 10480
+* UVa 10989
 * UVa 11506
 
 1.1.2 mincost maxflow
 
+- UVa 10746
+- UVa 10806
+- NWERC 2012 A "admiral"
+- Topcoder SRM 506 div 1 600 "SlimeXGrandSlimeAuto"
+- Topcoder TCO 2013 round 1A hard "DirectionBoard"
 * Topcoder SRM 372 div 1 1000 "RadarGuns" (both min- and maxcost)
-* Topcoder SRM 506 div 1 600 "SlimeXGrandSlimeAuto"
 * UVa 10594?
-* UVa 10746
 * Topcoder TCO 2005 semifinal room 3, div 1 medium "Conference"
+* UVa-live 2927
+* UVa-live 3550
+* UVa-live 3562
+* SPOJ 387 TOURS
+* Codeforces 164C VK cup 2012 round 3 C "Machine programming" (?)
 
 1.1.3 maximum cardinality matching in bipartite graph
 
@@ -108,32 +117,31 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - BAPC 2006 F (hnu 11025) (let left side be doors+times, sort by
   increasing time)
 - NWERC 2005 G "guardian of decency"
+- IDI Open 2010 B "beehive epidemic"
+- IDI Open 2012 A "boss rush"
+* IDI Open 2009 F "train tickets"
 * UVa 10380
 * Topcoder TCO 2005 round 3 easy "PlayingCubes"
 * Topcoder SRM 447 div 1 500 "PeopleYouMayKnow"
 * Topcoder SRM 327 div 1 1000 "PostfixRLE" (among other algorithms)
 * Topcoder TCO 2003 semifinal round 4 hard "RookAttack"
 * Topcoder TCO 2009 qual 1 "PrimePairs"
+* UVa 10243
+* UVa 10418
 * UVa 10615
 * UVa 10735
-* UVa 10746
+* UVa 10984
 * UVa 11045
 * UVa 11138
 * UVa 11159
 * UVa 11262
-* UVa 10511 (apparently it is possible with bipartite matching. how?)
+* UVa 10511 (oh really?)
 * UVa-live 4407
 * POJ 3614/SDIBT 2247 (USACO NOV07 gold problem 3 "tanning"/"suncreen")
-  (maxflow isn't the intended algorithm, might not be possible)
+  (maxflow isn't the intended algorithm, might not even be possible)
 
 1.1.3.1 maximum/minimum weight matching in bipartite graph (assignment
   problem/hungarian algorithm)
-
-[nb, min-weight can be reduced to mincost-maxflow this way: create an edge with
- cost 0 from source to left, and right to sink. create edges between every pair
- in left+right with cost equal to the negative of the cost of choosing (i,j).
- all edges have capacity 1. then, run mcmf and the answer is the negative
- of the maximal cost.]
 
 - UVa 10072
 - UVa 10888
@@ -142,9 +150,9 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - Topcoder SRM 372 div 1 1000 "RadarGuns" (both min and max)
 - Topcoder SRM 526 div 1 250 "DucksAlignment" (this algorithm is overkill
   for this problem)
+- Project Euler 345
 * Topcoder SRM 506 div 1 600 "SlimeXGrandSlimeAuto" (add multiple walk, add
   dummy districts of cost 0)
-- Project Euler 345
 
 1.1.3.2 minimum vertex cover in bipartite graph (könig's theorem)
 
@@ -154,6 +162,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - SPOJ 9890 (NWERC 2011 problem D)
 - Topcoder SRM 422 div 1 1000 "WorkersOnPlane"
+- Topcoder SRM 575 div 1 1000 "TheTilesDivOne"
 
 1.2 shortest-path
 1.2.1 one-to-all shortest-path
@@ -184,6 +193,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 104 (find "negative" weight cycle)
 - Topcoder SRM 551, div 1 450 "ColorfulWolves"
+- Topcoder SRM 551, div 1 450 "ColorfulWolves"
 
 1.3 graph search
 1.3.1 uninformed search
@@ -196,6 +206,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 12101
 - UVa 12491
 - UVa live 3639 (NWERC 2006 problem G)
+- Topcoder SRM 576 div 1 256 "ArcadeManao"
 * Topcoder TCO 06 round 2 hard
 
 1.3.1.1.1 0-1-breadth-first search (bfs in a graph with edge costs 0 or 1)
@@ -205,6 +216,13 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 1.3.1.1.2 breadth-first search with multiple queues
 
 1.3.1.2 depth-first search
+
+* IDI Open 2013 "neurotic network"
+
+1.3.1.3 flood fill
+
+- IDI Open 2013 "csi: p15"
+
 1.3.2 bidirectional search
 1.3.2.1 bidirectional breadth-first search
 
@@ -239,6 +257,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 715 (need to consider the set of all topological sorts)
 - UVa 11686
 - UVa 12466
+- IDI Open 2013 "neurotic network"
 * UVa 124
 * UVa 196
 * UVa 200
@@ -278,6 +297,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 216 (n<=8)
 - UVa 10496 (n<=10)
+- IDI Open 2013 "travelling cellsman" (on a grid)
 
 1.12 maximum matching in general graph (edmond's blossom algorithm)
 
@@ -349,6 +369,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 2.4 bitmask dp (straightforward use of bitmask to mark selected elements
     and similar)
 
+- UVa 10296
 - UVa 10496
 - UVa 10746
 - NCPC 2007 D "Copying DNA"
@@ -360,7 +381,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 * Uva-live 3136
 
 2.5 frontier (profile) dp (represent frontier between processed and
-    unprocessed portions of a partially completed data structure)
+    unprocessed portions of a partially completed domain)
 
 - GCJ AMER semifinal 2008, problem D: King
 - Project Euler 161
@@ -368,15 +389,17 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - Project Euler 215
 - Project Euler 237
 - Project Euler 393
+- IDI Open 2013 "kings on a chessboard"
 * Project Euler 289
 * Timus 1519
 * Topcoder SRM 532 div2-hard "DengklekPaintingSquares"
 * Topcoder problem (early, around 200-300) exam seating thing in classroom
 
-2.6 longest/shortest/number of paths in DAG
+2.6 longest/shortest/number of paths/other processing in DAG
 
 - UVa 103
 - UVa 10051
+- IDI Open 2013 "neurotic network"
 
 2.7 other dp
 
@@ -389,6 +412,9 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 10306
 - Codeforces 131 Div 1 C
 - Topcoder TCCC05 Qual 5 Hard "NestedRandomness"
+- Topcoder TCO07 Round 4 easy "PolishNotation"
+- Topcoder TCO07 Round 4 hard "FourSubstrings"
+- Topcoder SRM 564 div1-medium "AlternateColors2"
 - NWERC 2012 B "beer pressure"
 - NWERC 2012 E "edge case"
 * UVa 10003
@@ -396,8 +422,6 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 * UVa 10074 (max subrectangle sum)
 * UVa 10667 (max subrectangle sum)
 * UVa 10827 (max subtorus sum)
-* UVa 507 (max 1D sum)
-* UVa 10684 (max 1D sum)
 * UVa 562 (knapsack)
 * UVa 990 (knapsack)
 * UVa 10130 (knapsack)
@@ -406,10 +430,10 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 * UVa 473
 * UVa 607
 * UVa 10337
-* UVa 10891
-* UVa-live 3404
 * UVa 10243
+* UVa 10891
 * UVa 11307
+* UVa-live 3404
 
 unclassified:
 * UVa 11450
@@ -592,6 +616,18 @@ unclassified:
 
 - UVa 109
 - UVa 10112 (triangles only)
+
+3.4.5 distance from point to line segment
+
+- IDI open 2013 "space travel"
+
+3.4.5.1 distance from point to line segment in 3D
+
+- IDI open 2013 "space travel"
+
+3.4.5.2 distance from line segment to line segment in 3D
+
+- IDI open 2013 "space travel"
 
 3.5 combinatorics
 3.5.1 permutations without duplicates
@@ -776,7 +812,7 @@ unclassified:
 
 5.2.1.3 sliding-block puzzles
 
-* Topcoder 353 div 1-1000 "FurnitureRobbery" (not sure if it's even possible)
+* Topcoder SRM 353 div 1-1000 "FurnitureRobbery" (not sure if it's even possible)
 
 5.2.1.3.1 rush hour
 
@@ -790,11 +826,13 @@ unclassified:
 5.2.1.4 nurikabe
 
 - UVa-live 4103 (Tehran 2007 problem J) (solve)
+- IDI Open 20?? (verify filled-in board)
 
 5.2.1.5 slitherlink
 
 - UVa-live 3848 (North-America Mid-Central 2007 problem C)
 - UVa-live 5126 (TODO find contest)
+* Topcoder marathon 78 "FixTheFence"
 
 5.2.1.6 sudoku
 
@@ -901,6 +939,7 @@ or similar if the range of values is small.]
 * KTH challenge 2011 problem D?
 * NCPC 2012 problem B "bread sorting" (only need to calculate modulo 2)
 * UVa 11495
+* SPOJ 6256 INVCNT
 
 11 search
 11.1 binary search
@@ -923,6 +962,7 @@ or similar if the range of values is small.]
 
 11.2 ternary search
 
+- IDI open 2013 "space travel"
 - Topcoder SRM 543 div 1 500 "EllysRivers" (discrete) (subroutine)
 
 12 data structures
@@ -945,6 +985,7 @@ or similar if the range of values is small.]
 - UVa 12086
 - UVa 12365
 - NWERC 2011 problem C "movie collection" (SPOJ 9889)
+- SPOJ 6256 INVCNT
 * poj 1990
 * poj 1195 (2D)
 * topcoder 2010 TCO semifinal 2 hard "FunnyGames"
@@ -1003,11 +1044,11 @@ or similar if the range of values is small.]
 
 - UVa 744
 - UVa 851
+- UVa 1152
 - UVa 10181
 - UVa 10226
 - Google Code Jam 2012 Round 2 D-small
 - Codeforces 131 div 1 A
-* UVa 1152
 
 12.5 square root buckets (for range minimum query (rmq), frequencies etc)
 
@@ -1022,6 +1063,7 @@ or similar if the range of values is small.]
 - UVa 10147
 - UVa 10301
 - UVa 10397
+* Topcoder SRM 576 div 1 256 "ArcadeManao"
 * UVa 459
 * UVa 793
 * UVa 912
@@ -1057,9 +1099,9 @@ or similar if the range of values is small.]
 14.3 meet-in-the-middle (divide search space in half, process each half,
      combine)
 
+- UVa 1152 (multiple ways to apply meet-in-the-middle)
 - Project Euler 266
-- topcoder SRM 523 div 1 900 "AlphabetPaths"
-* UVa 1152
+- Topcoder SRM 523 div 1 900 "AlphabetPaths"
 
 14.4 try all combinations
 

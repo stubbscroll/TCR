@@ -47,11 +47,11 @@
 
 /* TODO consider interleaving all these in a struct or something
    for cache-friendliness */
-int from[MAXE],to[MAXE];  /*  graph */
-int gs[MAXV+1];           /*  pointer to first node */
-int f[MAXE];              /*  flow/capacity/residual graph */
-int inv[MAXE];            /*  index to reverse edge */
-int n,ne;                 /*  number of nodes, edges */
+int from[MAXE],to[MAXE];  /* graph */
+int gs[MAXV+1];           /* pointer to first node */
+int f[MAXE];              /* flow/capacity/residual graph */
+int inv[MAXE];            /* index to reverse edge */
+int n,ne;                 /* number of nodes, edges */
 
 /* NB! force starting move heuristic assumes that all capacities==1 */
 int maxflow(int source,int sink) {
@@ -74,7 +74,7 @@ int maxflow(int source,int sink) {
 		/* if all nodes adjacent to the sink must be matched: use break
 			 if not: use continue */
 		break;
-/*    continue; */
+/*		continue; */
 	out:
 		l=parent[sink];
 		while(l>-1) {

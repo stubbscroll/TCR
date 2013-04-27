@@ -4,6 +4,8 @@
 /* preflow-push maxflow with efficient edge lists
    based on http://en.wikipedia.org/wiki/Preflow_push
    runtime: dunno
+   better for larger graphs where maxflow-tripartite cannot be used,
+   i think
 */
 /* usage:
    - set MAXV,MAXE to guaranteed maximum values for the problem (MAXE

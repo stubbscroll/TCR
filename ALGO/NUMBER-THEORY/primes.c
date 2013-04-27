@@ -149,6 +149,7 @@ void exeuclid(ll a,ll b,ll *x,ll *y) {
 /* requires gcd(a,mod)==1, returns 0 otherwise */
 /* OK UVa 12365 12.11.2011 */
 /* OK Project Euler 381 27.04.2012 */
+/* OK Project Euler 274 2013-03-08 */
 /* OK Codeforces 138 div 1 problem C 16.09.2012 */
 ll inverse(ll a,ll mod) {
 	ll b=mod,x=0,y=1,t,q,lastx=1,lasty=0;
@@ -159,6 +160,21 @@ ll inverse(ll a,ll mod) {
 		t=y,y=lasty-q*y,lasty=t;
 	}
 	return a==1?(lastx%mod+mod)%mod:0;
+}
+
+/* faster/better inverse from "prime numbers - a computational perspective,
+   algorithm 9.4.4 page 465. beware of overflow! */
+/* OK Project Euler 274 2013-03-08 */
+ll inverse2(ll x,ll p) {
+	ll a=1,q;
+	if(x>=p) x%=p;
+	while(x!=1) {
+		q=-(p/x);
+		x=p+q*x;
+		a=(q*a)%p; /* warning ullmulmod if necessary */
+		if(a<0) a+=p;
+	}
+	return a;
 }
 
 /* solve a set of modular equations using chinese remainder theorem */
@@ -233,7 +249,7 @@ uint powmod(uint n,uint k,uint mod) {
 	LOG2_32(k,i,t,tt)
 /*  alternatively:
 	i=31;
-	while(i>=0 && !(n&(1<<i))) --i;
+	while(i>=0 && !(k&(1<<i))) --i;
 */
 	for(j=0;j<=i;j++) {
 		if(k&(1U<<j)) ans=(ull)ans*v%mod;

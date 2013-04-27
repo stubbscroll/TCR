@@ -152,7 +152,7 @@ If your algorithm has higher constraints than the suggested $n$ in the left colu
 \subsection{Game theory}
 
 \begin{itemize}
-	\item Don't calculate grundy numbers if just \texttt{xor}-ing nim values is enough (and the nim-values are easily obtainable without doing the mex calculations).
+	\item Don't calculate grundy numbers if just \texttt{xor}-ing nim values is enough (and the nim-values are easily obtainable without doing the mex calculations). This happens in particular if a game cannot be split into multiple subgames.
 \end{itemize}
 
 \subsection{Optimization}
@@ -197,7 +197,7 @@ Here are some algorithms to try.
 
 \begin{itemize}
 	\item Warning, don't underestimate the difficulty when conditional probabilities are involved. Be sure of what you're doing and stay sharp!
-	\item For DP problems of the type ``what's the probability of escaping through the ordeal'', consider not normalizing the probabilities, and do subtraction of non-normalized probabilities.
+	\item For DP problems of the type ``what's the probability of escaping through some ordeal'', consider not normalizing the probabilities, and do subtraction of non-normalized probabilities.
 	\item Given a random permutation of length n, the probability of it being in a cycle of length $k$ is $\frac{1}{n}$ for any $1\leq k \leq n$. TODO this doesn't make sense, figure out what I really meant and rewrite it.
 \end{itemize}
 

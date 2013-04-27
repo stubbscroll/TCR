@@ -5,6 +5,7 @@
 /* OK UVa 10301 08.06.2012 */
 /* OK UVa 10397 26.05.2012 */
 /* OK NCPC 2009 H "beacons" (UVa 11696) 05.10.2012 */
+/* OK Topcoder SRM 572 div 1 250 "NewArenaPassword" n<=50, worst 3 ms, 2013-03-07 */
 
 int p[MAXSET],rank[MAXSET];
 

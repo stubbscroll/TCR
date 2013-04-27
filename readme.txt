@@ -13,6 +13,10 @@ CRYPTO
 routines used in cryptography (such as md5)
 general stuff like primality testing/factoring goes to algo
 
+FILEFORMAT
+==========
+routines for loading/parsing existing file formats
+
 LIB
 ===
 contains subdirectories with projects showing how to make and use them

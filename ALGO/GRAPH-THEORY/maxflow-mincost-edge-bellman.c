@@ -1,7 +1,6 @@
 #define MAXV 102
 #define MAXE 20000
 #define INF 1000000000
-#define MAXH 20000
 
 /* min-cost maxflow! this routine is not optimized for sparse graphs,
    as augment() always takes at least n operations.
@@ -12,7 +11,7 @@
    dist/vis/prev with list of visited nodes)
 */
 
-/* OK Topcoder SRM 506 div 1-600 worst case 11 ms n<=102 30.11.2012 */
+/* OK Topcoder SRM 506 div 1-600 worst case 11 ms n<=103 30.11.2012 */
 int from[MAXE],to[MAXE];  /* graph */
 int gs[MAXV+1];           /* pointer to first node */
 int f[MAXE];              /* flow/capacity/residual graph */
@@ -26,11 +25,10 @@ int augment(int source,int sink) {
 	static char vis[MAXV];
 	int cur,ix,i,qs,qe;
 	memset(vis,0,n);
-	memset(dist,126,sizeof(int)*n);
+	memset(dist,120,sizeof(int)*n);
 	memset(prev,-1,sizeof(int)*n);
-	qs=qe=0;
+	dist[source]=qs=qe=0;
 	q[qe++]=source;
-	dist[source]=0;
 	while(qs<qe) {
 		cur=q[qs++];
 		vis[cur]=0;
