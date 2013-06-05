@@ -394,6 +394,8 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 * Timus 1519
 * Topcoder SRM 532 div2-hard "DengklekPaintingSquares"
 * Topcoder problem (early, around 200-300) exam seating thing in classroom
+* hangzhou dianzi (HDU) 4285 http://acm.hdu.edu.cn/showproblem.php?pid=4285
+* ZOJ 3213 http://acm.zju.edu.cn/onlinejudge/showProblem.do?problemCode=3213
 
 2.6 longest/shortest/number of paths/other processing in DAG
 
@@ -415,6 +417,8 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - Topcoder TCO07 Round 4 easy "PolishNotation"
 - Topcoder TCO07 Round 4 hard "FourSubstrings"
 - Topcoder SRM 564 div1-medium "AlternateColors2"
+- Topcoder SRM 578 div 1 250 "GooseInZooDivOne"
+- Topcoder SRM 578 div 1 500 "WolfInZooDivOne"
 - NWERC 2012 B "beer pressure"
 - NWERC 2012 E "edge case"
 * UVa 10003
@@ -1063,6 +1067,7 @@ or similar if the range of values is small.]
 - UVa 10147
 - UVa 10301
 - UVa 10397
+- Topcoder SRM 578 div 1 250 "GooseInZooDivOne"
 * Topcoder SRM 576 div 1 256 "ArcadeManao"
 * UVa 459
 * UVa 793

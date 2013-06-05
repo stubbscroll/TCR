@@ -88,7 +88,8 @@ GRAPH
 - out-of-kilter algorithm (but only if it isn't dominated by mincost maxflow
   with dijkstra)
 - proper polynomial-time mincost maxflow
-- dijkstra running in O(V log V+E) (is it of any use?)
+- dijkstra running in O(V log V+E) (is it of any use? consider another data
+  structure than heap, for example skip-list)
 
 MATRIX
 

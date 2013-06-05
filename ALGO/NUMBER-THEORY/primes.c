@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 /* MAXP      65536  1000000  10000000  30000000
-	 n-primes   6542    78498    664579   1857859
+   n-primes   6542    78498    664579   1857859
 */
 
 #define MAXP 10000000
@@ -18,13 +18,13 @@ int primes;
 
 /* prime number generation! */
 
-/* OK project euler 214 03.08.2011 */
-/* OK spoj (classical) 4942 04.08.2011 */
-/* OK spoj (tutorial) 1392 04.08.2011 */
+/* OK project euler 214 2011-08-03 */
+/* OK spoj (classical) 4942 2011-08-04 */
+/* OK spoj (tutorial) 1392 2011-08-04 */
 /* OK UVa 11073 04.08.2011 */
-/* OK UVa 12101 (NWERC 2006 problem G) 0.004 ms n<10000 26.08.2012 */
-/* OK UVa 12493 n<=46500 23.08.2012 */
-/* OK UVa-live 3639 (NWERC 2006 problem G) 0.004 ms n<10000 26.08.2012 */
+/* OK UVa 12101 (NWERC 2006 problem G) 0.004 ms n<10000 2012-08-26 */
+/* OK UVa 12493 n<=46500 2012-08-23 */
+/* OK UVa-live 3639 (NWERC 2006 problem G) 0.004 ms n<10000 2012-08-26 */
 void createsieve() {
 	int i,j,q;
 	memset(sieve,1,sizeof(sieve));
@@ -44,9 +44,9 @@ void genprimes() {
 }
 
 /* factorization sieve: sieve[i] is 0 if i is prime, otherwise sieve[i] is
-	 smallest divisor. the datatype for sieve[] must be able to hold
-	 sqrt(MAXP). same asymptotic runtime as normal sieve, but higher constant
-	 because of the branch in the inner loop, and wider datatype */
+   smallest divisor. the datatype for sieve[] must be able to hold
+   sqrt(MAXP). same asymptotic runtime as normal sieve, but higher constant
+   because of the branch in the inner loop, and wider datatype */
 /* OK Project Euler 386 27.08.2011 */
 /* OK Topcoder Inv 2002 finals (run 1) 500 04.06.2012 */
 /* OK UVa 10680 0.096 seconds n<=1000000 08.06.2012 */
@@ -58,7 +58,7 @@ void fsieve() {
 	for(i=2;i<=q;i++) if(sieve2[i]<1) for(j=i*i;j<MAXP;j+=i) if(!sieve2[j]) sieve2[j]=i;
 }
 /* use factorization sieve to factor a number (requires n<MAXP), runs in time
-	 linear to the number of prime factors (including duplicates). */
+   linear to the number of prime factors (including duplicates). */
 /* OK Project Euler 386 27.08.2011 */
 /* OK Topcoder Inv 2002 finals (run 1) 500 04.06.2012 */
 /* OK UVa 10680 0.096 seconds n<=1000000 08.06.2012 */
@@ -179,7 +179,7 @@ ll inverse2(ll x,ll p) {
 
 /* solve a set of modular equations using chinese remainder theorem */
 /* n: number of equations of the form
-	 x = a[i] mod b[i] */
+   x = a[i] mod b[i] */
 /* OK project euler 365 20.02.2012 */
 ull chinese(int n,int *a,int *b) {
 	int i;
@@ -189,11 +189,11 @@ ull chinese(int n,int *a,int *b) {
 	return x;
 }
 
-/*  primality testing! */
+/* primality testing! */
 
 /* trial division, can check primality for numbers up to prime[primes-1]^2 */
 /* can actually remove the i<primes check if n is at most
-	 prime[primes-2]^2 */
+   prime[primes-2]^2 */
 /* change ll to int and remove (ll) if n<2^31 always holds */
 /* NB, not tested */
 int isprime(ll n) {
@@ -204,12 +204,13 @@ int isprime(ll n) {
 }
 
 /* table used by routine that finds log base 2 a.k.a. number of highest
-	 set bit */
+   set bit */
 /* NB, needed for powmod, and hence also for witness, millerrabin,
-	 ullmillerrabin,factormain */
+   ullmillerrabin,factormain */
 /* NB, initlogtable must be called! */
+/* TODO get rid of this drivel */
 char logtable256[256];
-/*  init routine which must be called */
+/* init routine which must be called */
 void initlogtable() {
 	int i;
 	logtable256[0]=-1;
@@ -217,7 +218,7 @@ void initlogtable() {
 	for(i=2;i<256;i++) logtable256[i]=1+logtable256[i>>1];
 }
 /* find highest set bit of unsigned 32-bit number n and put result in r.
-	 t,tt are temp variables in 32, t in 64 */
+   t,tt are temp variables in 32, t in 64 */
 #define LOG2_32(n,r,t,tt) if((tt=n>>16)) r=(t=tt>>8)?24+logtable256[t]:\
 	16+logtable256[tt]; else r=(t=n>>8)?8+logtable256[t]:logtable256[n];
 #define LOG2_64(n,r,t) if((t=n>>56)) r=56+logtable256[t];\
@@ -229,14 +230,14 @@ void initlogtable() {
 	else if((t=n>>8)) r=8+logtable256[t];\
 	else r=logtable256[n];
 
-/*  need powmod for witness */
-/*  OK UVa 10956 31.08.2011 */
-/*  NOT OK YET spoj (classical) 4942 04.08.2011 */
+/* need powmod for witness */
+/* OK UVa 10956 31.08.2011 */
+/* NOT OK YET spoj (classical) 4942 04.08.2011 */
 uint powmod(uint n,uint k,uint mod) {
 	int i,j;
 	uint v=n,ans=1,t,tt;
 	if(!k) return 1;
-	/*  TODO rewrite this drivel:
+	/* TODO rewrite this drivel:
 	goto start;
 	while(k>0) {
 		v=(ull)v*v%mod;
@@ -245,9 +246,9 @@ uint powmod(uint n,uint k,uint mod) {
 		k>>=1;
 	}
 	*/
-	/*  find topmost set bit */
+	/* find topmost set bit */
 	LOG2_32(k,i,t,tt)
-/*  alternatively:
+/* alternatively:
 	i=31;
 	while(i>=0 && !(k&(1<<i))) --i;
 */
@@ -258,9 +259,9 @@ uint powmod(uint n,uint k,uint mod) {
 	return ans;
 }
 
-/*  subroutine for miller-rabin, only works for odd n */
-/*  OK UVa 10956 04.08.2011 */
-/*  OK spoj (classical) 4942 04.08.2011 */
+/* subroutine for miller-rabin, only works for odd n */
+/* OK UVa 10956 04.08.2011 */
+/* OK spoj (classical) 4942 04.08.2011 */
 int witness(uint n,uint a) {
 	int s=1,r;
 	uint d=(n-1)>>1,x;
@@ -379,18 +380,18 @@ int ullmillerrabin(ull n) {
 		&& ullwitness(n,1795265022);
 }
 
-/*  TODO solovay-strassen */
-/*  TODO lucas-lehmer */
-/*  TODO use algorithm from PRIMES in P */
+/* TODO solovay-strassen */
+/* TODO lucas-lehmer */
+/* TODO use algorithm from PRIMES in P */
 
-/*  factorization */
+/* factorization */
 
-/*  uses prime[] */
-/*  write out the factors to f, the count of each f to fc, the
-		number of factors to fn */
-/*  OK project euler 003 09.06.2011 */
-/*  OK spoj (tutorial) 1392 04.08.2011 */
-/*  OK UVa 11073 04.08.2011 */
+/* uses prime[] */
+/* write out the factors to f, the count of each f to fc, the
+   number of factors to fn */
+/* OK project euler 003 09.06.2011 */
+/* OK spoj (tutorial) 1392 04.08.2011 */
+/* OK UVa 11073 04.08.2011 */
 /* OK UVa 12465 n<=32000 06.06.2012 */
 void factor(ull n,ull *f,int *fc,int *fn) {
 	int i;
@@ -404,13 +405,13 @@ void factor(ull n,ull *f,int *fc,int *fn) {
 	if(n>1) f[*fn]=n,fc[(*fn)++]=1;
 }
 
-/*  warning, only call on composite numbers */
-/*  OK spoj (classical) 4942 04.08.2011 */
-/*  OK UVa 11476 04.08.2011 */
+/* warning, only call on composite numbers */
+/* OK spoj (classical) 4942 04.08.2011 */
+/* OK UVa 11476 04.08.2011 */
 ull pollardrho(ull n,ull c) {
-	/*  number of iterations: 1.177*sqrt(sqrt(n)) is good
-			source http://users.telenet.be/janneli/jan/factorization/pollard_rho.html
-			TODO proof? */
+	/* number of iterations: 1.177*sqrt(sqrt(n)) is good
+	   source http://users.telenet.be/janneli/jan/factorization/pollard_rho.html
+	   TODO proof? */
 	int max=1.179*sqrt(sqrt(n)),range=1,j,k;
 	ull x1=2,x2=4+c,product=1,temp,g;
 	for(j=0;j<max;) {
@@ -439,16 +440,16 @@ ull pollardrho(ull n,ull c) {
 	return 0;
 }
 
-/*  requires primes up to MAXPRIME */
-/*  OK spoj (classical) 4942 0.09 seconds 04.08.2011 */
-/*  OK UVa 11476 9.600 seconds 04.08.2011 */
+/* requires primes up to MAXPRIME */
+/* OK spoj (classical) 4942 0.09 seconds 04.08.2011 */
+/* OK UVa 11476 9.600 seconds 04.08.2011 */
 #define MAXPRIME 1000
 void factormain(ull n,ull *f,int *fc,int *fn,int small) {
 	int i,fc1[2][64],fn1[2],j,k,done;
 	ull v,f1[2][64];
 	*fn=0;
 	if(small) {
-		/*  factor out small factors */
+		/* factor out small factors */
 		for(i=0;prime[i]<MAXPRIME && (ull)prime[i]*prime[i]<=n;i++) if(n%prime[i]==0) {
 			n/=prime[i];
 			f[*fn]=prime[i];
@@ -505,9 +506,9 @@ ll phi(ll n) {
 	return res;
 }
 
-/*  generate all phi up to MAXPHI, needs all prime[]<MAXPHI.
-		this routine is faster than calculating each phi(i) individually */
-/*  OK project euler 214 03.08.2011 */
+/* generate all phi up to MAXPHI, needs all prime[]<MAXPHI.
+   this routine is faster than calculating each phi(i) individually */
+/* OK project euler 214 03.08.2011 */
 #define MAXPHI 40000001
 int phivalues[MAXPHI];
 
@@ -531,10 +532,10 @@ void phigen() {
 	phigenbtr(1,1,0);
 }
 
-/*  inverse phi! */
+/* inverse phi! */
 
-/*  OK UVa 11073 04.08.2011 0.076 seconds */
-/*  OK Project Euler 248 04.08.2011 */
+/* OK UVa 11073 04.08.2011 0.076 seconds */
+/* OK Project Euler 248 04.08.2011 */
 void inversephibtr(ull left,ull build,int p,ull *val,int *n) {
 	ull temp,b;
 	if(left==1) { val[(*n)++]=build; return; }
@@ -568,9 +569,9 @@ ll numdiv(ll n) {
 	return ans;
 }
 
-/*  sum of divisors, requires prime[]<=sqrt(n) */
-/*  OK-ish, n<100001 matches OEIS A000203 03.08.2011 */
-/*  OK spoj (tutorial) 1392 04.08.2011 */
+/* sum of divisors, requires prime[]<=sqrt(n) */
+/* OK-ish, n<100001 matches OEIS A000203 03.08.2011 */
+/* OK spoj (tutorial) 1392 04.08.2011 */
 ll sumdiv(ll n) {
 	ll ans=1,f[64],q;
 	int i,j,fc[64],fn;

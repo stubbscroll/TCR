@@ -3,6 +3,7 @@
 
    construction O(n), query O(log n), update O(log n)
    TODO range update O(log n)
+   TODO a problem that uses range update: gcj r1c c "the great wall"
 
    uses twice as much memory as rmq-log2
 	 to convert to range max query (or other stuff), change lines with (<)

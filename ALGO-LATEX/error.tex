@@ -80,6 +80,7 @@
 \begin{itemize}
 	\item Be careful with indexes! Check that \texttt{i} and \texttt{j} aren't switched. Make sure that the \texttt{cx} in \texttt{x2~=~cx~+~dx[d]} isn't forgotten.
 	\item If the end result is a \texttt{long long}, be sure to let the intermediate variables be \texttt{long long} as well. \texttt{int} multiplication overflow is an extremely common mistake.
+	\item Be careful when mapping 2D coordinates to a flat 1D-array! Given a 2D system of size $x \times y$, the correct mapping of $(i,j)$ is $i+j\cdot x$. Take care to not use $y$. You might even want to use a square array and hardcode the dimensions.
 	\item Please select easy-to-implement solutions with few/no special cases to consider (as long as they will be fast enough to pass).
 	\item Getting different results on the same test case? Is the answer to the first test case correct, while the rest is nonsense? Remember to clean up variables between test cases!
 \end{itemize}
@@ -135,7 +136,7 @@ any $n$ & $O(1)$ & Clever stuff \\
 \hline
 \end{tabular}
 
-If your algorithm has higher constraints than the suggested $n$ in the left column, try to come up with a new idea (or prune!).
+If your algorithm has higher constraints than the suggested $n$ in the left column, try to come up with a new idea (or prune!). The above $n$ assumes very efficient implementations in C. Lower somewhat for other languages.
 
 \subsection{Calculating stuff twice}
 
