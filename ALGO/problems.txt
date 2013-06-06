@@ -284,6 +284,9 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 1.8 degree properties
 1.9 connectivity
 1.9.1 articulation point in graph
+
+- UVa 315 (n<=100)
+
 1.9.2 bridge in graph
 1.10 planarity
 
@@ -291,6 +294,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 1.11 hamilton path/cycle
 
+- UVa 775 (n<=256 but still easy)
 - hacker.org, puzzle Oneofus
 
 1.11.1 shortest hamilton path/cycle aka travelling salesman
