@@ -1,14 +1,26 @@
-/* hamilton path in undirected graph!
+/* hamilton cycle in undirected graph! (beware, problem is np-complete)
    based on "a search procedure for hamilton paths and circuits"
 	 by frank rubin (1973)
 
    usage:
 	 - set n to the number of nodes and set ne=0
-   - add edges (add both ways manually!)
+   - add edges (add both directions manually!)
 	 - run radixsort
 	 - run hamcycle with desired start node, returns 0 if no cycle found,
      otherwise 1
-   - path is in path[]
+   - cycle is in path[] (index 0 to n-1, n-1 is connected to 0)
+
+   recommended usage on harder sparse graphs:
+	 - set maxiter to some suitable value (n*C for a C around 2-5, for instance).
+   - run hamcycle(i) for different i. if no path is found for all i,
+     increase maxiter dramatically (10x or 20x)
+
+   recommended usage on dense graphs:
+	 - remove the expensive stuff in admissible() (maybe even all of it)
+
+   how to use this routine to solve ham-path:
+   - create an extra node with edges to all other nodes. find a cycle,
+     then remove the extra node and we get the ham-path
 */
 
 /* OK UVa 775 2013-06-06 n<=256 0.356 s */
