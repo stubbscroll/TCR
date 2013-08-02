@@ -99,6 +99,7 @@ MATRIX
 - gaussian elimination
 - gaussian elimination mod
 - for square matrix A, sum A^1+A^2+...+A^n (not hard to deduce, though)
+- faster algorithm for solving equation system mod, like block-wiedemann
 
 MISC
 

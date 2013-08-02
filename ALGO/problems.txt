@@ -237,6 +237,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 1.4 strongly connected components
 
+- UVa 11504
 - UVa 11709
 - UVa live 4287 (NWERC 2008 problem B)
 * UVa 125
@@ -245,7 +246,6 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 * UVa 10731
 * UVa 11324
 * UVa 11390
-* UVa 11504
 * UVa 11721
 * UVa 247
 * UVa 11770
@@ -286,8 +286,13 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 1.9.1 articulation point in graph
 
 - UVa 315 (n<=100)
+* UVa 10199 (n<=100)
 
 1.9.2 bridge in graph
+
+* UVa 610
+* UVa 796
+
 1.10 planarity
 
 - UVa 10768
@@ -301,7 +306,12 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 216 (n<=8)
 - UVa 10496 (n<=10)
-- IDI Open 2013 "travelling cellsman" (on a grid)
+- IDI Open 2013 "travelling cellsman" (grid graph)
+* http://cstest.scu.edu.cn/soj/problem.action?id=3310 (n<=30)
+
+1.11.2 longest simple path in general graph
+
+* IPSC 2013 G "grid travel" (grid graph)
 
 1.12 maximum matching in general graph (edmond's blossom algorithm)
 
@@ -335,6 +345,10 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 10369 (prim's won't work here)
 
 1.13.2 minimum spanning tree (minimum arborescence) in directed graph
+
+1.14 diameter of undirected graph
+
+- UVa 1056
 
 2 dynamic programming
 2.1 longest increasing/decreasing/common subsequence
@@ -416,6 +430,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 10271
 - UVa 10304
 - UVa 10306
+- UVa 11450 (knapsack variant)
 - Codeforces 131 Div 1 C
 - Topcoder TCCC05 Qual 5 Hard "NestedRandomness"
 - Topcoder TCO07 Round 4 easy "PolishNotation"
@@ -425,6 +440,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - Topcoder SRM 578 div 1 500 "WolfInZooDivOne"
 - NWERC 2012 B "beer pressure"
 - NWERC 2012 E "edge case"
+- IPSC 2013 K "knee problems"
 * UVa 10003
 * UVa 836 (max subrectangle sum)
 * UVa 10074 (max subrectangle sum)
@@ -919,6 +935,10 @@ unclassified:
 * NCPC 2011 K "Kindergarten"
 * NWERC 2011 D "Piece it together"
 
+8.2.2 3SAT
+
+* IPSC 2013 L "labyrinth" (hard input)
+
 9 binary/boolean tricks
 9.1 snoob/gosper's hack
 
@@ -982,17 +1002,18 @@ or similar if the range of values is small.]
 - NCPC 2011 B "mega-inversions"
 - NCPC 2012 B "bread sorting" (only need to count modulo 2)
 - NCPC 2012 C "cookie selection" (needs ~1.2 GB RAM)
-- Topcoder SRM 234 div 1 850 "HowUnsorted" (+ interval compression or hash map)
+- Topcoder SRM 234 div 1 850 "HowUnsorted" (+ interval compression or map)
 - Topcoder SRM 310 div 1 500 "FloatingMedian"
 - Topcoder Member SRM 482 div 1 250 "LockersDivOne"
 - UVa 501
+- UVa 1428
 - UVa 10015
 - UVa 10057
 - UVa 10909
 - UVa 11525
 - UVa 12086
 - UVa 12365
-- NWERC 2011 problem C "movie collection" (SPOJ 9889)
+- NWERC 2011 problem C "movie collection" (SPOJ 9889, UVa 1513)
 - SPOJ 6256 INVCNT
 * poj 1990
 * poj 1195 (2D)
@@ -1009,14 +1030,13 @@ or similar if the range of values is small.]
 * ioi 2001 "mobiles" (2d)
 * UVa 12232?
 * UVa 10327
-* UVa 10810
 * UVa 11495
 
 12.2 binary tree
 12.2.1 self-balancing binary tree (with insert, delete, order statistics)
        (red-black tree, for example)
 
-- NWERC 2011 problem C "movie collection" (SPOJ 9889)
+- NWERC 2011 problem C "movie collection" (SPOJ 9889, UVa 1513)
 - UVa 501
 - UVa 10909
 - UVa 11525

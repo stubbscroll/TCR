@@ -21,7 +21,8 @@ int primes;
 /* OK project euler 214 2011-08-03 */
 /* OK spoj (classical) 4942 2011-08-04 */
 /* OK spoj (tutorial) 1392 2011-08-04 */
-/* OK UVa 11073 04.08.2011 */
+/* OK UVa 11073 2011-08-04 */
+/* OK UVa 11466 n<=10000000 2013-06-12 */
 /* OK UVa 12101 (NWERC 2006 problem G) 0.004 ms n<10000 2012-08-26 */
 /* OK UVa 12493 n<=46500 2012-08-23 */
 /* OK UVa-live 3639 (NWERC 2006 problem G) 0.004 ms n<10000 2012-08-26 */
@@ -33,11 +34,12 @@ void createsieve() {
 		for(j=i*i;j<MAXP;j+=i) sieve[j]=0;
 }
 
-/* OK project euler 214 03.08.2011 */
-/* OK spoj (classical) 4942 04.08.2011 */
-/* OK spoj (tutorial) 1392 04.08.2011 */
-/* OK UVa 11073 04.08.2011 */
-/* OK UVa 12493 n<=46500 23.08.2012 */
+/* OK project euler 214 2011-08-03 */
+/* OK spoj (classical) 4942 2011-08-04 */
+/* OK spoj (tutorial) 2011-08-04 */
+/* OK UVa 11073 2011-08-04 */
+/* OK UVa 11466 n<=10000000 2013-06-12 */
+/* OK UVa 12493 n<=46500 2012-08-23 */
 void genprimes() {
 	int i;
 	for(primes=i=0;i<MAXP;i++) if(sieve[i]) prime[primes++]=i;
@@ -392,6 +394,7 @@ int ullmillerrabin(ull n) {
 /* OK project euler 003 09.06.2011 */
 /* OK spoj (tutorial) 1392 04.08.2011 */
 /* OK UVa 11073 04.08.2011 */
+/* OK UVa 11466 n<=10000000 2013-06-12 */
 /* OK UVa 12465 n<=32000 06.06.2012 */
 void factor(ull n,ull *f,int *fc,int *fn) {
 	int i;

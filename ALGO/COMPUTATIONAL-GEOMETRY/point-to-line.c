@@ -13,14 +13,15 @@ double pointtoline3d(double x,double y,double z,double x1,double y1,
 	double vx=x2-x1, vy=y2-y1, vz=z2-z1;
 	double wx=x-x1, wy=y-y1, wz=z-z1;
 	double c1=vx*wx+vy*wy+vz*wz;
+	double c2,b,bx,by,bz;
 	/* left endpoint closest? */
 	if(c1<0) return sqrt(distsq3d(x,y,z,x1,y1,z1));
-	double c2=vx*vx+vy*vy+vz*vz;
+	c2=vx*vx+vy*vy+vz*vz;
 	/* right endpoint closest? */
 	if(c2<=c1) return sqrt(distsq3d(x,y,z,x2,y2,z2));
-	double b=c1/c2;
+	b=c1/c2;
 	/* find the actual point in the segment */
-	double bx=x1+vx*b, by=y1+vy*b, bz=z1+vz*b;
+	bx=x1+vx*b, by=y1+vy*b, bz=z1+vz*b;
 	return sqrt(distsq(bx,by,bz,x,y,z));
 }
 
