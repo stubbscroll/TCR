@@ -1,4 +1,4 @@
-/* OK UVa 315, n<100, 0.019 seconds, 2013-08-02 */
+/* OK UVa 315, n<100, 0.019 seconds, 2013-08-05 */
 
 /* find all articulation points in connected undirected graph! */
 /* usage:
@@ -6,7 +6,10 @@
    - countingsort()
    - articulation(some node)
    - there are now acn elements in ac[] containing a list
-     of articulation points (node numbers) */
+     of articulation points (node numbers)
+
+   this is faster, but a bit longer. use the other one in
+   online competitions */
 
 #define MAXV 111
 #define MAXE 99999
@@ -25,7 +28,7 @@ int ac[MAXV];           /* list of articulation points */
 int acn;                /* number of articulation points */
 
 void dfsvisit(int v,int p) {
-	int ch=0,i,w;
+	int i,w;
 	vis[v]=1;
 	ud[v]=ulow[v]=++resn;
 	for(i=gs[v];i<gs[v+1];i++) {
@@ -36,18 +39,24 @@ void dfsvisit(int v,int p) {
 		} else {
 			dfsvisit(w,v);
 			if(ulow[v]>ulow[w]) ulow[v]=ulow[w];
-			if(ulow[w]>=ud[v] && p>-1 && !isartic[v]) isartic[v]=1,ac[acn++]=v;
-			ch++;
+			if(ulow[w]>=ud[v] && !isartic[v]) isartic[v]=1,ac[acn++]=v;
 		}
 	}
-	if(p<0 && ch>1 && !isartic[v]) isartic[v]=1,ac[acn++]=v;
+}
+
+void dfsvisitroot(int v) {
+	int ch=0,i;
+	vis[v]=1;
+	ud[v]=ulow[v]=++resn;
+	for(i=gs[v];i<gs[v+1];i++) if(!vis[to[i]]) dfsvisit(to[i],v),ch++;
+	if(ch>1) isartic[v]=1,ac[acn++]=v;
 }
 
 void articulation(int root) {
 	resn=acn=0;
 	memset(vis,0,n);
 	memset(isartic,0,n);
-	dfsvisit(root,-1);
+	dfsvisitroot(0);
 }
 
 void countingsort() {
