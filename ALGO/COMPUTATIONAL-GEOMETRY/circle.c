@@ -16,7 +16,7 @@ double trirad(double a,double b,double c) {
 /* radius can be negative! */
 /* OK project euler 199 04.08.2011 */
 double enclosedcircle(double r1,double r2,double r3) {
-  return 1/(1/r1 + 1/r2 + 1/r3 + 2*sqrt(1/(r1*r2)+1/(r1*r3)+1/(r2*r3)));
+	return 1/(1/r1 + 1/r2 + 1/r3 + 2*sqrt(1/(r1*r2)+1/(r1*r3)+1/(r2*r3)));
 }
 
 /* subroutine used in circletangent and circlecircleintersection */
@@ -76,17 +76,17 @@ int linesegmentcircleintersect(double x1,double y1,double x2,double y2,double cx
 	double c=fx*fx+fy*fy-r*r;
 	double D=b*b-4*a*c;
 	double t1,t2;
-	/*	no collision */
+	/* no collision */
 	if(D<0) return 0;
-	/*	check if line segment actually intersects or touches */
+	/* check if line segment actually intersects or touches */
 	D=sqrt(D);
 	t1=(-b+D)/(2*a);
 	t2=(-b-D)/(2*a);
 	return (t1>=0 && t1<=1) || (t2>=0 && t2<=1);
 }
 
-/*	check if endless line intersects circle, return 1 if yes, 0 if no */
-/*	OK UVa 12454 0.232 seconds 22.05.2012 */
+/* check if endless line intersects circle, return 1 if yes, 0 if no */
+/* OK UVa 12454 0.232 seconds 22.05.2012 */
 int linecircleintersect(double x1,double y1,double x2,double y2,double cx,double cy,double r) {
 	double dx=x2-x1,dy=y2-y1;
 	double fx=x1-cx,fy=y1-cy;
@@ -111,7 +111,7 @@ double deq(double a,double b) {
 */
 /* OK UVa 453 07.06.2012 */
 int circlecircleintersect(double x0,double y0,double r0,double x1,double y1,double r1,
-		double *x3,double *y3,double *x4,double *y4) {
+                          double *x3,double *y3,double *x4,double *y4) {
 	double d=dist2d(x0,y0,x1,y1),a,h,x2,y2;
 	if(d>r0+r1+EPS) return 0;
 	if(d+EPS<fabs(r0-r1)) return 1;

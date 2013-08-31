@@ -1,5 +1,4 @@
-
-/*	helper routine for insidepoly */
+/* helper routine for insidepoly */
 ll area2xy(int x1,int y1,int x2,int y2,int x3,int y3) {
 	return ((ll)x2-x1)*((ll)y3-y1)-((ll)x3-x1)*((ll)y2-y1);
 }

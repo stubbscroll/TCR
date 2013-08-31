@@ -1,37 +1,40 @@
+/* generate all partitions of various types
+   calculate number of partitions */
+
 #include <stdio.h>
 
-/*  TODO rewrite this for long long */
+typedef unsigned long long ull;
 
-/*mpz_t *table;
-long long maxindex;
-*/
-/*  a(n) = a(n-1)+a(n-2)-a(n-5)-a(n-7)+a(n-12)+a(n-15)-...
-    where i in n-i is from the sequence n(3n-1)/2 with n=+-1, +-2, +-3 ...
-    source: third formula at http://oeis.org/A000041
-    time complexity: O(n^1.5) */
-/*
-int A000041_init(long long max){
-  if(max>=MAX || max<1) return 0;
-  if(0==(table=malloc(sizeof(mpz_t)*((int)max+1)))) return 0;
-  maxindex=max+1;
-  mpz_init_set_si(table[0],1);  
-  for(int i=1;i<=max;i++) {
-    mpz_init_set_si(table[i],0);
-    for(long long j=1,k;;j++) {
-      k=i-j*(3*j-1)/2;
-      if(k<0) break;
-      if(j&1) mpz_add(table[i],table[i],table[k]);
-      else mpz_sub(table[i],table[i],table[k]);
-      k=i-j*(3*j+1)/2;
-      if(k<0) break;
-      if(j&1) mpz_add(table[i],table[i],table[k]);
-      else mpz_sub(table[i],table[i],table[k]);
-    }
-  }
-  return 1;
+/* integer partitions! number of unordered partitions of an integer such that
+   the partitions are integers >= 1 */
+/* precalculate partition numbers up to 2^64 using dp
+   a(n) = a(n-1)+a(n-2)-a(n-5)-a(n-7)+a(n-12)+a(n-15)-...
+   where i in n-i is from the sequence n(3n-1)/2 with n=+-1, +-2, +-3 ...
+   source: third formula at http://oeis.org/A000041
+   time complexity: O(n^1.5) */
+/* WARNING, not tested, but matches OEIS at quick glance */
+
+#define MAXPART 417
+ull part[MAXPART];
+void precalcpart() {
+	int i,j,k;
+	part[0]=1;
+	for(i=1;i<MAXPART;i++) {
+		part[i]=0;
+		for(j=1;;j++) {
+			k=i-j*(3*j-1)/2;
+			if(k<0) break;
+			if(j&1) part[i]+=part[k];
+			else part[i]-=part[k];
+			k=i-j*(3*j+1)/2;
+			if(k<0) break;
+			if(j&1) part[i]+=part[k];
+			else part[i]-=part[k];
+		}
+	}
 }
 
-*/
+/* TODO generate all integer partitions, rank/unrank/next */
 
 /* unordered set partition! division of n elements into sets.
    represented by int* where different int means different sets.
@@ -96,5 +99,8 @@ int main() {
 			printf("\n");
 		}
 	}
+	precalcpart();
+	puts("partition numbers!");
+	for(i=0;i<MAXPART;i++) printf("%d: %I64u\n",i,part[i]);
 	return 0;
 }

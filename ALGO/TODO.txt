@@ -1,3 +1,12 @@
+GET STUFF FROM:
+
+e-maxx:
+http://e-maxx.ru/algo/
+translated:
+http://translate.google.com/translate?sl=auto&tl=en&js=n&prev=_t&hl=no&ie=UTF-8&u=http%3A%2F%2Fe-maxx.ru%2Falgo%2F
+
+topcoder editorials
+
 ARITHMETIC
 
 issquare
@@ -68,7 +77,7 @@ DATA STRUCTURE
 
 GRAPH
 
-- bron-kerbosch (max clique in undirected graph)
+- bron-kerbosch (find all maximal cliques in undirected graph)
 - mincost maxflow with dijkstra (potensials)
 - maxflow with dinic's algorithm
 - bipartite matching with capacity >1 between each pairs such that
@@ -78,8 +87,7 @@ GRAPH
   maxflow-tripartite
 - find bridge in graph: edge that splits graph if removed
   https://secure.wikimedia.org/wikipedia/en/wiki/Bridge_%28graph_theory%29
-- find articulation point in graph; node that splits graph if removed
-  https://secure.wikimedia.org/wikipedia/en/wiki/Articulation_point
+  http://translate.googleusercontent.com/translate_c?depth=1&hl=no&ie=UTF8&prev=_t&rurl=translate.google.com&sl=auto&tl=en&u=http://e-maxx.ru/algo/bridge_searching&usg=ALkJrhgctPzHPadiea0qQgM336GtlaWm-Q
 - dilworth's theorem (minimum number of chains in a DAG or something like that)
 - kth shortest path
 - tarjan's scc
@@ -90,6 +98,9 @@ GRAPH
 - proper polynomial-time mincost maxflow
 - dijkstra running in O(V log V+E) (is it of any use? consider another data
   structure than heap, for example skip-list)
+- online algorithms in general are strongly desired!
+  - find articulation points (fast) in a graph where we add AND remove nodes
+    and edges
 
 MATRIX
 
@@ -100,6 +111,7 @@ MATRIX
 - gaussian elimination mod
 - for square matrix A, sum A^1+A^2+...+A^n (not hard to deduce, though)
 - faster algorithm for solving equation system mod, like block-wiedemann
+- special algorithm for solving equation system mod 2
 
 MISC
 
@@ -124,8 +136,12 @@ NUMERIC
 - robinson's recursion for solving "toeplitz" matrices
 - linear programming (simplex method)
 - linear programming (polynomial time method)
+- quadratic programming (active set)
 - discrete fourier transform O(N^2)
 - fast fourier transform O(N log N)
+- solve equation systems
+- find eigenvalues
+- least squares method
 
 PROBABILITY
 

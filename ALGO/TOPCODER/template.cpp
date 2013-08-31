@@ -1,13 +1,4 @@
-#include <cstdio>
-#include <cmath>
-#include <cstdlib>
-#include <cstring>
-#include <cctype>
-#include <vector>
-#include <string>
-#include <map>
-#include <set>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 struct  {

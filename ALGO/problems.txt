@@ -241,13 +241,14 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 11709
 - UVa live 4287 (NWERC 2008 problem B)
 * UVa 125
+* UVa 247
+* UVa 1227
 * UVa 10319
 * UVa 10510
 * UVa 10731
 * UVa 11324
 * UVa 11390
 * UVa 11721
-* UVa 247
 * UVa 11770
 * UVa 11838
 
@@ -265,6 +266,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 * UVa 925
 * UVa 10259
 * UVa 10305
+* UVa 11060
 * UVa 11174
 * UVa 11680
 * UVa 11724
@@ -287,11 +289,18 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 315 (n<=100)
 * UVa 10199 (n<=100)
+* UVa 10765?
+* SPOJ 3977 POLQUERY (n<=100000, e<=500000)
 
 1.9.2 bridge in graph
 
 * UVa 610
 * UVa 796
+* SPOJ 3977 POLQUERY (n<=100000, e<=500000)
+
+1.9.3 biconnected components
+
+* SPOJ 3977 POLQUERY (n<=100000, e<=500000)
 
 1.10 planarity
 

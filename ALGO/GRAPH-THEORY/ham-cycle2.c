@@ -16,6 +16,8 @@
      a different start node
    - if several runs fail (with 4(n-1)*ln(n-1) iterations) we can
      conclude (but not be fully sure) that the graph has no ham-cycle
+   - the above estimate might be optimistic because of a dubious shortcut
+     taken during implementation
 */
 
 /* OK UVa 775 0.052 seconds, n<=256, 2013-06-07 */

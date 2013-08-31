@@ -1,8 +1,6 @@
-
-
-/*	calculate triangle area given side lengths. this is the
-		slightly more numerically stable version */
-/*	OK UVa 10347 0.008 seconds 26.05.2012 */
+/* calculate triangle area given side lengths. this is the
+   slightly more numerically stable version */
+/* OK UVa 10347 0.008 seconds 26.05.2012 */
 double trianglearea(double a,double b,double c) {
 	return sqrt((a+b-c)*(a-b+c)*(-a+b+c)*(a+b+c))/4;
 }
@@ -24,9 +22,9 @@ int iabs(int a) {
 /* OK UVa 10112 07.05.2012 */
 int pointintri(int x1,int y1,int x2,int y2,int x3,int y3,int x4,int y4) {
 	return iabs(triarea2(x1,y1,x2,y2,x3,y3))==
-		iabs(triarea2(x1,y1,x2,y2,x4,y4))+
-		iabs(triarea2(x2,y2,x3,y3,x4,y4))+
-		iabs(triarea2(x3,y3,x1,y1,x4,y4));
+	       iabs(triarea2(x1,y1,x2,y2,x4,y4))+
+	       iabs(triarea2(x2,y2,x3,y3,x4,y4))+
+	       iabs(triarea2(x3,y3,x1,y1,x4,y4));
 }
 
 /* given triangle vertices, find circumcenter (point having equal distance

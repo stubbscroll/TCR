@@ -1,14 +1,14 @@
 #include <stdlib.h>
 
 /* convex hull! (for integer coordinates)
-	 input points in struct p, the resulting convex hull in struct h
-	 n:number of points in input, hn:number of points in output
-	 algorithm: graham scan, sort O(n log n), convex hull O(n)
-	 note: input array is destroyed, including the value of n!
-	 algorithm seems to be robust against degenerate cases.
-	 source: computational geometry in c
-		
-	 overflow is likely to occur whenever |x|,|y|>10^9.
+   input points in struct p, the resulting convex hull in struct h
+   n:number of points in input, hn:number of points in output
+   algorithm: graham scan, sort O(n log n), convex hull O(n)
+   note: input array is destroyed, including the value of n!
+   algorithm seems to be robust against degenerate cases.
+   source: computational geometry in c
+
+   overflow is likely to occur whenever |x|,|y|>10^9.
 */
 
 #define MAX 100
