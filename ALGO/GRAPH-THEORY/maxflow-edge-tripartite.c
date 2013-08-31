@@ -8,7 +8,7 @@
    graphs.
 
    recommended domains:
-	 - tripartite matching where each center node has rather few possibilities
+   - tripartite matching where each center node has rather few possibilities
      on both sides
    - "arbitrary cap bipartite matching" where the left side can be chosen
      once
@@ -17,7 +17,7 @@
    - derermine if edges should be sort reversed, and if we want to force
      all nodes adjacent to the sink to be matched. change the code
      accordingly
-	 - set MAXV,MAXE to guaranteed maximum values for the problem (MAXE
+   - set MAXV,MAXE to guaranteed maximum values for the problem (MAXE
      must include back edges!)
    - set n to the desided number of nodes, set ne=0
    - define edges either by putting them into from[],to[] manually
@@ -72,7 +72,7 @@ int maxflow(int source,int sink) {
 			}
 		}
 		/* if all nodes adjacent to the sink must be matched: use break
-			 if not: use continue */
+		   if not: use continue */
 		break;
 /*		continue; */
 	out:
@@ -109,7 +109,7 @@ void radixsort() {
 	for(i=1;i<n;i++) gs[i]+=gs[i-1];
 	gs[n]=ne;
 	for(i=ne-1;i>=0;i--) {
-	/* use the next line for reversing to[] */
+	/* use the next line instead of the previous for reversing to[] */
 /*	for(i=0;i<ne;i++) {*/
 		j=--gs[newfrom[i]];
 		to[j]=newto[i];
@@ -123,6 +123,6 @@ void inverseedges() {
 	int i;
 	memcpy(starts,gs,sizeof(int)*(n+1));
 	for(i=0;i<ne;i++) inv[i]=starts[to[i]]++;
-	/* use the next line for reversing to[] */
+	/* use the next line instead of the previous for reversing to[] */
 /*	for(i=ne-1;i>=0;i--) inv[i]=starts[to[i]]++;*/
 }

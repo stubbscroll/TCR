@@ -39,7 +39,7 @@
 \subsection{Corner cases, ``gotcha'' elements}
 
 \begin{itemize}
-	\item Are you handling all corner cases? Try the graph with no nodes, graph with one node, graph with no edges, empty set, one-element set, and other kinds of cases.
+	\item Are you handling all corner cases? Try the minimum/maximum inputs, graph with no nodes, graph with one node, graph with no edges, empty set, one-element set, and other kinds of cases.
 	\item Don't obey restrictions not mentioned in the problem statement. Move out of the grid unless prohibited!
 	\item Check if parity or other properties make the problem much simpler.
 	\item Beware the old ``input trap''. If you are given $a$ and $b$ and are asked to do something with this range, be sure to ensure that $a\leq b$ by swapping.
@@ -177,7 +177,19 @@ Here are some algorithms to try.
 	\item Sweep line/interval compression
 	\item Meet-in-the-middle
 	\item Binary tree data structure thingy
+	\item etc.
 \end{itemize}
+
+Try to formulate the problem in terms of:
+\begin{itemize}
+	\item Graph theory
+	\item System of equations
+	\item State space traversal (try to obtain a DAG and run DP)
+	\item Linear programming
+	\item etc.
+\end{itemize}
+
+Try to combine algorithms by assuming that some variables are known, and try to find ``inner'' and ``outer'' algorithms for each ``half''. Typical ``outer'' algorithms are binary search, sorting and trying all combinations of some kind.
 
 \section{Theorems and stuff}
 
@@ -206,6 +218,7 @@ Here are some algorithms to try.
 
 \begin{itemize}
 	\item If the graph is undirected, don't even think about finding strongly connected components.
+	\item Max-clique on $G$ is equivalent to max independent set on the complement of $G$.
 \end{itemize}
 
 \end{document}

@@ -77,7 +77,6 @@ DATA STRUCTURE
 
 GRAPH
 
-- bron-kerbosch (find all maximal cliques in undirected graph)
 - mincost maxflow with dijkstra (potensials)
 - maxflow with dinic's algorithm
 - bipartite matching with capacity >1 between each pairs such that
@@ -88,6 +87,8 @@ GRAPH
 - find bridge in graph: edge that splits graph if removed
   https://secure.wikimedia.org/wikipedia/en/wiki/Bridge_%28graph_theory%29
   http://translate.googleusercontent.com/translate_c?depth=1&hl=no&ie=UTF8&prev=_t&rurl=translate.google.com&sl=auto&tl=en&u=http://e-maxx.ru/algo/bridge_searching&usg=ALkJrhgctPzHPadiea0qQgM336GtlaWm-Q
+- find all k-articulation points or k-bridges: all k-tuples of (nodes, edges)
+  that disconnects the graph when removed
 - dilworth's theorem (minimum number of chains in a DAG or something like that)
 - kth shortest path
 - tarjan's scc
@@ -98,6 +99,7 @@ GRAPH
 - proper polynomial-time mincost maxflow
 - dijkstra running in O(V log V+E) (is it of any use? consider another data
   structure than heap, for example skip-list)
+- bron-kerbosch for max-clique: add vertex ordering
 - online algorithms in general are strongly desired!
   - find articulation points (fast) in a graph where we add AND remove nodes
     and edges
