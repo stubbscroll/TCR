@@ -9,6 +9,8 @@
    special version with bitmasks:
    - graph is in array of bitmasks g
    - graph size n<=64
+   usage: call bronkerboschbitpivot(0,mask,0); bit i=1 if i-th node is in
+	        graph, usually mask=(1ULL<<n)-1
 */
 /* OK topcoder SRM 571 div 1-500 n<=50 0.059 s 2013-08-31 */
 /* OK topcoder SRM 589 div 1-450 n<=50 0.011 s 2013-08-31 */
