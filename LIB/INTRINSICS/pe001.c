@@ -20,9 +20,9 @@ typedef long long ll;
 #define N 1000000000
 
 double gettime() {
-  struct timeval t;
-  gettimeofday(&t,NULL);
-  return t.tv_sec+t.tv_usec/1000000.;
+	struct timeval t;
+	gettimeofday(&t,NULL);
+	return t.tv_sec+t.tv_usec/1000000.;
 }
 
 /* naive C solution using counters modulo 3 and 5 to make it more similar to
@@ -82,7 +82,7 @@ ll pe001intr() {
 		/* convert to 64-bits, results in 0,1,2,3 */
 		res3=_mm256_permutevar8x32_epi32(res3,pix);
 		/* actually, it's faster to add the 4 values we have here than to proceed
-		   with shifting, but what's the fun in that? */
+		   with shifting, but where's the fun in that? */
 		/* add shifted version, results in 0,1 */
 		res3=_mm256_add_epi64(res3,_mm256_srli_si256(res3,8));
 		/* only two values left, add them */
