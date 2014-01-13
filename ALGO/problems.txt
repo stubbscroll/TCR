@@ -362,6 +362,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 1.15 maximum/minimum sets of various properties
 
 1.15.1 maximum clique (subset of nodes such that induced subgraph is complete)
+       maximum independent set (set of nodes having no edges in common), equivalent
 
 - Topcoder SRM 571 div 1 500 "MagicMolecule"
 - Topcoder SRM 589 div 1 450 "GearsDiv1"
@@ -369,8 +370,6 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 1.15.2 minimum vertex cover (set of nodes such that all edges are incident to node from set)
 
 1.15.3 minimum edge cover (set of edges such that all vertices are incident to edge from set)
-
-1.15.4 maximum independent set (set of nodes having no edges in common)
 
 2 dynamic programming
 2.1 longest increasing/decreasing/common subsequence
@@ -504,6 +503,9 @@ unclassified:
 * UVa-live 3794
 * UVa-live 3902
 * UVa-live 4141
+
+even more dp problems (from spoj):
+http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 
 3 math
 3.1 number theory

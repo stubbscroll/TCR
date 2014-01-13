@@ -24,6 +24,7 @@
 /* OK UVa 12086 n<=200000, 0.288 seconds, 15.06.2012 */
 /* OK UVa 12365 n<=100000, 0.488 seconds, 12.11.2011 */
 /* OK NCPC 2011 problem B Mega-inversions 01.10.2011 */
+/* OK NCPC 2012 problem C Cookie selection n<=300000002 2013-09-28 */
 /* OK SPOJ 6256 INVCNT, n<=10000000, 1.72 seconds, 2013-03-18 */
 /* OK SPOJ 9889 (NWERC 2011 problem C movie collection) n<=200000 0.95 seconds 15.01.2012 */
 int tree[100001],n;   /* warning, array must be of size n+1 */
