@@ -234,7 +234,7 @@ int main() {
 		return 1;
 	}   
 	
-	// Create the OpenCL kernel
+	/* Create the OpenCL kernel */
 	printf("Calling clCreateKernel\n");
 	cl_kernel symm = clCreateKernel(myprogram, "symm", &err);
 	if (err != CL_SUCCESS) {
@@ -242,7 +242,7 @@ int main() {
 		return 1;
 	}
 
-	/*Set the kernel arguments*/
+	/* Set the kernel arguments*/
 	printf("Calling clSetKernelArg\n");
 	err =  clSetKernelArg(symm, 0, sizeof(cl_mem), (void*)&d_C);
 	err |= clSetKernelArg(symm, 1, sizeof(cl_int), (void*)&dM);
@@ -250,7 +250,7 @@ int main() {
 	err |= clSetKernelArg(symm, 3, sizeof(cl_mem), (void*)&d_A);
 	err |= clSetKernelArg(symm, 4, sizeof(cl_mem), (void*)&d_B);
 
-	//Run the kernel
+	/* Run the kernel */
 	printf("Calling clEnqueueNDRangeKernel\n");
 	err = clEnqueueNDRangeKernel(myqueue, symm, 2, NULL, globalws, localws, 0, NULL, NULL);
 	if (err != CL_SUCCESS) {
@@ -301,14 +301,10 @@ int main() {
 	/* Clean up and go home */
 	free (ha), free (hb), free(hc), free(hv), free(platforms), free(devices);
 
-	/********** SUBTASK5: Free the device memory objects ************************/
-	//Insert code here
-	
 	clReleaseMemObject(d_A);
 	clReleaseMemObject(d_B);
 	clReleaseMemObject(d_C);
 	
-	/********** SUBTASK5 END *************************************************/
 	clReleaseKernel(symm);
 	clReleaseProgram(myprogram);
 	clReleaseCommandQueue(myqueue);

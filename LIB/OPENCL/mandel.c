@@ -2,9 +2,9 @@
 
 /* usage:
    mandel [n]
-	 no parameter: no image saved
-	 n=0: save image from host calculations
-	 n=1: save image from device calculations
+   no parameter: no image saved
+   n=0: save image from host calculations
+   n=1: save image from device calculations
 */
 
 /* i got compile errors when i used double in the kernel, so this version uses float */
@@ -13,7 +13,7 @@
 #include <string.h>
 #include <math.h>
 #include <sys/time.h>
-#include <cl/cl.h>
+#include <CL/cl.h>
 
 typedef unsigned char uchar;
 
@@ -25,7 +25,7 @@ typedef unsigned char uchar;
 
 /* local work sizes */
 /* warning, must not exceed capabilities of device
-   - on radeon hd 6850, x*y<=1024 (so 16*16 is ok, 32*32 is not ok, 16*32 somehow isn't ok)
+   - on radeon hd 6850, x*y<=1024 (so 16*16 is ok, somehow 32*32 and 16*32 aren't ok)
    - on radeon mobility hd 4570, x*y<=128 (so 8*8 is ok, 8*16 is ok, 16*16 is not ok)
 */
 /* warning, these values should not be too far away from the device's capability as possible,

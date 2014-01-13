@@ -3,11 +3,11 @@
    implementation. also, the division into work groups is messed up, i made
    this program before i understood how it works.
    also, no bitmasks make me sad.
-	 
-	 apparently, this example is very wrong as it seems to run on the cpu
-	 instead of the gpu. */
 
-#include <cl/cl.h>
+   apparently, this example is very wrong as it seems to run on the cpu
+   instead of the gpu. */
+
+#include <CL/cl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -80,7 +80,7 @@ void init() {
 	}
 	if(i==n) id=ids[0];
 	free(ids);
-	/*  get context stuff */
+	/* get context stuff */
 	cl_context_properties cps[3]={CL_CONTEXT_PLATFORM,(cl_context_properties)id,0};
 	context=clCreateContextFromType(cps,CL_DEVICE_TYPE_CPU,NULL,NULL,&status);
 	if(CL_SUCCESS!=status) error("couldn't create context");
@@ -90,12 +90,12 @@ void init() {
 	if(NULL==(devices=malloc(n))) error("out of memory");
 	if(CL_SUCCESS!=clGetContextInfo(context,CL_CONTEXT_DEVICES,n,devices,NULL))
 		error("error getting context info 2");
-	/*  create opencl command queue */
+	/* create opencl command queue */
 	cmdq=clCreateCommandQueue(context,devices[0],0,&status);
 	if(CL_SUCCESS!=status) error("error creating command queue");
-	/*  create memory buffers */
+	/* create memory buffers */
 	initmem();
-	/*  copy contents of in to inbuffer */
+	/* copy contents of in to inbuffer */
 	inbuffer=clCreateBuffer(context,CL_MEM_READ_WRITE|CL_MEM_USE_HOST_PTR,
 		MAXP,in,&status);
 	if(CL_SUCCESS!=status) {
@@ -167,7 +167,7 @@ void calculate() {
 		/* enqueue kernel run call */
 		if(CL_SUCCESS!=clEnqueueNDRangeKernel(cmdq,kernel,3,NULL,globalthreads,
 			0,0,NULL,&events[0])) error("error enqueueing kernel");
-		/*  wait for the kernel call to finish */
+		/* wait for the kernel call to finish */
 		if(CL_SUCCESS!=clWaitForEvents(1,&events[0])) error("error waiting");
 		if(CL_SUCCESS!=clReleaseEvent(events[0])) error("error releasing");
 		/* enqueue readbuffer */

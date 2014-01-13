@@ -1,6 +1,6 @@
 /* super duper minimal opencl example (no error checking):
    write global id to array.
-	 ripped from AMD and reformatted slightly */
+   ripped from AMD and reformatted slightly */
 
 #include <stdio.h>
 #include <CL/cl.h>

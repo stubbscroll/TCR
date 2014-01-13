@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <cl/cl.h>
+#include <CL/cl.h>
 
 #if defined(__MINGW32__) || defined(__MINGW64__)
 	#define LL "%I64d"
@@ -65,8 +65,8 @@ const char *errorstr(cl_int err) {
 }
 
 void error(char *s) {
-  puts(s);
-  exit(1);
+	puts(s);
+	exit(1);
 }
 
 void clerror(char *s,cl_int err) {
@@ -76,37 +76,37 @@ void clerror(char *s,cl_int err) {
 
 #define MAXCHAR 1024
 void platforms() {
-  cl_uint n,m,z,dim;
-  cl_platform_id *id;
+	cl_uint n,m,z,dim;
+	cl_platform_id *id;
 	cl_device_id *dev;
 	cl_device_type dt;
 	cl_int err;
 	cl_ulong ul;
 	cl_device_mem_cache_type cache;
-  int i,j,k;
+	int i,j,k;
 	size_t max;
 	size_t maks[100];
-  static char s[MAXCHAR];
-  if(CL_SUCCESS!=clGetPlatformIDs(0,NULL,&n)) error("error getting platforms 1");
-  if(NULL==(id=malloc(sizeof(cl_platform_id)*n))) error("out of memory");
-  if(CL_SUCCESS!=clGetPlatformIDs(n,id,NULL)) error("error getting platforms 2");
-  puts("list of opencl platforms on this machine:");
-  for(i=0;i<n;i++) {
-    printf("platform %d:\n",i);
-    if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_PROFILE,MAXCHAR,s,NULL))
-      error("error getting platform 3");
+	static char s[MAXCHAR];
+	if(CL_SUCCESS!=clGetPlatformIDs(0,NULL,&n)) error("error getting platforms 1");
+	if(NULL==(id=malloc(sizeof(cl_platform_id)*n))) error("out of memory");
+	if(CL_SUCCESS!=clGetPlatformIDs(n,id,NULL)) error("error getting platforms 2");
+	puts("list of opencl platforms on this machine:");
+	for(i=0;i<n;i++) {
+		printf("platform %d:\n",i);
+		if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_PROFILE,MAXCHAR,s,NULL))
+			error("error getting platform 3");
 		printf("  profile %s\n",s);
-    if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_VERSION,MAXCHAR,s,NULL))
-      error("error getting platform 3");
+		if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_VERSION,MAXCHAR,s,NULL))
+			error("error getting platform 3");
 		printf("  version %s\n",s);
-    if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_NAME,MAXCHAR,s,NULL))
-      error("error getting platform 3");
+		if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_NAME,MAXCHAR,s,NULL))
+			error("error getting platform 3");
 		printf("  name    %s\n",s);
-    if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_VENDOR,MAXCHAR,s,NULL))
-      error("error getting platform 3");
+		if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_VENDOR,MAXCHAR,s,NULL))
+			error("error getting platform 3");
 		printf("  vendor  %s\n",s);
-    if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_EXTENSIONS,MAXCHAR,s,NULL))
-      error("error getting platform 3");
+		if(CL_SUCCESS!=clGetPlatformInfo(id[i],CL_PLATFORM_EXTENSIONS,MAXCHAR,s,NULL))
+			error("error getting platform 3");
 		printf("  ext     %s\n",s);
 		if(CL_SUCCESS!=clGetDeviceIDs(id[i],CL_DEVICE_TYPE_ALL,0,NULL,&m))
 			error("error getting device id");
@@ -164,11 +164,11 @@ void platforms() {
 			printf("    device extensions %s\n",s);
 		}
 		free(dev);
-  }
-  free(id);
+	}
+	free(id);
 }
 
 int main() {
-  platforms();
-  return 0;
+	platforms();
+	return 0;
 }

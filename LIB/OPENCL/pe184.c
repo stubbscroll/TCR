@@ -16,7 +16,7 @@
 #include <string.h>
 #include <math.h>
 #include <sys/time.h>
-#include <cl/cl.h>
+#include <CL/cl.h>
 
 #define PLATFORMID 0
 #define DEVICEID 0
