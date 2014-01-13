@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{article}
+|\documentclass[a4paper,11pt]{article}
 \usepackage[T1]{fontenc}																					% nødvendig for fonter
 \usepackage[latin1]{inputenc}																			% nødvendig for æøå
 \usepackage{amsmath,amsfonts,amssymb,yfonts,mathrsfs,gensymb}			% nødvendig for matematiske symboler
@@ -61,6 +61,7 @@
 	\item In BFS, return a distance of 0 if the start node is a goal node!
 	\item In Floyd-Warshall, use indexes $k,i,j$ in this order when checking if it is faster to go from $i$ to $j$ via $k$.
 	\item Beware of multiple edges between the same pair of nodes!
+	\item When the state consists of (node $ \times $ node) (for example Holey Road, Eco-driving) and packing them into one int, make sure the arrays are large enough.
 \end{itemize}
 
 \subsection{Number theory}
@@ -83,6 +84,7 @@
 	\item Be careful when mapping 2D coordinates to a flat 1D-array! Given a 2D system of size $x \times y$, the correct mapping of $(i,j)$ is $i+j\cdot x$. Take care to not use $y$. You might even want to use a square array and hardcode the dimensions.
 	\item Please select easy-to-implement solutions with few/no special cases to consider (as long as they will be fast enough to pass).
 	\item Getting different results on the same test case? Is the answer to the first test case correct, while the rest is nonsense? Remember to clean up variables between test cases!
+	\item Remove debug output before submitting!
 \end{itemize}
 
 \section{Help! I got ``Time limit exceeded!'' }
