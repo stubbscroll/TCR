@@ -205,7 +205,7 @@ int main(int argc,char **argv) {
 	unsigned char *buffer;
 	size_t localws[2];
 	size_t globalws[2];
-	float fxleft,fyupper,fstep;
+	double fxleft,fyupper,fstep;
 
 	step=(xright-xleft)/XSIZE;
 	yupper=ycenter+(step*YSIZE)/2;
@@ -259,9 +259,9 @@ int main(int argc,char **argv) {
 	/* create kernel arguments */
 	fxleft=xleft; fyupper=yupper; fstep=step;
 	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,0,sizeof(cl_mem),&devmem))) clerror("error setting kernel argument 0",err);
-	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,1,sizeof(cl_float),&fxleft))) clerror("error setting kernel argument 1",err);
-	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,2,sizeof(cl_float),&fyupper))) clerror("error setting kernel argument 2",err);
-	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,3,sizeof(cl_float),&fstep))) clerror("error setting kernel argument 3",err);
+	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,1,sizeof(cl_double),&fxleft))) clerror("error setting kernel argument 1",err);
+	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,2,sizeof(cl_double),&fyupper))) clerror("error setting kernel argument 2",err);
+	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,3,sizeof(cl_double),&fstep))) clerror("error setting kernel argument 3",err);
 	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,4,sizeof(cl_int),&xsize))) clerror("error setting kernel argument 4",err);
 	if(CL_SUCCESS!=(err=clSetKernelArg(kernel,5,sizeof(cl_int),&ysize))) clerror("error setting kernel argument 5",err);
 

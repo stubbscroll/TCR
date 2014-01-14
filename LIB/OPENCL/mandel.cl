@@ -1,7 +1,7 @@
-__kernel void mandel(__global int *a,float xleft,float yupper,float step,int XSIZE,int YSIZE) {
+__kernel void mandel(__global int *a,double xleft,double yupper,double step,int XSIZE,int YSIZE) {
   const int i=get_global_id(0);
   const int j=get_global_id(1);
-	float cx,cy,zx,zy,tempx;
+	double cx,cy,zx,zy,tempx;
 	int iter=0;
 	if(i<XSIZE && j<YSIZE) {
 		zx=cx = (xleft + step*i);
