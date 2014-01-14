@@ -1,6 +1,12 @@
-handy reference: http://software.intel.com/sites/landingpage/IntrinsicsGuide/
+this directory contains random programs i've written that uses intrinsics
+(sse etc).
 
+there's too little example code out there, so this is my attempt at fixing it.
+==============================================================================
+handy reference: http://software.intel.com/sites/landingpage/IntrinsicsGuide/
+==============================================================================
 summary of header files
+
 including a specific file automatically includes all previous extensions
 
 <mmintrin.h>  MMX
@@ -18,8 +24,8 @@ including a specific file automatically includes all previous extensions
 <x86intrin.h> everything (from both intel and amd)
 
 warning, there are no vectorized integer division or modulo instructions
-
-quick overview:
+==============================================================================
+quick overview of what's new in each instruction set:
 
 MMX:
 - 8 registers, MM0-MM7 (aliased with x87 FPU stack registers)
@@ -45,7 +51,7 @@ SSE4.1:
 SSE4.2:
 
 AVX:
-- new registers
+- new registers YMM0-YMMx (for some x (15? 31?))
 - packed 256-bit instructions
 - 128-bit permute
 - 256-bit movemask for float/double
