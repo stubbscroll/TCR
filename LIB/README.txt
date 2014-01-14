@@ -1,13 +1,8 @@
-here be single (and single-ish) file programs made by other people. none
-of these should require installation.
+here be single (and single-ish) file programs using third-party libraries.
+none of these should require installation (except for the library).
 
-works in mingw64:
+most of these work on my mingw64 install, except:
+GMP (c++ example)
+SDLMIXER (not mod support due to missing 64-bit mikmod)
+SDLIMAGE
 
-FFTW
-GMP (c++ example doesn't work on w64, missing header)
-INTRINSICS
-OPENMP
-PTHREAD
-SDL
-SDLMIXER (64-bit version doesn't support mod, no mikmod)
-SDLNET (it seems connection doesn't happen most of the time, maybe it's just a bad example program)
