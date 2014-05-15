@@ -1,0 +1,37 @@
+my attempt at classifying algorithms and domains
+
+graph theory
+ network flow
+  max flow
+   minimum cut
+   mincost maxflow
+   maximum cardinality matching in bipartite graph
+    max/min weight matching in bipartite graph (aka hungarian algorithm)
+    minimum vertex cover in bipartite graph (aka könig's theorem)
+   maximum matching in "tripartite graph"
+ shortest path
+  one-to-all shortest-path
+   one-to-all shortest-path, no negative costs (dijkstra)
+    one-to-all shortest-path, costs on nodes, no negative costs
+   one-to-all shortest-path, negative costs
+  all-pairs shortest path (floyd-warshall)
+ graph search
+  uninformed search
+   breadth-first search
+    modified breadth-first search, costs can be 0 or 1
+   depth-first search
+   flood fill
+  bidirectional search
+  informed search (A*)
+ strongly connected components
+ topological sort
+ steiner tree
+  discrete steiner tree
+ eulerian path/cycle
+ find articulation point in graph
+ find bridge in graph
+ planarity
+ hamilton path/cycle
+  longest simple path in general graph
+ maximum matching in general graph (edmond's blossom algorithm)
+ 

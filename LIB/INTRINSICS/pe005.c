@@ -1,4 +1,4 @@
-/* rather silly solution to project euler 1 using intrinsics.
+/* rather silly solution to project euler 5 using intrinsics.
    this program requires AVX2 (haswell and newer) and will die horribly if run
    on a non-conforming cpu. */
 

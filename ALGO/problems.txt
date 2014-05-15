@@ -12,18 +12,18 @@ part it's not listed.
 
 list of abbreviations i've used and their associated online judges:
 
-UVa http://uva.onlinejudge.org/
-UVa-live (live-archive) http://icpcarchive.ecs.baylor.edu/ http://livearchive.onlinejudge.org/
-SPOJ http://www.spoj.pl/
-Topcoder http://www.topcoder.com/tc
-POJ http://poj.org/
-Project Euler http://projecteuler.net/
-IPSC http://ipsc.ksp.sk/
-Codeforces http://codeforces.com/
+UVa                http://uva.onlinejudge.org/
+UVa-live archive   http://icpcarchive.ecs.baylor.edu/ or http://livearchive.onlinejudge.org/
+SPOJ               http://www.spoj.pl/
+Topcoder           http://www.topcoder.com/tc
+POJ                http://poj.org/
+Project Euler      http://projecteuler.net/
+IPSC               http://ipsc.ksp.sk/
+Codeforces         http://codeforces.com/
 USACO competitions http://ace.delos.com/contestgate
-USACO training http://ace.delos.com/usacogate
-codechef http://www.codechef.com/
-Timus http://acm.timus.ru/
+USACO training     http://ace.delos.com/usacogate
+codechef           http://www.codechef.com/
+Timus              http://acm.timus.ru/
 
 (often problems from regionals and subregionals are listed directly without an
 online judge ID. regionals are at live-archive, while subregionals and other
@@ -802,6 +802,11 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 
 - UVa 12517 (digit sum in a range)
 
+3.8.5 powers
+3.8.5.1 sum of powers, sum_i x^i
+
+- IPSC 2005 problem B2 (bottom coder)
+
 3.9 numerical optimization
 3.9.1 unconstrained optimization
 3.9.2 constrained optimization
@@ -958,6 +963,7 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 - NWERC 2012 I "Idol"
 * NCPC 2011 K "Kindergarten"
 * NWERC 2011 D "Piece it together"
+* Asia-Changchun 2012 B (Uva-live 6067) "Bit magic"
 
 8.2.2 3SAT
 
@@ -979,7 +985,9 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 10.1.1 count inversions using merge sort
 
 [is's also possible to count the number of inversions using fenwick tree
-or similar if the range of values is small.]
+or similar if the range of values is small. While it is possible to use
+this technique even when the range is large (for instance, by using a map),
+it is not recommended because it is much slower.]
 
 - Topcoder SRM 234 div 1 850 "HowUnsorted"
 - UVa 10810
@@ -1025,7 +1033,7 @@ or similar if the range of values is small.]
 - NCPC 2010 I (2D tree)
 - NCPC 2011 B "mega-inversions"
 - NCPC 2012 B "bread sorting" (only need to count modulo 2)
-- NCPC 2012 C "cookie selection" (needs ~1.2 GB RAM)
+- NCPC 2012 C "cookie selection" (needs ~1.2 GB RAM if done uncompressed)
 - Topcoder SRM 234 div 1 850 "HowUnsorted" (+ interval compression or map)
 - Topcoder SRM 310 div 1 500 "FloatingMedian"
 - Topcoder Member SRM 482 div 1 250 "LockersDivOne"
