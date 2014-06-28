@@ -75,6 +75,9 @@ DATA STRUCTURE
 - treap
 - b-tree?
 
+GAME THEORY
+- retrograde analysis
+
 GRAPH
 
 - mincost maxflow with dijkstra (potensials)
@@ -103,6 +106,8 @@ GRAPH
 - online algorithms in general are strongly desired!
   - find articulation points (fast) in a graph where we add AND remove nodes
     and edges
+- min-cost bipartite matching (see editorial to ipsc 2005 f "find the right
+  words")
 
 MATRIX
 
@@ -131,6 +136,8 @@ NUMBER-THEORY
   quadratic sieve, number field sieve)
 - number-theoretic transform
 - cube root modulo prime http://stackoverflow.com/questions/6752374/cube-root-modulo-p-how-do-i-do-this
+- chinese remainder theorem when numbers aren't pairwise coprime
+  (see my solution to ipsc 2005 g "gears in action", hard input)
 
 NUMERIC
 
@@ -162,7 +169,11 @@ STRING
 - aho-corasick
 - given a string, calculate transition table[a][b]:
   if we have matched to pos a and see char b, transition to position in table
-- suffix array
+- suffix array:
+  for instance manber, myers O(n log n) time, O(n) memory
+  kasai, lee et al O(n) lcp
+  also, linear-time construction
+  also, O(n log^2 n) if it's short and simple (see cosmin.ro)
 
 OTHER
 

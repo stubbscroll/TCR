@@ -14,7 +14,7 @@
      once
 
    usage:
-   - derermine if edges should be sort reversed, and if we want to force
+   - determine if edges should be sort reversed, and if we want to force
      all nodes adjacent to the sink to be matched. change the code
      accordingly
    - set MAXV,MAXE to guaranteed maximum values for the problem (MAXE

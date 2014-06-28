@@ -3,16 +3,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*  given an array of values, "compress" the array by sorting it
-    and keeping only unique values. also, provide a way to get the
-    index in the new array, given an old value */
+/* given an array of values, "compress" the array by sorting it
+   and keeping only unique values. also, provide a way to get the
+   index in the new array, given an old value */
 
-/*  compare two integers (quicksort) */
+/* compare two integers (quicksort) */
 int compi(const void *A,const void *B) {
-  int *a=(int *)A,*b=(int *)B;
-  if(*a<*b) return -1;
-  if(*a>*b) return 1;
-  return 0;
+	int *a=(int *)A,*b=(int *)B;
+	if(*a<*b) return -1;
+	if(*a>*b) return 1;
+	return 0;
 }
 
 /* given a number in the original array, return its index in the
@@ -24,13 +24,13 @@ int compi(const void *A,const void *B) {
 /* NB, caller must take care when element doesn't exist. */
 /* OK POJ 2637 (NCPC 2005 F "worst weather ever") 04.09.2011 */
 int getindex(int val,int *a,int n) {
-  int lo=0,hi=n,mid;
-  while(lo!=hi) {
-    mid=lo+(hi-lo)/2;
-    if(a[mid]<val) lo=mid+1;
-    else hi=mid;
-  }
-  return lo;
+	int lo=0,hi=n,mid;
+	while(lo!=hi) {
+		mid=lo+(hi-lo)/2;
+		if(a[mid]<val) lo=mid+1;
+		else hi=mid;
+	}
+	return lo;
 }
 
 /* interval compression (sweepline) */
@@ -40,8 +40,8 @@ int getindex(int val,int *a,int n) {
 /* OK SPOJ 3465 DRIVE (NEERC 2008 D) 16.08.2011 */
 /* OK POJ 2637 (NCPC 2005 F "worst weather ever") 04.09.2011 */
 int intervalcompress(int *a,int n) {
-  int nn=1,i;
-  qsort(a,n,sizeof(int),compi);
-  for(i=1;i<n;i++) if(a[i]>a[i-1]) a[nn++]=a[i];
-  return nn;
+	int nn=1,i;
+	qsort(a,n,sizeof(int),compi);
+	for(i=1;i<n;i++) if(a[i]>a[i-1]) a[nn++]=a[i];
+	return nn;
 }

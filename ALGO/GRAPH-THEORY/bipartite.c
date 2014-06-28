@@ -15,35 +15,38 @@
    runtime: O(nm)
 */
 #define MAXV 150
-char g[MAXV][MAXV];         /*	[i][j]: edge between i on the left and j on the right */
-int n,m;                    /*	left, right */
-int mate[MAXV];             /*	mate for right node (or -1 if unmatched) */
+char g[MAXV][MAXV];         /* [i][j]: edge between i on the left and j on the right */
+int n,m;                    /* left, right */
+int mate[MAXV];             /* mate for right node (or -1 if unmatched) */
 int parent[2*MAXV];
 
-/* OK Topcoder SRM 200 div 1 1000, 4 ms worst case, n=m=176, 07.08.2011 */
-/* OK Topcoder SRM 236 div 1 1000, 12 ms worst case, n,m<=100, 07.08.2011 (+bfs, binary search) */
-/* OK Topcoder SRM 303 div 1 500, 5 ms worst case, n,m<=338, 07.08.2011 */
-/* OK Topcoder SRM 477 div 1 500, 8 ms worst case, n+m<=200, 07.08.2011 */
-/* OK Topcoder SRM 549 div 1 250, 4 ms worst case, n+m<=100, 09.07.2012 */
-/* OK Topcoder TCO 2003 semifinals 4 1050, 7 ms worst case, n,m<=300, 07.08.2011 */
-/* OK UVa 259 0.020 seconds, n,m<=10, 13.08.2011 (small constraints, backtracking is faster */
-/* OK UVa 663 0.004 seconds, n=m<=26, 07.08.2011 */
-/* OK UVa 670 0.016 seconds, n,m<=100, 07.08.2011 */
-/* OK UVa 753 0.108 seconds, n,m<=100, 13.08.2011 (+floyd-warshall) */
-/* OK UVa 10080 0.016 seconds, n,m<=100, 11.08.2011 */
-/* OK UVa 10092 0.376 seconds, n<=1000,m<=200, 11.08.2011 */
-/* OK UVa 10122 0.980 seconds, n,m<=100, 11.08.2011 (+binary search, preprocessing) */
-/* OK UVa 10349 0.008 seconds, n,m<=200, 11.08.2011 */
-/* OK UVa 10804 0.076 seconds, n,m<=50, 07.08.2011 (+binary search) */
-/* OK UVa 11418 0.008 seconds, n=m<=26, 07.08.2011 */
-/* OK UVa 11419 0.396 seconds, n,m<=1000, 07.08.2011 */
-/* OK UVa 12083 0.044 seconds, n+m<=500, 29.08.2012 */
-/* OK UVa-live 3415 (NWERC 2005 problem H) 0.040 seconds, n+m<=500, 29.08.2012 */
-/* OK UVa-live 4288 (NWERC 2008 problem C) 0.032 seconds, n+m<=500, 08.08.2011 */
-/* OK hnu 11025 (BAPC 2006 problem F) 15 ms, n<5120, m<100, 12.08.2011 */
-/* OK IDI Open 2012 problem A (Boss Rush), n<=100, m<=300, 21.05.2012 */
+/* OK Topcoder SRM 200 div 1 1000, 4 ms worst case, n=m=176, 2011-08-07 */
+/* OK Topcoder SRM 236 div 1 1000, 12 ms worst case, n,m<=100, 2011-08-07 (+bfs, binary search) */
+/* OK Topcoder SRM 303 div 1 500, 5 ms worst case, n,m<=338, 2011-08-07 */
+/* OK Topcoder SRM 477 div 1 500, 8 ms worst case, n+m<=200, 2011-08-07 */
+/* OK Topcoder SRM 549 div 1 250, 4 ms worst case, n+m<=100, 2012-07-09 */
+/* OK Topcoder TCO 2003 semifinals 4 1050, 7 ms worst case, n,m<=300, 2011-08-07 */
+/* OK UVa 259 0.020 seconds, n,m<=10, 2011-08-13 (small constraints, backtracking is faster */
+/* OK UVa 663 0.004 seconds, n=m<=26, 2011-08-07 */
+/* OK UVa 670 0.016 seconds, n,m<=100, 2011-08-07 */
+/* OK UVa 753 0.108 seconds, n,m<=100, 2011-08-13 (+floyd-warshall) */
+/* OK UVa 10080 0.016 seconds, n,m<=100, 2011-08-11 */
+/* OK UVa 10092 0.376 seconds, n<=1000,m<=200, 2011-08-11 */
+/* OK UVa 10122 0.980 seconds, n,m<=100, 2011-08-11 (+binary search, preprocessing) */
+/* OK UVa 10349 0.008 seconds, n,m<=200, 2011-08-11 */
+/* OK UVa 10804 0.076 seconds, n,m<=50, 2011-08-07 (+binary search) */
+/* OK UVa 11418 0.008 seconds, n=m<=26, 2011-08-07 */
+/* OK UVa 11419 0.396 seconds, n,m<=1000, 2011-08-07 */
+/* OK UVa 12083 0.044 seconds, n+m<=500, 2012-08-29 */
+/* OK UVa-live 3415 (NWERC 2005 problem H) 0.040 seconds, n+m<=500, 2012-08-29 */
+/* OK UVa-live 4288 (NWERC 2008 problem C) 0.032 seconds, n+m<=500, 2012-08-08 */
+/* OK hnu 11025 (BAPC 2006 problem F) 15 ms, n<5120, m<100, 2011-08-12 */
+/* OK IDI Open 2012 problem A (Boss Rush), n<=100, m<=300, 2012-05-21 */
+/* OK IPSC 2003 problem A (arranging flowers), n,m<=220, 2014-05-31 */
+/* OK IPSC 2004-practice problem T, n,m<=10945, 2014-05-31 */
 int bipartite() {
-	int i,j,r=0,cur,qs,qe=0,q[2*MAXV];
+	int i,j,r=0,cur,qs,qe=0;
+	static int q[2*MAXV];
 	memset(mate,-1,m*sizeof(int));
 	memset(parent,-1,(n+m)*sizeof(int));
 	for(i=0;i<n;i++) {

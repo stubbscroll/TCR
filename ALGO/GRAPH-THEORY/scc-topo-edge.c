@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-/*  find strongly connected components with edge lists! */
+/* find strongly connected components with edge lists! */
 
 #define MAXV 20000
 #define MAXE 50000
@@ -65,28 +65,29 @@ void dfsvisit(int u,int c) {
 }
 
 /* topological sort! res[] contains the nodes in backwards order */
-/* OK UVa 103, 0.008 seconds, n<=30,ne<=420 25.05.2011 */
-/* OK UVa 11686, 0.452 seconds, n,ne<=1000000 26.05.2012 */
-/* OK UVa 12466, 0.692 seconds, n<=100000,ne<=999999 07.06.2012 */
+/* OK UVa 103, 0.008 seconds, n<=30,ne<=420 2011-05-25 */
+/* OK UVa 11686, 0.452 seconds, n,ne<=1000000 2012-05-26 */
+/* OK UVa 12466, 0.692 seconds, n<=100000,ne<=999999 2012-06-07 */
 void toposort() {
 	int i;
 	memset(vis,0,n);
-	/*  may want to quit early if cycle */
+	/* may want to quit early if cycle */
 	for(resn=cycle=i=0;i<n;i++) if(!vis[i]) dfsvisit(i,-1); 
 }
 
 /* return the number of connected components */
 /* for vertex i, id of component is in con[i] */
 /* OK UVa 11504 0.146 seconds, n<=100000, ne<=100000 2013-06-13 */
-/* OK UVa 11709 0.860 seconds, n<=1000, ne<=999000 09.08.2011 */
-/* OK UVa-live 4287 (NWERC 2008 problem B), n<=20000, ne<=50000, 0.088 seconds, 09.08.2011 */
-/* OK NWERC 2012 I "Idol" n<=2000 e<=4000 25.11.2012 */
+/* OK UVa 11709 0.860 seconds, n<=1000, ne<=999000 2011-08-09 */
+/* OK UVa-live 4287 (NWERC 2008 problem B), n<=20000, ne<=50000, 0.088 seconds, 2011-08-09 */
+/* OK NWERC 2012 I "Idol" n<=2000 e<=4000 2012-11-25 */
+/* OK IPSC 2014-practice U "urban planning" n<=300 e<=90000 2014-06-14 */
 int scc() {
 	static int dfsres[MAXV];
 	int i,t,c=0;
 	memset(vis,0,n);
 	for(resn=i=0;i<n;i++) if(!vis[i]) dfsvisit(i,-1);
-	/*  transpose graph */
+	/* transpose graph */
 	memcpy(dfsres,res,n*sizeof(int));
 	for(i=0;i<ne;i++) t=from[i],from[i]=to[i],to[i]=t;
 	countingsort();

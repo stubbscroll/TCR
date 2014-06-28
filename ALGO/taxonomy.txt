@@ -25,6 +25,8 @@ graph theory
   informed search (A*)
  strongly connected components
  topological sort
+ minimum spanning tree (prim, kruskal)
+  minimum arborescence
  steiner tree
   discrete steiner tree
  eulerian path/cycle

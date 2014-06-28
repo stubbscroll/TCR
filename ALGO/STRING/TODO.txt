@@ -1,3 +1,4 @@
 need the following:
 
-TODO!
+suffix array!
+TODO more!

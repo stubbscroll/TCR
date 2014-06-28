@@ -1,11 +1,13 @@
 UVa quicklink: http://uva.onlinejudge.org/external/abc/abcde.html
 
+TODO make a coherent taxonomy later
+
 -: tested
 *: untested, problem seems to be a fit for given algorithm
 
 list of problems for testing different kinds of algorithms and methods. that
 problem p is listed under algorithm a does not necessarily mean that a is the
-best algorithm for solving p (often it's definitely not). in some cases the
+best algorithm for solving p (sometimes it's definitely not). in some cases the
 algorithm is only a minor part of a larger program, in these cases the
 algorithm is marked with (subroutine). if the algorithm is an extremely minor
 part it's not listed.
@@ -58,6 +60,7 @@ algorithm classification is rather ad hoc, improve later.
 * Topcoder TCO 2005 round 3 easy "PlayingCubes"
 * Topcoder TCO 2005 semifinal 3 medium
 * NCPC 2005 G "kingdom"
+* IPSC 2014 M1 "maximum enjoyment"
 
 place these in either bipartite, maxflow or mincostmaxflow (the first category
   that applies)
@@ -80,6 +83,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 
 - UVa 10746
 - UVa 10806
+- IPSC 2005 F "find the right words"
 - NWERC 2012 A "admiral"
 - Topcoder SRM 506 div 1 600 "SlimeXGrandSlimeAuto"
 - Topcoder TCO 2013 round 1A hard "DirectionBoard"
@@ -92,7 +96,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 * SPOJ 387 TOURS
 * Codeforces 164C VK cup 2012 round 3 C "Machine programming" (?)
 
-1.1.3 maximum cardinality matching in bipartite graph
+1.1.3 maximum cardinality (or perfect) matching in bipartite graph
 
 - Topcoder SRM 200 div 1 hard "Graduation" (+careful graph construction to
   satisfy lexicographically smallest)
@@ -119,6 +123,8 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - NWERC 2005 G "guardian of decency"
 - IDI Open 2010 B "beehive epidemic"
 - IDI Open 2012 A "boss rush"
+- IPSC 2003 A "arranging flowers"
+- IPSC 2004-practice T "the tiling problem"
 * IDI Open 2009 F "train tickets"
 * UVa 10380
 * Topcoder TCO 2005 round 3 easy "PlayingCubes"
@@ -240,6 +246,7 @@ place these in either bipartite, maxflow or mincostmaxflow (the first category
 - UVa 11504
 - UVa 11709
 - UVa live 4287 (NWERC 2008 problem B)
+- IPSC 2014-practice U "urban planning"
 * UVa 125
 * UVa 247
 * UVa 1227
@@ -578,6 +585,10 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 
 - Topcoder SRM 477 div 1 500 "PythTriplets" (subroutine)
 
+3.1.7 chinese remainder theorem
+
+- IPSC 2005 G "gears in action"
+
 3.2 linear algebra
 
 3.2.1 solve a set of linear equations: gaussian elimination
@@ -632,6 +643,8 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 * UVa 11769
 
 3.4.2.1.1 convex hull in 3D
+
+* a problem from spoj?
 
 3.4.2.2 intersection
 3.4.2.2.1 circle-circle
@@ -807,10 +820,18 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 
 - IPSC 2005 problem B2 (bottom coder)
 
+3.8.6 binary arithmetic
+3.8.6.1 gray codes
+
+- IPSC 2003 practice T (strange numbers)
+
 3.9 numerical optimization
 3.9.1 unconstrained optimization
 3.9.2 constrained optimization
-3.9.2.1 linear programmering
+3.9.2.1 linear programming
+
+* IPSC 2014 M "maximum enjoyment"
+
 3.9.2.1.1 system of difference constraints
 
 - UVa 515
@@ -937,6 +958,7 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 
 - Project Euler 366
 - UVa 12469 (win-loss-minimax)
+- IPSC 2008 G "game on words"
 
 7.1.1.1 nim
 
@@ -961,6 +983,7 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 8.2.1 2SAT
 
 - NWERC 2012 I "Idol"
+* IPSC 2004-practice T "the tiling problem"
 * NCPC 2011 K "Kindergarten"
 * NWERC 2011 D "Piece it together"
 * Asia-Changchun 2012 B (Uva-live 6067) "Bit magic"
@@ -1118,11 +1141,13 @@ it is not recommended because it is much slower.]
 - SPOJ 61 BRCKTS
 * UVa 12232?
 
-12.6 disjoint set/union set find
+12.6 disjoint-set
 
 - UVa 10147
 - UVa 10301
 - UVa 10397
+- IPSC 2005 C "crane operator"
+- IPSC 2008 I "inventing test data"
 - Topcoder SRM 578 div 1 250 "GooseInZooDivOne"
 * Topcoder SRM 576 div 1 256 "ArcadeManao"
 * UVa 459

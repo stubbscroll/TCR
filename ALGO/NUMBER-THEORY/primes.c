@@ -149,10 +149,11 @@ void exeuclid(ll a,ll b,ll *x,ll *y) {
 
 /* find the multiplicative inverse of a modulo mod */
 /* requires gcd(a,mod)==1, returns 0 otherwise */
-/* OK UVa 12365 12.11.2011 */
-/* OK Project Euler 381 27.04.2012 */
+/* OK UVa 12365 2011-11-12 */
+/* OK IPSC 2005 G "gears in action" 2014-05-17 */
+/* OK Project Euler 381 2012-04.27 */
 /* OK Project Euler 274 2013-03-08 */
-/* OK Codeforces 138 div 1 problem C 16.09.2012 */
+/* OK Codeforces 138 div 1 problem C 2012-09-16 */
 ll inverse(ll a,ll mod) {
 	ll b=mod,x=0,y=1,t,q,lastx=1,lasty=0;
 	while(b) {
@@ -182,7 +183,8 @@ ll inverse2(ll x,ll p) {
 /* solve a set of modular equations using chinese remainder theorem */
 /* n: number of equations of the form
    x = a[i] mod b[i] */
-/* OK project euler 365 20.02.2012 */
+/* OK IPSC 2005 G "gears in action" (java bigint version) 2014-05-17 */
+/* OK project euler 365 2012-02-20 */
 ull chinese(int n,int *a,int *b) {
 	int i;
 	ull N,x=0;
