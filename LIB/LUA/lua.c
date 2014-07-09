@@ -1,6 +1,7 @@
 /* small sample program that runs a lua program that calls a C function.
    example stolen from http://csl.name/lua/, converted to C and upgraded to
-   lua 5.2 very hastily by me */
+   lua 5.2 very hastily by me.
+   run with lua lua.lua */
 
 #include <stdio.h>
 #include "lua.h"

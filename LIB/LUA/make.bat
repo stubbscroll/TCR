@@ -1,2 +1,2 @@
-gcc -o luatest.exe luatest.c -O3 -Wall -llua52
-luatest test.lua
+gcc -o lua.exe lua.c -O3 -Wall -llua52
+gcc -o lua2.exe lua2.c -O3 -Wall -llua52
