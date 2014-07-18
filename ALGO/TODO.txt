@@ -14,7 +14,7 @@ issquarefree
 iscube
 ispower (also for bigint, find the significand as well)
 
-fast way to calculate issquare(n)
+fast way to calculate issquare(n), also for big n
 
 http://stackoverflow.com/questions/295579/fastest-way-to-determine-if-an-integers-square-root-is-an-integer
 http://hansliten.wordpress.com/2010/07/31/faster-square-test/
@@ -139,12 +139,12 @@ NUMBER-THEORY
 - chinese remainder theorem when numbers aren't pairwise coprime
   (see my solution to ipsc 2005 g "gears in action", hard input)
 
-NUMERIC
+NUMERICAL
 
 - laguerre's (numerical) method of finding roots of a polynomial
 - robinson's recursion for solving "toeplitz" matrices
-- linear programming (simplex method)
-- linear programming (polynomial time method)
+- linear programming (simplex for sparse systems)
+- linear programming (interior-point method which runs in O(polynomial time))
 - quadratic programming (active set)
 - discrete fourier transform O(N^2)
 - fast fourier transform O(N log N)
