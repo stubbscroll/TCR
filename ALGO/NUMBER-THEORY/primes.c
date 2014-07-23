@@ -1,3 +1,7 @@
+/* TODO! this file is a mess. split stuff into separate files, such as
+   factor, numdiv, sumdiv, phi etc and indicate where common code should
+   be inserted (or just duplicate it) */
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
@@ -61,9 +65,9 @@ void fsieve() {
 }
 /* use factorization sieve to factor a number (requires n<MAXP), runs in time
    linear to the number of prime factors (including duplicates). */
-/* OK Project Euler 386 27.08.2011 */
-/* OK Topcoder Inv 2002 finals (run 1) 500 04.06.2012 */
-/* OK UVa 10680 0.096 seconds n<=1000000 08.06.2012 */
+/* OK Project Euler 386 2011-08-27 */
+/* OK Topcoder Inv 2002 finals (run 1) 500 2012-06-04 */
+/* OK UVa 10680 0.096 seconds n<=1000000 2012-06-08 */
 void ffactor(int n,int *f,int *fc,int *fn) {
 	*fn=0;
 	while(sieve2[n]) {
@@ -94,17 +98,16 @@ void pgenprimes() {
 	for(primes=1,i=3;i<MAXP;i+=2) if(CHECKBIT(i)) prime[primes++]=i;
 }
 
-/*  gcd! */
-
+/* gcd! */
 ull gcd(ull a,ull b) {
 	ull t;
 	while(b) t=a,a=b,b=t%b;
 	return a;
 }
 
-/*  slightly faster gcd */
-/*  OK project euler 005 04.08.2011 */
-/*  OK spoj (classical) 4942 04.08.2011 */
+/* slightly faster gcd */
+/* OK project euler 005 2011-08-04 */
+/* OK spoj (classical) 4942 2011-08-04 */
 ull binarygcd(ull a,ull b) {
 	int e=0;
 	ull d;
@@ -120,13 +123,13 @@ ull binarygcd(ull a,ull b) {
 	return a<<e;
 }
 
-/*  OK project euler 005 04.08.2011 */
+/* OK project euler 005 2011-08-04 */
 ull lcm(ull a,ull b) {
 	return a/binarygcd(a,b)*b;
 }
 
 /* find x,y such that ax + by = gcd(a,b) */
-/* UVa 10090 08.06.2012 */
+/* UVa 10090 2012-06-08 */
 ll extendedeuclid(ll a,ll b,ll *lastx,ll *lasty) {
 	ll x=0,y=1,t,q;
 	*lastx=1; *lasty=0;
@@ -235,8 +238,8 @@ void initlogtable() {
 	else r=logtable256[n];
 
 /* need powmod for witness */
-/* OK UVa 10956 31.08.2011 */
-/* NOT OK YET spoj (classical) 4942 04.08.2011 */
+/* OK UVa 10956 2011-08-31 */
+/* NOT OK YET spoj (classical) 4942 2011-08-04 */
 uint powmod(uint n,uint k,uint mod) {
 	int i,j;
 	uint v=n,ans=1,t,tt;
@@ -264,8 +267,8 @@ uint powmod(uint n,uint k,uint mod) {
 }
 
 /* subroutine for miller-rabin, only works for odd n */
-/* OK UVa 10956 04.08.2011 */
-/* OK spoj (classical) 4942 04.08.2011 */
+/* OK UVa 10956 2011-08-04 */
+/* OK spoj (classical) 4942 2011-08-04 */
 int witness(uint n,uint a) {
 	int s=1,r;
 	uint d=(n-1)>>1,x;
@@ -281,8 +284,8 @@ int witness(uint n,uint a) {
 }
 
 /* deterministic miller-rabin, return 1 if n is prime */
-/* OK UVa 10956 04.08.2011 */
-/* OK spoj (classical) 4942 04.08.2011 */
+/* OK UVa 10956 2011-08-04 */
+/* OK spoj (classical) 4942 2011-08-04 */
 int millerrabin(uint n) {
 	if(n<4) return n>1;
 	if(!(n&1)) return 0;
@@ -292,7 +295,7 @@ int millerrabin(uint n) {
 }
 
 /* needed for ullwitness */
-/* OK spoj (classical) 4942 04.08.2011 */
+/* OK spoj (classical) 4942 2011-08-04 */
 /* (however, not tested for values very close to maxull) */
 ull ullmulmod(ull a,ull b,ull mod) {
 	ull r=0,t;
@@ -314,7 +317,6 @@ ull ullmulmod(ull a,ull b,ull mod) {
 /* warning, it apparently only works in 64-bits gcc */
 /* http://apps.topcoder.com/forums/?module=Thread&threadID=765421&start=0 */
 /* TODO find out which online judges this works on */
-/* TODO convert to 64-bits assembly */
 typedef __uint128_t ulll;
 ull ullmulmod2(ull a,ull b,ull mod) { return (ulll)a*b%mod; }
 
@@ -330,7 +332,7 @@ ull ullmulmod3(ull x,ull y,ull mod) {
 	return r;
 }
 
-/* OK spoj (classical) 4942 04.08.2011 */
+/* OK spoj (classical) 4942 2011-08-04 */
 ull ullpowmod(ull n,ull k,ull mod) {
 	int i,j;
 	ull v=n,ans=1;
@@ -346,7 +348,7 @@ ull ullpowmod(ull n,ull k,ull mod) {
 }
 
 /* subroutine for miller-rabin, only works for odd n */
-/* OK spoj (classical) 4942 04.08.2011 */
+/* OK spoj (classical) 4942 2011-08-04 */
 int ullwitness(ull n,ull a) {
 	int s=1,r;
 	ull d=(n-1)>>1,x;
@@ -362,8 +364,8 @@ int ullwitness(ull n,ull a) {
 }
 
 /* deterministic miller-rabin for 64-bit numbers */
-/* OK spoj (classical) 4942 04.08.2011 */
-/* OK Project Euler 387 04.07.2012 */
+/* OK spoj (classical) 4942 2011-08-04 */
+/* OK Project Euler 387 2012-07-04 */
 int ullmillerrabin(ull n) {
 	if(n<4294967295LU) return millerrabin(n);
 	if(!(n&1)) return 0;
@@ -393,11 +395,11 @@ int ullmillerrabin(ull n) {
 /* uses prime[] */
 /* write out the factors to f, the count of each f to fc, the
    number of factors to fn */
-/* OK project euler 003 09.06.2011 */
-/* OK spoj (tutorial) 1392 04.08.2011 */
-/* OK UVa 11073 04.08.2011 */
+/* OK project euler 003 2011-06-09 */
+/* OK spoj (tutorial) 1392 2011-08-04 */
+/* OK UVa 11073 2011-08-04 */
 /* OK UVa 11466 n<=10000000 2013-06-12 */
-/* OK UVa 12465 n<=32000 06.06.2012 */
+/* OK UVa 12465 n<=32000 2012-06-06 */
 void factor(ull n,ull *f,int *fc,int *fn) {
 	int i;
 	for(*fn=i=0;i<primes && (ull)prime[i]*prime[i]<=n;i++) if(n%prime[i]<1) {
@@ -411,8 +413,8 @@ void factor(ull n,ull *f,int *fc,int *fn) {
 }
 
 /* warning, only call on composite numbers */
-/* OK spoj (classical) 4942 04.08.2011 */
-/* OK UVa 11476 04.08.2011 */
+/* OK spoj (classical) 4942 2011-08-04 */
+/* OK UVa 11476 2011-08-04 */
 ull pollardrho(ull n,ull c) {
 	/* number of iterations: 1.177*sqrt(sqrt(n)) is good
 	   source http://users.telenet.be/janneli/jan/factorization/pollard_rho.html
@@ -446,8 +448,8 @@ ull pollardrho(ull n,ull c) {
 }
 
 /* requires primes up to MAXPRIME */
-/* OK spoj (classical) 4942 0.09 seconds 04.08.2011 */
-/* OK UVa 11476 9.600 seconds 04.08.2011 */
+/* OK spoj (classical) 4942 0.09 seconds 2011-08-04 */
+/* OK UVa 11476 9.600 seconds 2011-08-04 */
 #define MAXPRIME 1000
 void factormain(ull n,ull *f,int *fc,int *fn,int small) {
 	int i,fc1[2][64],fn1[2],j,k,done;
@@ -490,8 +492,8 @@ void factormain(ull n,ull *f,int *fc,int *fn,int small) {
 
 /* euler's totient (phi) function! */
 /* calculate phi(n), needs one prime[] > sqrt(n) */
-/* OK, compared against phigen 03.08.2011 */
-/* OK UVa 12493 n<=46500 23.08.2012 */
+/* OK, compared against phigen 2011-08-03 */
+/* OK UVa 12493 n<=46500 2012-08-23 */
 ll phi(ll n) {
 	int i=0,q=sqrt(n);
 	ll res=1;
@@ -513,7 +515,7 @@ ll phi(ll n) {
 
 /* generate all phi up to MAXPHI, needs all prime[]<MAXPHI.
    this routine is faster than calculating each phi(i) individually */
-/* OK project euler 214 03.08.2011 */
+/* OK project euler 214 2011-08-03 */
 #define MAXPHI 40000001
 int phivalues[MAXPHI];
 
@@ -539,8 +541,8 @@ void phigen() {
 
 /* inverse phi! */
 
-/* OK UVa 11073 04.08.2011 0.076 seconds */
-/* OK Project Euler 248 04.08.2011 */
+/* OK UVa 11073 2011-08-04 0.076 seconds */
+/* OK Project Euler 248 2011-08-04 */
 void inversephibtr(ull left,ull build,int p,ull *val,int *n) {
 	ull temp,b;
 	if(left==1) { val[(*n)++]=build; return; }
@@ -564,8 +566,8 @@ void inversephi(ull left,ull *val,int *n) {
 }
 
 /* number of divisors, requires prime[]<=sqrt(n) */
-/* OK-ish, n<100001 matches OEIS A000005 03.08.2011 */
-/* OK UVa 12465 n<=1000000000 06.06.2012 */
+/* OK-ish, n<100001 matches OEIS A000005 2011-08-03 */
+/* OK UVa 12465 n<=1000000000 2012-06-06 */
 ll numdiv(ll n) {
 	ll ans=1,f[64];
 	int i,fc[64],fn;
@@ -574,9 +576,23 @@ ll numdiv(ll n) {
 	return ans;
 }
 
+/* number of divisors, worst-case runtime O(sqrt(n)) which happens when
+   n is prime or a power, but is standalone */
+/* OK-ish, matches numdiv() for n<10000000 2014-07-23 */
+ll numdiv2(ll n) {
+	ll r=1;
+	int i,j;
+	for(i=2;(ll)i*i<=n;i++) if(n%i==0) {
+		for(j=2,n/=i;n%i==0;n/=i,j++);
+		r*=j;
+	}
+	if(n>1) r*=2;
+	return r;
+}
+
 /* sum of divisors, requires prime[]<=sqrt(n) */
-/* OK-ish, n<100001 matches OEIS A000203 03.08.2011 */
-/* OK spoj (tutorial) 1392 04.08.2011 */
+/* OK-ish, n<100001 matches OEIS A000203 2011-08-03 */
+/* OK spoj (tutorial) 1392 2011-08-04 */
 ll sumdiv(ll n) {
 	ll ans=1,f[64],q;
 	int i,j,fc[64],fn;
@@ -603,7 +619,7 @@ int main() {
 	genprimes();
 	factor(600851475143LL,f,fc,&fn);
 	printf("Project Euler 003: %lld\n",f[fn-1]);     /*  6857 */
-	printf("Project Euler 007: %d\n",prime[10000]);   /*  104743 */
+	printf("Project Euler 007: %d\n",prime[10000]);  /*  104743 */
 	for(sum=i=0;prime[i]<2000000;i++) sum+=prime[i];
 	printf("Project Euler 010: %lld\n",sum);         /*  142913828922 */
 	x=1;
