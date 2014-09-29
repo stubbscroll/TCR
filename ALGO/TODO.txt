@@ -166,14 +166,14 @@ find kth number in array in linear time (order statistics)
 
 STRING
 
-- aho-corasick
-- given a string, calculate transition table[a][b]:
-  if we have matched to pos a and see char b, transition to position in table
 - suffix array:
   for instance manber, myers O(n log n) time, O(n) memory
   kasai, lee et al O(n) lcp
-  also, linear-time construction
+  also, linear-time construction (check nong et al, 2009)
   also, O(n log^2 n) if it's short and simple (see cosmin.ro)
+- aho-corasick
+- given a string, calculate transition table[a][b]:
+  if we have matched to pos a and see char b, transition to position in table
 
 OTHER
 

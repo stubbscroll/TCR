@@ -215,7 +215,7 @@ int isprime(ll n) {
 /* NB, needed for powmod, and hence also for witness, millerrabin,
    ullmillerrabin,factormain */
 /* NB, initlogtable must be called! */
-/* TODO get rid of this drivel */
+/* TODO get rid of this drivel as soon as the new powmod is tested */
 char logtable256[256];
 /* init routine which must be called */
 void initlogtable() {
@@ -240,7 +240,7 @@ void initlogtable() {
 /* need powmod for witness */
 /* OK UVa 10956 2011-08-31 */
 /* NOT OK YET spoj (classical) 4942 2011-08-04 */
-uint powmod(uint n,uint k,uint mod) {
+uint powmodold(uint n,uint k,uint mod) {
 	int i,j;
 	uint v=n,ans=1,t,tt;
 	if(!k) return 1;
@@ -262,6 +262,18 @@ uint powmod(uint n,uint k,uint mod) {
 	for(j=0;j<=i;j++) {
 		if(k&(1U<<j)) ans=(ull)ans*v%mod;
 		v=(ull)v*v%mod;
+	}
+	return ans;
+}
+
+/* evaluate n^k mod mod */
+/* TODO test on problems */
+unsigned int powmod(unsigned int n,unsigned int k,unsigned int mod) {
+	unsigned int ans=1;
+	while(k) {
+		if(k&1) ans=(unsigned long long)ans*n%mod;
+		k>>=1;
+		n=(unsigned long long)n*n%mod;
 	}
 	return ans;
 }
@@ -333,7 +345,8 @@ ull ullmulmod3(ull x,ull y,ull mod) {
 }
 
 /* OK spoj (classical) 4942 2011-08-04 */
-ull ullpowmod(ull n,ull k,ull mod) {
+/* TODO throw out */
+ull ullpowmodold(ull n,ull k,ull mod) {
 	int i,j;
 	ull v=n,ans=1;
 	uint t;
@@ -343,6 +356,17 @@ ull ullpowmod(ull n,ull k,ull mod) {
 	for(j=0;j<=i;j++) {
 		if(k&(1ULL<<j)) ans=ullmulmod(ans,v,mod);
 		v=ullmulmod(v,v,mod);
+	}
+	return ans;
+}
+
+/* TODO test this */
+unsigned long long ullpowmod(unsigned long long n,unsigned long long k,unsigned long long mod) {
+	unsigned long long ans=1;
+	while(k) {
+		if(k&1) ans=ullmulmod(ans,n,mod);
+		k>>=1;
+		n=ullmulmod(n,n,mod);
 	}
 	return ans;
 }
@@ -513,9 +537,21 @@ ll phi(ll n) {
 	return res;
 }
 
+/* short-to-implement euler's totient (phi) function that's standalone */
+/* OK OEIS A000010 n<=100000 2014-09-21 */
+int phi(int n) {
+	int r=1,i;
+	for(i=2;(long long)i*i<=n;i++) if(n%i==0) {
+		for(r*=i-1,n/=i;n%i==0;n/=i,r*=i);
+	}
+	if(n>1) r*=n-1;
+	return r;
+}
+
 /* generate all phi up to MAXPHI, needs all prime[]<MAXPHI.
    this routine is faster than calculating each phi(i) individually */
 /* OK project euler 214 2011-08-03 */
+/* OK OEIS A000010 n<=100000 2014-09-21 */
 #define MAXPHI 40000001
 int phivalues[MAXPHI];
 
