@@ -1,5 +1,10 @@
 two small examples for using lua with C.
 
+lua.c:  invoke with: lua lua.lua (the parameters to lua.exe specify the lua
+        files to run). this example is based on someone else's example found
+        on the net.
+lua2.c: example of C calling lua calling C.
+
 warning! http://luabinaries.sourceforge.net/ seems to be the most sensible
 place to get mingw64 libraries, but there are problems. lua errors will
 result in a crash instead of proper catching because of gcc optimizations.
