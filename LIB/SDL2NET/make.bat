@@ -1,0 +1,11 @@
+gcc -o dnr.exe dnr.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o tcpserver.exe tcpserver.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o tcpclient.exe tcpclient.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o tcpmultiserver.exe tcpmultiserver.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o tcpmulticlient.exe tcpmulticlient.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o tcpmulticlientthreaded.exe tcpmulticlientthreaded.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o tcptimesync.exe tcptimesync.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o tcptimesyncserver.exe tcptimesyncserver.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o tcptimesyncclient.exe tcptimesyncclient.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o udptftpserver.exe udptftpserver.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
+gcc -o udptftpclient.exe udptftpclient.c -O3 -Wall -lmingw32 -lsdl2main -lsdl2 -lsdl2_net
