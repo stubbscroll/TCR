@@ -147,7 +147,7 @@ void close() {
 	SDL_Quit();
 }
 
-void handlekeys(unsigned char key,int x,int y) {
+void handlekeys(unsigned char key) {
 	/* toggle quad */
 	if(key=='q') renderquad^=1;
 }
@@ -171,16 +171,13 @@ void render() {
 
 int main(int argc,char **argv) {
 	SDL_Event e;
-	int quit=0,x,y;
+	int quit=0;
 	init();
 	SDL_StartTextInput();             /* enable text input */
 	while(!quit) {
 		while(SDL_PollEvent(&e)) {
 			if(e.type==SDL_QUIT) quit=1;
-			else if(e.type==SDL_TEXTINPUT) {
-				SDL_GetMouseState(&x,&y);
-				handlekeys(e.text.text[0],x,y);
-			}
+			else if(e.type==SDL_TEXTINPUT) handlekeys(e.text.text[0]);
 		}
 		render();
 		SDL_GL_SwapWindow(window);      /* update screen */
