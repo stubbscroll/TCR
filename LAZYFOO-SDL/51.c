@@ -78,8 +78,6 @@ void initGL() {
 	};	
 	GLfloat vertexdata[]={-0.5f,-0.5f,0.5f,-0.5f,0.5f,0.5f,-0.5f,0.5f};
 	GLuint indexdata[]={0,1,2,3};
-
-
 	programid=glCreateProgram();                            /* generate program */
 	vertexshader=glCreateShader(GL_VERTEX_SHADER);          /* create vertex shader */
 	glShaderSource(vertexshader,1,vertexshadersource,NULL); /* set vertex source */

@@ -570,6 +570,7 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 
 - UVa 11073
 - Project Euler 248
+- Project Euler 516
 * UVa 10837
 
 3.1.5 gcd/lcm
@@ -947,6 +948,10 @@ http://apps.topcoder.com/forums/?module=Thread&threadID=674592&start=0
 6.2.2 aho-corasick
 
 * Topcoder SRM 519 div 1 medium "RequiredSubstrings"
+
+6.2.3 suffix array
+
+* IPSC 2000 C "trolls"
 
 6.3 lexicographic smallest rotation of cyclic string
 

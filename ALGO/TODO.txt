@@ -74,6 +74,8 @@ DATA STRUCTURE
 - scapegoat tree
 - treap
 - b-tree?
+- "track the minimum" in sliding window, fast
+  http://richardhartersworld.com/cri/2001/slidingmin.html
 
 GAME THEORY
 - retrograde analysis

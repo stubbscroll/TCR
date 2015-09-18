@@ -5,7 +5,8 @@
 /* 0: lines don't intersect, 1:lines intersect, 2:lines are colinear */
 /* NB, collinear lines aren't handled very well. */
 /* NB, this code is a ticking overflow-bomb */
-/* OK NCPC 2010 problem J 19.08.2011 */
+/* OK NCPC 2010 problem J 2011-08-19 */
+/* OK IPSC 2000 problem B 2015-05-16 (lines instead of line segments) */
 int linesintersect(int x1,int y1,int x2,int y2,int x3,int y3,int x4,int y4,
                    double *x,double *y) {
 	int a1,a2,b1,b2,c1,c2,r1,r2,r3,r4;

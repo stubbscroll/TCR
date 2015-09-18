@@ -5,7 +5,7 @@ ll area2xy(int x1,int y1,int x2,int y2,int x3,int y3) {
 
 /* check if px,py is inside a simple polygon (not necessarily convex) */
 /* handles |x|,|y|<10^9 */
-/* warning, undefined result of point is on border */
+/* warning, undefined result if point is on border */
 /* OK UVa 109 25.05.2012 */
 int insidepoly(int *x,int *y,int n,int px,int py) {
 	int i,j,in=0;

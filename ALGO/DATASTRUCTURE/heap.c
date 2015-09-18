@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 /* min-heap! warning, 1-indexed, index 0 is unused */
+/* heapn starts at 1 (number of elements is 0, +1) */
+
 /* OK UVa 851 17.08.2011 */
 /* OK UVa 929 16.08.2011 */
 /* OK UVa 10181 17.08.2011 */

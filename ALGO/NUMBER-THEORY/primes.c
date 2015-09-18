@@ -34,6 +34,8 @@ void createsieve() {
 	int i,j,q;
 	memset(sieve,1,sizeof(sieve));
 	q=sqrt(MAXP);
+	/* TODO speed up sieve by splitting the loop into 2 and odd, and having
+	   j+=i+i in the odd inner loop */
 	for(sieve[0]=sieve[1]=0,i=2;i<=q;i++) if(sieve[i])
 		for(j=i*i;j<MAXP;j+=i) sieve[j]=0;
 }
@@ -171,6 +173,7 @@ ll inverse(ll a,ll mod) {
 /* faster/better inverse from "prime numbers - a computational perspective,
    algorithm 9.4.4 page 465. beware of overflow! */
 /* OK Project Euler 274 2013-03-08 */
+/* NOT OK Project Euler 451, fails on inverse2(3,8) */
 ll inverse2(ll x,ll p) {
 	ll a=1,q;
 	if(x>=p) x%=p;
@@ -360,7 +363,7 @@ ull ullpowmodold(ull n,ull k,ull mod) {
 	return ans;
 }
 
-/* TODO test this */
+/* OK project euler 516 2015-09-10 */
 unsigned long long ullpowmod(unsigned long long n,unsigned long long k,unsigned long long mod) {
 	unsigned long long ans=1;
 	while(k) {
@@ -373,6 +376,7 @@ unsigned long long ullpowmod(unsigned long long n,unsigned long long k,unsigned 
 
 /* subroutine for miller-rabin, only works for odd n */
 /* OK spoj (classical) 4942 2011-08-04 */
+/* OK project euler 516 2015-09-10 */
 int ullwitness(ull n,ull a) {
 	int s=1,r;
 	ull d=(n-1)>>1,x;
@@ -390,6 +394,7 @@ int ullwitness(ull n,ull a) {
 /* deterministic miller-rabin for 64-bit numbers */
 /* OK spoj (classical) 4942 2011-08-04 */
 /* OK Project Euler 387 2012-07-04 */
+/* OK project euler 516 2015-09-10 */
 int ullmillerrabin(ull n) {
 	if(n<4294967295LU) return millerrabin(n);
 	if(!(n&1)) return 0;

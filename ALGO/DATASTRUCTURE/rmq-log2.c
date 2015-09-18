@@ -26,8 +26,9 @@ int rmq2[2*N];
 /* a is the array we want to construct from */
 /* if you need sentinels etc (when doing interval compression), make sure to
    include them in the array (within n) */
-/* OK POJ 2637 (NCPC 2005 F "worst weather ever") (min), n<=50000 q<=10000, 219 ms, 02.10.2012 */
-/* OK Timus 1846 (gcd), n<=100000, q<=100000, 0.171 s, 18.11.2012 */
+/* OK POJ 2637 (NCPC 2005 F "worst weather ever") (min), n<=50000 q<=10000, 219 ms, 2012-10-02 */
+/* OK Timus 1846 (gcd), n<=100000, q<=100000, 0.171 s, 2012-11-18 */
+/* OK Project Euler 485 (max), n<=100000000, 13.5 s, 2015-02-21 */
 void construct(int *a,int n) {
 	int i,j,p;
 	for(j=n,p=i=0;j>1;i++,p+=j,j>>=1) rmq[i]=rmq2+p;
@@ -45,6 +46,7 @@ void construct(int *a,int n) {
    (start>end) */
 /* OK POJ 2637 (NCPC 2005 F "worst weather ever") (min), n<=50000 q<=10000, 219 ms, 02.10.2012 */
 /* OK Timus 1846 (gcd), n<=100000, q<=100000, 0.171 s, 18.11.2012 */
+/* OK Project Euler 485 (max), n<=100000000, 13.5 s, 2015-02-21 */
 int query(int *a,int start,int end) {
 	int j,min=start;
 	for(end++,j=0;start<end;j++,start>>=1,end>>=1) {
