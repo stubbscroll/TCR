@@ -82,7 +82,7 @@ void md5init() {
 }
 /*  b: message to decode, len: length of message, h: where to output digest */
 void md5(uchar *b,int len,uchar *h) {
-  static uchar M[16384],xx[16];
+  static uchar M[16384],xx[64];
   unsigned *X=(unsigned *)xx;
   int l=len,i,j;
   unsigned A=0x67452301,B=0xefcdab89,C=0x98badcfe,D=0x10325476,AA,BB,CC,DD;

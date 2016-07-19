@@ -1,1 +1,1 @@
-gcc webpage.c -o webpage.exe -lcurl -lcurldll
+gcc webpage.c -o webpage.exe -lcurl
