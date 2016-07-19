@@ -1,4 +1,4 @@
-/* warning, -O2 and -O3 causes program to be wrong */
+/* can be compiled with -O2 and -O3 now that the bug has been fixed, i guess */
 #include <stdio.h>
 #include <string.h>
 typedef unsigned char uchar;
