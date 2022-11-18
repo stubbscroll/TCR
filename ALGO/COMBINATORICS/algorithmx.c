@@ -115,6 +115,7 @@ int nextpos;
 
 // n: number of items
 void inithelp(int n) {
+	if(n>=MAXITEM) printf("error, increase MAXITEM and recompile\n");
 	for(int i=1;i<=n;i++) len[i]=0;
 	for(int i=0;i<=n;i++) llink[i]=(i+n)%(n+1);
 	for(int i=0;i<=n;i++) rlink[i]=(i+1)%(n+1);
@@ -126,6 +127,7 @@ void inithelp(int n) {
 
 // add row with m ones, a[i] holds item number (1-indexed)
 void addrow(int m,int *a) {
+	if(nextpos+m>=MAX) printf("error, increase MAX and recompile\n");
 	int lastspacer=nextpos-1;
 	for(int i=0;i<m;i++) {
 		int ix=a[i];
