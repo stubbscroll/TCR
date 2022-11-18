@@ -173,7 +173,9 @@ ll inverse(ll a,ll mod) {
 /* faster/better inverse from "prime numbers - a computational perspective,
    algorithm 9.4.4 page 465. beware of overflow! */
 /* OK Project Euler 274 2013-03-08 */
+/* OK NCPC 2018 K "king's colors" 2018-10-12 (usint ints) */
 /* NOT OK Project Euler 451, fails on inverse2(3,8) */
+/* i guess p has to be actually prime, not sufficient with gcd(x,p)=1 */
 ll inverse2(ll x,ll p) {
 	ll a=1,q;
 	if(x>=p) x%=p;

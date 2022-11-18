@@ -10,7 +10,7 @@ typedef long long ll;
    NB, ranking is not lexicographic! */
 /* max n=20, since 21! overflows long long */
 
-/* OK UVa 10181 17.08.2011 */
+/* OK UVa 10181 2011-08-17 */
 
 ll fact[21];
 
@@ -59,8 +59,8 @@ ll permutationrank2(int n,int *p) {
    destroys the incoming string.
    works with duplicates as well.  */
 /* datatype can be char *, int * etc */
-/* OK UVA 12079 (NWERC 2005 problem D), n<=9, 08.09.2012 */
-/* OK TJU 2482 (NCPC 2006 problem B "tour guide", n<=8, 01.10.2012 */
+/* OK UVA 12079 (NWERC 2005 problem D), n<=9, 2012-09-08 */
+/* OK TJU 2482 (NCPC 2006 problem B "tour guide", n<=8, 2012-10-01 */
 int nextpermutation(char *a,int n) {
 	int j,k,i;
 	char t;  /* datatype of permutation */
@@ -126,7 +126,8 @@ void precalculatepascal() {
 
 /* evaluate multinomial coefficient (without division)
    based on knuth 1.2.6 equation 4.3 */
-/* HNU 11763 (BAPC 2009 problem D) 0 ms, 18.08.2001 */
+/* HNU 11763 (BAPC 2009 problem D) 0 ms, 2011-08-18 */
+/* IPSC 2017 problem C1, 2017-07-10 */
 ull evalmultinomial(int *c,int n) {
 	ull r=1;
 	int a=c[0],b=0,i;
@@ -134,7 +135,7 @@ ull evalmultinomial(int *c,int n) {
 	return r;
 }
 
-/* OK UVa 12335 29.10.2011 */
+/* OK UVa 12335 2011-10-29 */
 void permutationunrank(ull rank,int *distr,int m,int *seq) {
 	ull run,next;
 	int tot=0,i,j,left[MAXP];
@@ -163,7 +164,7 @@ void permutationunrank(ull rank,int *distr,int m,int *seq) {
    distr; distr[i] is the number of element i, m different elements */
 /* (distr can be calculated from seq, but with multiple calls to
     permutationrank() this is inefficient.)*/
-/* HNU 11763 (BAPC 2009 problem D) 0 ms, 18.08.2001 */
+/* HNU 11763 (BAPC 2009 problem D) 0 ms, 2011-08-18 */
 ull permutationrank(int *seq,int n,int *distr,int m) {
 	ull r=0;
 	int left[MAXP],i,j;

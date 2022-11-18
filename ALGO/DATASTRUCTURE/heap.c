@@ -13,6 +13,7 @@
 /* OK TJU 3132 (NEERC 2008 problem D) 16.08.2011 */
 /* OK UVa 11367 (NCPC 2007 problem F) 29.09.2011 */
 /* OK NCPC 2011 problem F 01.10.2011 */
+/* OK GCJ 2017 qualification problem C (small 2) n<=1000000 (maxheap) 2017-04-08 */
 
 #define MAXH 1000000
 

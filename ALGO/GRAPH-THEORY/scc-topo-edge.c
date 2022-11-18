@@ -82,6 +82,7 @@ void toposort() {
 /* OK UVa-live 4287 (NWERC 2008 problem B), n<=20000, ne<=50000, 0.088 seconds, 2011-08-09 */
 /* OK NWERC 2012 I "Idol" n<=2000 e<=4000 2012-11-25 */
 /* OK IPSC 2014-practice U "urban planning" n<=300 e<=90000 2014-06-14 */
+/* OK IPSC 2017 I1 "internet problem" n<=1000, e<=3000, 2017-07-10 */
 int scc() {
 	static int dfsres[MAXV];
 	int i,t,c=0;
