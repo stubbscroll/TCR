@@ -1,13 +1,17 @@
 #include <stdio.h>
+#include <string.h>
 
 // algorithm x (dancing links) for finding exact cover.
 // supports secondary items that can be covered <=1 times (but not twice),
-// items that aren't included in the horizontal doubly linked list (llink/rlink)
-// become secondary.
+// items that aren't included in the horizontal doubly linked list (that is,
+// items not reachable from node 0) become secondary.
 // source: the art of computer programming volume 4b (donald knuth)
 
 // 2022-11-18: langford(n) correct up to 16
-// 2022-11-19: n-queens 
+// 2022-11-19: n-queens: correct up to 16 (uses secondary items)
+// 2022-11-21: sudoku: tried 224838 puzzles, 1 solution found on all of them
+//             (haven't actually inspected any of the solutions to see if
+//             they're correctly solved)
 
 #define MAXITEM 1000
 #define MAX 10000
@@ -186,7 +190,7 @@ void langford_all() {
 	for(int i=3;i<=12;i++) if(i%4==0 || i%4==3) langford(i);
 }
 
-// find all ways to place n queens on a n*n chessboard
+// find all ways to place n non-attacking queens on a n*n chessboard
 void nqueens(int n) {
 	// items: 6n-2 items total, 2n primary, 4n-2 secondary
 	// 1 to n: n rows
@@ -212,8 +216,82 @@ void nqueens_all() {
 	for(int i=1;i<=14;i++) nqueens(i);
 }
 
+// solve a lot of sudoku puzzles
+void sudoku() {
+	// sudoku setup stolen from knuth vol 4b
+	// options have the form p_ij r_ik c_jk b_xk
+	// where 0 <= i,j < 9, 1 <= k <= 9, x=3*int(i/3)+int(j/3)
+	// where i,j are the cell coordinates (i is y-axis)
+	// and k is the digit to be placed
+	// there are 324 items (81 for each of p, r, c, b, and all are
+	// primary) and 729 options (starting clues reduce this amount)
+	// test cases from here:
+	// https://drive.google.com/drive/folders/1e_hQNQiJVxhHP_5WBQhBNur9dnS5ml3E
+	// i used tarek_pearly6000, top_50k_toughest, 17puz49157, sudoku_diabolical
+	FILE *f=fopen("sudoku.txt","r");
+	if(!f) puts("error, sudoku.txt not found");
+	char s[1000];
+	int good=0,total=0;
+	while(fgets(s,998,f)) {
+		int map[4][9][9]; // get item number from coordinates
+		char ok[4][9][9]; // 1: item is not deleted by starting clues
+		memset(map,-1,sizeof(map));
+		memset(ok,1,sizeof(ok));
+		for(int l=0;l<81;l++) if(s[l]!='0') {
+			int d=s[l]-'0';
+			int i=l/9,j=l%9;
+			ok[0][i][j]=0;    // cell i,j taken
+			ok[1][i][d-1]=0;  // digit d taken in row i
+			ok[2][j][d-1]=0;  // digit d taken in column j
+			int x=3*(i/3)+j/3;
+			ok[3][x][d-1]=0;  // digit d taken in box x
+		}
+		// find unfilled squares
+		int items=1;
+		for(int l=0;l<81;l++) if(s[l]=='0') {
+			int i=l/9,j=l%9;
+			if(ok[0][i][j]) map[0][i][j]=items++;
+			for(int k=1;k<=9;k++) {
+				if(ok[1][i][k-1] && map[1][i][k-1]<0) map[1][i][k-1]=items++;
+				if(ok[2][j][k-1] && map[2][j][k-1]<0) map[2][j][k-1]=items++;
+				int x=3*(i/3)+j/3;
+				if(ok[3][x][k-1] && map[3][x][k-1]<0) map[3][x][k-1]=items++;
+			}
+		}
+		inithelp(items-1,0);
+		// create options
+		int options=0;
+		for(int i=0;i<9;i++) for(int j=0;j<9;j++) for(int k=1;k<=9;k++) {
+			int row[4];
+			int x=3*(i/3)+j/3;
+			if(map[0][i][j]<0) continue; // cell i,j already filled out
+			if(map[1][i][k-1]<0) continue; // row i already has digit k in clues
+			if(map[2][j][k-1]<0) continue; // column j already has digit k in clues
+			if(map[3][x][k-1]<0) continue; // box x already has digit k in clues
+			row[0]=map[0][i][j];
+			row[1]=map[1][i][k-1];
+			row[2]=map[2][j][k-1];
+			row[3]=map[3][x][k-1];
+			addrow(4,row);
+			options++;
+		}
+		solutions=0;
+		algorithmx();
+		if(solutions==1) good++;
+		total++;
+	}
+	printf("sudoku: %d puzzles tried, %d with unique solution\n",total,good);
+}
+
+void sudoku16x16() {
+	// TODO
+	// 4*16*16=1024 items, 16*16*16=4096 options
+}
+
 int main() {
 	langford_all();
 	nqueens_all();
+	sudoku();
+//	sudoku16x16();
 	return 0;
 }
