@@ -12,8 +12,10 @@
 // 2022-11-21: sudoku: tried 224838 puzzles, 1 solution found on all of them
 //             (haven't actually inspected any of the solutions to see if
 //             they're correctly solved)
+// 2022-11-22: 16x16 sudoku: tried 8 puzzles, found unique solutions
+//             (didn't inspect these either)
 
-#define MAXITEM 1000
+#define MAXITEM 1050
 #define MAX 10000
 
 int name[MAXITEM];     // optional, name each item
@@ -224,7 +226,7 @@ void sudoku() {
 	// where i,j are the cell coordinates (i is y-axis)
 	// and k is the digit to be placed
 	// there are 324 items (81 for each of p, r, c, b, and all are
-	// primary) and 729 options (starting clues reduce this amount)
+	// primary) and 729 options (starting clues reduce these amounts)
 	// test cases from here:
 	// https://drive.google.com/drive/folders/1e_hQNQiJVxhHP_5WBQhBNur9dnS5ml3E
 	// i used tarek_pearly6000, top_50k_toughest, 17puz49157, sudoku_diabolical
@@ -284,14 +286,83 @@ void sudoku() {
 }
 
 void sudoku16x16() {
-	// TODO
+	// setup similar to 9x9 sudoku
+	// 4*256=1024 items
+	// 16*16*16=4096 options (starting clues reduce these amounts)
+	// test cases taken from:
+	// https://stackoverflow.com/questions/70934747/16x16-sudoku-solver-using-hex-characters
+	// https://github.com/jtortorelli/sudoku16/tree/master/example_puzzles
+	// http://acm.ro/2006/problems.htm (problem A)
 	// 4*16*16=1024 items, 16*16*16=4096 options
+	FILE *f=fopen("sudoku16.txt","r");
+	if(!f) puts("error, sudoku16.txt not found");
+	char s[1000];
+	int good=0,total=0;
+	while(fgets(s,998,f)) {
+		int map[4][16][16]; // get item number from coordinates
+		char ok[4][16][16]; // 1: item is not deleted by starting clues
+		memset(map,-1,sizeof(map));
+		memset(ok,1,sizeof(ok));
+		// convert input to correct format
+		// this also canonically sorts values by occurrence
+		char z[128];
+		int id='A';
+		for(int i=0;i<128;i++) z[i]=-1;
+		for(int i=0;i<256;i++) {
+			if(s[i]=='.') s[i]='-';
+			else if(s[i]!='-' && s[i]>=0 && s[i]<128 && z[(int)s[i]]<0) z[(int)s[i]]=id++;
+		}
+		for(int i=0;i<256;i++) if(z[(int)s[i]]>=0) s[i]=z[(int)s[i]];
+		for(int l=0;l<256;l++) if(s[l]!='-') {
+			int d=s[l]-'A'+1;
+			int i=l/16,j=l%16;
+			ok[0][i][j]=0;    // cell i,j taken
+			ok[1][i][d-1]=0;  // digit d taken in row i
+			ok[2][j][d-1]=0;  // digit d taken in column j
+			int x=4*(i/4)+j/4;
+			ok[3][x][d-1]=0;  // digit d taken in box x
+		}
+		// find unfilled squares
+		int items=1;
+		for(int l=0;l<256;l++) if(s[l]=='-') {
+			int i=l/16,j=l%16;
+			if(ok[0][i][j]) map[0][i][j]=items++;
+			for(int k=1;k<=16;k++) {
+				if(ok[1][i][k-1] && map[1][i][k-1]<0) map[1][i][k-1]=items++;
+				if(ok[2][j][k-1] && map[2][j][k-1]<0) map[2][j][k-1]=items++;
+				int x=4*(i/4)+j/4;
+				if(ok[3][x][k-1] && map[3][x][k-1]<0) map[3][x][k-1]=items++;
+			}
+		}
+		inithelp(items-1,0);
+		// create options
+		int options=0;
+		for(int i=0;i<16;i++) for(int j=0;j<16;j++) for(int k=1;k<=16;k++) {
+			int row[4];
+			int x=4*(i/4)+j/4;
+			if(map[0][i][j]<0) continue; // cell i,j already filled out
+			if(map[1][i][k-1]<0) continue; // row i already has digit k in clues
+			if(map[2][j][k-1]<0) continue; // column j already has digit k in clues
+			if(map[3][x][k-1]<0) continue; // box x already has digit k in clues
+			row[0]=map[0][i][j];
+			row[1]=map[1][i][k-1];
+			row[2]=map[2][j][k-1];
+			row[3]=map[3][x][k-1];
+			addrow(4,row);
+			options++;
+		}
+		solutions=0;
+		algorithmx();
+		if(solutions==1) good++;
+		total++;
+	}
+	printf("sudoku16: %d puzzles tried, %d with unique solution\n",total,good);
 }
 
 int main() {
 	langford_all();
 	nqueens_all();
 	sudoku();
-//	sudoku16x16();
+	sudoku16x16();
 	return 0;
 }
