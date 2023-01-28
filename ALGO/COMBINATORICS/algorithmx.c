@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 // algorithm x (dancing links) for finding exact cover.
 // supports secondary items that can be covered <=1 times (but not twice),
@@ -14,9 +15,10 @@
 //             they're correctly solved)
 // 2022-11-22: 16x16 sudoku: tried 8 puzzles, found unique solutions
 //             (didn't inspect these either)
+// 2023-01-26: pack pentominoes into rectangles: correct (i think)
 
 #define MAXITEM 1050
-#define MAX 10000
+#define MAX 20000
 
 int name[MAXITEM];     // optional, name each item
 int llink[MAXITEM];
@@ -85,7 +87,6 @@ x2:
 		if(best>len[i]) best=len[i],bestix=i;
 	}
 	i=bestix;
-//	printf("level %d, pick item %d\n",l,i);
 // x4
 	cover(i);
 	x[l]=dlink[i];
@@ -127,7 +128,7 @@ int numitems;
 // m: number of secondary items
 // primary items appear before secondary ones in the data structures
 void inithelp(int n,int m) {
-	if(n>=MAXITEM) printf("error, increase MAXITEM and recompile\n");
+	if(n>=MAXITEM) printf("error, increase MAXITEM and recompile\n"),exit(0);
 	numitems=n;
 	int p=n-m; // primary items
 	for(int i=1;i<=n;i++) len[i]=0;
@@ -145,7 +146,7 @@ void inithelp(int n,int m) {
 
 // add row with m ones, a[i] holds item number (1-indexed)
 void addrow(int m,int *a) {
-	if(nextpos+m>=MAX) printf("error, increase MAX and recompile\n");
+	if(nextpos+m>=MAX) printf("error, increase MAX to at least %d and recompile\n",nextpos+m+1),exit(0);
 	int lastspacer=nextpos-1;
 	for(int i=0;i<m;i++) {
 		int ix=a[i];
@@ -231,7 +232,7 @@ void sudoku() {
 	// https://drive.google.com/drive/folders/1e_hQNQiJVxhHP_5WBQhBNur9dnS5ml3E
 	// i used tarek_pearly6000, top_50k_toughest, 17puz49157, sudoku_diabolical
 	FILE *f=fopen("sudoku.txt","r");
-	if(!f) puts("error, sudoku.txt not found");
+	if(!f) puts("error, sudoku.txt not found"),exit(0);
 	char s[1000];
 	int good=0,total=0;
 	while(fgets(s,998,f)) {
@@ -295,7 +296,7 @@ void sudoku16x16() {
 	// http://acm.ro/2006/problems.htm (problem A)
 	// 4*16*16=1024 items, 16*16*16=4096 options
 	FILE *f=fopen("sudoku16.txt","r");
-	if(!f) puts("error, sudoku16.txt not found");
+	if(!f) puts("error, sudoku16.txt not found"),exit(0);
 	char s[1000];
 	int good=0,total=0;
 	while(fgets(s,998,f)) {
@@ -359,10 +360,181 @@ void sudoku16x16() {
 	printf("sudoku16: %d puzzles tried, %d with unique solution\n",total,good);
 }
 
+// start of big example (polyominoes) /////////////////////////////////////////
+
+#define MAXPIECE 50
+#define MAXSIZE 7
+#define MAXGRID 40
+
+char piece[MAXPIECE][8][MAXSIZE][MAXSIZE+1];
+int pieces;                  // number of pieces
+int piecerot[MAXPIECE];      // number of rotations/symmetries
+int piecex[MAXPIECE][8]; // [i][j] x-size of piece i, rotation j
+int piecey[MAXPIECE][8]; // y-size of piece
+
+char map[MAXGRID][MAXGRID+1];  // 0:cell is available, 1:it's not
+int cellid[MAXGRID][MAXGRID];  // id for each cell
+int mapx,mapy;               // map size
+
+void makemap(int x,int y) {
+	mapx=x; mapy=y;
+	for(int i=0;i<x;i++) for(int j=0;j<=y;j++) map[i][j]=0;
+}
+
+void generatecellid() {
+	int id=0;
+	for(int i=0;i<mapx;i++) for(int j=0;j<mapy;j++) {
+		if(map[i][j]) cellid[i][j]=-1;
+		else cellid[i][j]=id++;
+	}
+}
+
+// copy from p to q
+void copypiece(char p[MAXSIZE][MAXSIZE+1],char q[MAXSIZE][MAXSIZE+1],int x,int y) {
+	for(int i=0;i<x;i++) for(int j=0;j<y;j++) q[i][j]=p[i][j];
+}
+
+// add symmetry of piece with index ix
+// (only adds it if it doesn't exist)
+void addpiece(char p[MAXSIZE][MAXSIZE+1],int x,int y,int ix) {
+	for(int k=0;k<piecerot[ix];k++) {
+		if(x!=piecex[ix][k] || y!=piecey[ix][k]) continue; // different
+		for(int i=0;i<x;i++) for(int j=0;j<y;j++) if(piece[ix][k][i][j]!=p[i][j]) goto different;
+		return; // rotation exists
+	different:;
+	}
+	if(piecerot[ix]>=8) printf("error, can't have more than 8 symmetries"),exit(0);
+	copypiece(p,piece[ix][piecerot[ix]],x,y);
+	piecex[ix][piecerot[ix]]=x;
+	piecey[ix][piecerot[ix]]=y;
+	piecerot[ix]++;
+}
+
+// add a piece
+// rot=1: create all possible rotations and symmetries of given piece
+void createpiece(char p[MAXSIZE][MAXSIZE+1],int x,int y,int rot) {
+	if(pieces>=MAXPIECE) printf("error, increase MAXPIECE and recompile\n"),exit(0);
+	piecerot[pieces]=0;
+	addpiece(p,x,y,pieces);
+	if(rot) {
+		for(int r=1;r<8;r++) {
+			if(r==4) {
+				// flip
+				for(int i=0;i<x;i++) for(int j=0;j+j<y;j++) {
+					char t=p[i][j]; p[i][j]=p[i][y-j-1]; p[i][y-j-1]=t;
+				}
+			}
+			// rotate 90 degrees
+			char q[MAXSIZE][MAXSIZE+1];
+			for(int i=0;i<x;i++) for(int j=0;j<y;j++) q[j][x-i-1]=p[i][j];
+			int t=x; x=y; y=t;
+			copypiece(q,p,x,y);
+			addpiece(p,x,y,pieces);
+		}
+	}
+	pieces++;
+}
+
+void createpentominoes() {
+	pieces=0;
+	char T[MAXSIZE][MAXSIZE+1]={"###",".#.",".#."};
+	char U[MAXSIZE][MAXSIZE+1]={"#.#","###"};
+	char V[MAXSIZE][MAXSIZE+1]={"#..","#..","###"};
+	char W[MAXSIZE][MAXSIZE+1]={"#..","##.",".##"};
+	char X[MAXSIZE][MAXSIZE+1]={".#.","###",".#."};
+	char Y[MAXSIZE][MAXSIZE+1]={"..#.","####"};
+	char Z[MAXSIZE][MAXSIZE+1]={"##.",".#.",".##"};
+	char F[MAXSIZE][MAXSIZE+1]={".##","##.",".#."};
+	char I[MAXSIZE][MAXSIZE+1]={"#####"};
+	char L[MAXSIZE][MAXSIZE+1]={"####","#..."};
+	char P[MAXSIZE][MAXSIZE+1]={"##","##","#."};
+	char N[MAXSIZE][MAXSIZE+1]={"##..",".###"};
+	createpiece(T,3,3,1);
+	createpiece(U,2,3,1);
+	createpiece(V,3,3,1);
+	createpiece(W,3,3,1);
+	createpiece(X,3,3,1);
+	createpiece(Y,2,4,1);
+	createpiece(Z,3,3,1);
+	createpiece(F,3,3,1);
+	createpiece(I,1,5,1);
+	createpiece(L,2,4,1);
+	createpiece(P,3,2,1);
+	createpiece(N,2,4,1);
+}
+
+void packpolyominoes() {
+	// items (all primary):
+	// one for each piece, one for each cell to be covered
+	int count=0;
+	for(int i=0;i<mapx;i++) for(int j=0;j<mapy;j++) if(!map[i][j]) count++;
+	inithelp(pieces+count,0);
+	// options: try all rotations and symmetries of all pieces on all cells
+	int row[100],rn;
+	for(int p=0;p<pieces;p++) for(int r=0;r<piecerot[p];r++) {
+		for(int i=0;i<mapx-piecex[p][r]+1;i++) for(int j=0;j<mapy-piecey[p][r]+1;j++) {
+			// check if all cells under piece are available
+			for(int k=0;k<piecex[p][r];k++) for(int l=0;l<piecey[p][r];l++) {
+				if(piece[p][r][k][l]=='#' && map[i+k][j+l]) goto fail;
+			}
+			// piece can be placed, make option
+			rn=0;
+			row[rn++]=p+1;
+			for(int k=0;k<piecex[p][r];k++) for(int l=0;l<piecey[p][r];l++) {
+				if(piece[p][r][k][l]=='#') {
+					if(rn>=100) printf("option has too many items\n"),exit(0);
+					row[rn++]=pieces+1+cellid[i+k][j+l];
+				}
+			}
+			addrow(rn,row);
+		fail:;
+		}
+	}
+
+	// solve
+	solutions=0;
+	algorithmx();
+}
+
+// pack pentominoes in x*y grid
+void pentominoes(int x,int y) {
+	createpentominoes();
+	makemap(x,y);
+	generatecellid();
+	packpolyominoes();
+	printf("pentominoes(%d,%d): %lld solutions\n",x,y,solutions);
+}
+
+// pack pentominoes in chessboard minus 2x2 center
+void pentominoes_chess() {
+	createpentominoes();
+	makemap(8,8);
+	map[3][3]=1; map[3][4]=1; map[4][3]=1; map[4][4]=1;
+	generatecellid();
+	packpolyominoes();
+	printf("pentominoes on chessboard minus center: %lld solutions\n",solutions);
+}
+
+// number of solutions agree with this webpage
+// https://jansipke.nl/yasumi-puzzle/
+void polyominoes() {
+	pentominoes(3,20);
+	pentominoes(4,15);
+	pentominoes(5,12);
+	pentominoes(6,10);
+	// sanity test: transposed grids should return the same answer
+	pentominoes(20,3);
+	pentominoes(15,4);
+	pentominoes(12,5);
+	pentominoes(10,6);
+	pentominoes_chess();
+}
+
 int main() {
 	langford_all();
 	nqueens_all();
 	sudoku();
 	sudoku16x16();
+	polyominoes();
 	return 0;
 }
