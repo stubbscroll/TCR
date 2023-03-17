@@ -135,10 +135,12 @@ void inithelp(int n,int m) {
 	for(int i=0;i<=p;i++) llink[i]=(i+p)%(p+1);
 	for(int i=0;i<=p;i++) rlink[i]=(i+1)%(p+1);
 	for(int i=1;i<=n;i++) dlink[i]=ulink[i]=i;
-	// let secondary items form its own doubly linked list
-	for(int i=p+1;i<=n;i++) llink[i]=i-1;
-	for(int i=p+1;i<=n;i++) rlink[i]=i+1;
-	if(n>p) llink[p+1]=n,rlink[n]=p+1;
+	if(n>p) {
+		// let secondary items form their own doubly linked list
+		for(int i=p+1;i<=n+1;i++) llink[i]=i-1;
+		for(int i=p+1;i<=n+1;i++) rlink[i]=i+1;
+		llink[p+1]=n+1,rlink[n+1]=p+1;
+	}
 	nextpos=n+1;
 	spacerid=0;
 	top[nextpos++]=spacerid--;
