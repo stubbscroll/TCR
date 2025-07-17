@@ -5,12 +5,13 @@
 // algorithm c: exact covering with colours, extends algorithm x
 // secondary items (and only them!) can now have colours, and it's possible to
 // choose two options having the same secondary item, as long as they have the
-// same colour
+// same colour. a secondary item without a specified colour is assumed to have
+// a unique colour that appears nowhere else.
 // 0=no colour, positive integer=given colour, -1=internally used to
 // represent that a colour has been assigned to an item
 
-// add some interesting examples (better than the word squares), for example
-// the 5x5 number square thingy with prime numbers
+// 2023-03-17: prime number crossword square: done (correctness unknown)
+
 // add masyu and slitherlink and others to whichever variant of the algorithm
 // they can be solved by (seems like a modification of algorithm c is needed)
 
@@ -18,16 +19,20 @@
 #define MAX 40000
 
 int name[MAXITEM];     // optional, name each item
-int llink[MAXITEM];
+int llink[MAXITEM];    // links to the previous/next available items
 int rlink[MAXITEM];
-int top[MAX],*len=top;
-int ulink[MAX];
+int top[MAX],*len=top; // given index into an option, returns the item number
+int ulink[MAX];        // links to the previous/next available option for the item
 int dlink[MAX];
 int colour[MAX];
-int x[MAXITEM];        // solution
+int x[MAXITEM];        // current option to try for each search level
+                       // when a solution is found, x[] contains the chosen options
 
 void printstate();
 
+// subroutine to cover:
+// for the option with index p, hide every item from their respective list of
+// active options
 void hide(int p) {
 	int q=p+1;
 	while(q!=p) {
@@ -35,11 +40,12 @@ void hide(int p) {
 		if(x<=0) q=u;
 		else {
 			if(colour[q]>=0) dlink[u]=d,ulink[d]=u,len[x]--;
-			q++;
+			q++; // purified item: skip it
 		}
 	}
 }
 
+// cover item i: remove all options that involve item i
 void cover(int i) {
 	int p=dlink[i];
 	while(p!=i) hide(p),p=dlink[p];
@@ -66,6 +72,9 @@ void uncover(int i) {
 	while(p!=i) unhide(p),p=ulink[p];
 }
 
+// p is a node in an option referring to the secondary item i=top[p].
+// "purify" the item by setting colour to -1 for every option
+// having the same colour for this item
 void purify(int p) {
 	int c=colour[p],i=top[p],q=dlink[i];
 	colour[i]=c; 
@@ -85,6 +94,7 @@ void unpurify(int p) {
 	}
 }
 
+// purify an item (if it's coloured), or cover otherwise
 void commit(int p,int j) {
 	if(colour[p]==0) cover(j);
 	else if(colour[p]>0) purify(p);
@@ -122,8 +132,8 @@ c2:
 		if(best>len[i]) best=len[i],bestix=i;
 	}
 	i=bestix;
-// c4
-	cover(i);
+// c4: cover item i
+	cover(i); // i is primary, call cover directly as purify is never needed here
 	x[l]=dlink[i];
 c5:
 	if(x[l]==i) goto c7;             
@@ -218,7 +228,7 @@ void printstate() {
 
 // extremely simple example to ensure that the algorithm works
 // kept because i needed it for debugging
-// should have 1 solution: items 2 and 4
+// should have 1 solution: options 2 and 4
 
 void simpleexample() {
 	// primary items: p,q,r (1-3)
@@ -226,22 +236,22 @@ void simpleexample() {
 	inithelp(5,2);
 	int row[4];
 	int c[4];
-	// item 1: p q x y:A
+	// option 1: p q x y:A
 	for(int i=0;i<4;i++) c[i]=0;
 	row[0]=1; row[1]=2; row[2]=4; row[3]=5; c[3]='A';
 	addrow(4,row,c);
-	// item 2: p r x:A y
+	// option 2: p r x:A y
 	for(int i=0;i<4;i++) c[i]=0;
 	row[0]=1; row[1]=3; row[2]=4; row[3]=5; c[2]='A';
 	addrow(4,row,c);
-	// item 3: p x:B
+	// option 3: p x:B
 	for(int i=0;i<2;i++) c[i]=0;
 	row[0]=1; row[1]=4; c[1]='B';
 	addrow(2,row,c);
-	// item 4: q x:A
+	// option 4: q x:A
 	row[0]=2; row[1]=4; c[0]=0; c[1]='A';
 	addrow(2,row,c);
-	// item 5: r y:B
+	// option 5: r y:B
 	row[0]=3; row[1]=5; c[0]=0; c[1]='B';
 	addrow(2,row,c);
 	solutions=0;

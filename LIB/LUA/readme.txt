@@ -25,3 +25,5 @@ other versions of lua: add the -fno-omit-frame-pointer switch to CFLAGS.
 sources:
 http://stackoverflow.com/questions/19903762/lua-5-2-compiled-with-mingw32-crashes-my-host-program-when-a-lua-error-occurs
 http://lua-users.org/lists/lua-l/2011-10/msg00549.html
+
+TODO add an example with lua error to verify if lua doesn't crash

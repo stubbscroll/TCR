@@ -21,13 +21,17 @@
 #define MAX 20000
 
 int name[MAXITEM];     // optional, name each item
-int llink[MAXITEM];
+int llink[MAXITEM];    // links to the previous/next available items
 int rlink[MAXITEM];
-int top[MAX],*len=top;
-int ulink[MAX];
+int top[MAX],*len=top; // given index into an option, returns the item number
+int ulink[MAX];        // links to the previous/next available option for the item
 int dlink[MAX];
-int x[MAXITEM];        // solution
+int x[MAXITEM];        // current option to try for each search level
+                       // when a solution is found, x[] contains the chosen options
 
+// subroutine to cover:
+// for the option with index p, hide every item from their respective list of
+// active options
 void hide(int p) {
 	int q=p+1;
 	while(q!=p) {
@@ -37,6 +41,7 @@ void hide(int p) {
 	}
 }
 
+// cover item i: remove all options that involve item i
 void cover(int i) {
 	int p=dlink[i];
 	while(p!=i) hide(p),p=dlink[p];
@@ -63,7 +68,7 @@ void uncover(int i) {
 long long solutions;
 
 // a solution was found
-// l is number of rows in solution
+// l is the number of options used in solution
 void visit(int l) {
 	// here we can do something with x[0]..x[l-1]
 	solutions++;
@@ -73,12 +78,12 @@ void visit(int l) {
 // for example in llink[0]
 void algorithmx() {
 	int l=0;
-x2:
+x2: // enter level l
 	if(rlink[0]==0) {
 		visit(l);
 		goto x8;
 	}
-// x3
+// x3: find an item to cover
 	// minimum remaining values heuristic
 	// traverse the linked list and pick the item with the least len
 	int i=rlink[0];
@@ -87,20 +92,21 @@ x2:
 		if(best>len[i]) best=len[i],bestix=i;
 	}
 	i=bestix;
-// x4
+// x4: cover item i
 	cover(i);
 	x[l]=dlink[i];
-x5:
-	if(x[l]==i) goto x7;
+x5: // x[l] points to the current option to try containing item i
+	if(x[l]==i) goto x7; // we tried all options for i
 	int p=x[l]+1;
 	while(p!=x[l]) {
+		// cover all items j!=i in this option
 		int j=top[p];
-		if(j<=0) p=ulink[p];
+		if(j<=0) p=ulink[p]; // trailing spacer item, wrap around to beginning of list
 		else cover(j),p++;
 	}
 	l++;
 	goto x2;
-x6:
+x6: // try next option for item i
 	p=x[l]-1;
 	while(p!=x[l]) {
 		int j=top[p];
@@ -109,9 +115,9 @@ x6:
 	}
 	i=top[x[l]]; x[l]=dlink[x[l]];
 	goto x5;
-x7:
+x7: // backtrack, uncover item i
 	uncover(i);
-x8:
+x8: // leave level l, terminate if we're at l=0
 	if(l>0) {
 		l--;
 		goto x6;
@@ -465,6 +471,30 @@ void createpentominoes() {
 	createpiece(N,2,4,1);
 }
 
+void createioblock() {
+	pieces=0;
+	char a[MAXSIZE][MAXSIZE+1]={"####","##..","##.."};
+	char b[MAXSIZE][MAXSIZE+1]={"###","###","##."};
+	char c[MAXSIZE][MAXSIZE+1]={"###..","..#..","..###"};
+	char d[MAXSIZE][MAXSIZE+1]={"####","#...","#..."};
+	char e[MAXSIZE][MAXSIZE+1]={"####","#...","#..."}; // 2 identical pieces
+	char f[MAXSIZE][MAXSIZE+1]={"#####","##..."};
+	char g[MAXSIZE][MAXSIZE+1]={"###","#..","#.."};
+	char h[MAXSIZE][MAXSIZE+1]={"####","####"};
+	char i[MAXSIZE][MAXSIZE+1]={"###","##."};
+	char j[MAXSIZE][MAXSIZE+1]={"###","#.."};
+	createpiece(a,3,4,1); // height, width, 1=all rotations/symmetries
+	createpiece(b,3,3,1);
+	createpiece(c,3,5,1);
+	createpiece(d,3,4,1);
+	createpiece(e,3,4,1);
+	createpiece(f,2,5,1);
+	createpiece(g,3,3,1);
+	createpiece(h,2,4,1);
+	createpiece(i,2,3,1);
+	createpiece(j,2,3,1);
+}
+
 void packpolyominoes() {
 	// items (all primary):
 	// one for each piece, one for each cell to be covered
@@ -507,6 +537,16 @@ void pentominoes(int x,int y) {
 	printf("pentominoes(%d,%d): %lld solutions\n",x,y,solutions);
 }
 
+// random tile-packing toy i found in my house
+// 2 identical pieces, divide answer by 2
+void ioblock_toy() {
+	createioblock();
+	makemap(8,8);
+	generatecellid();
+	packpolyominoes();
+	printf("ioblock_toy: %lld solutions\n",solutions/2);
+}
+
 // pack pentominoes in chessboard minus 2x2 center
 void pentominoes_chess() {
 	createpentominoes();
@@ -538,5 +578,6 @@ int main() {
 	sudoku();
 	sudoku16x16();
 	polyominoes();
+	ioblock_toy();
 	return 0;
 }
